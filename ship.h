@@ -13,7 +13,7 @@
     const int MAX_BULLETS = 10;
 
   public:
-    Ship() { }
+    Ship();
     Ship(int x, int y);
     ~Ship();
 

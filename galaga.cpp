@@ -1,16 +1,22 @@
 #include "galaga.h"
 
-Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueue) : _ship(0, 0) {
+Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueue) {
   _screenWidth = screenWidth;
   _screenHeight = screenHeight;
   _eventQueue = eventQueue;
   _ship.moveTo(_screenWidth / 2, _screenHeight - 20);
+  _enemy.moveTo(_screenWidth / 2, 10);
+}
+
+Galaga::~Galaga() {
+  _bullets.erase(_bullets.begin(), _bullets.end());
 }
 
 bool Galaga::update(unsigned int ticks) {
   ALLEGRO_EVENT events;
   al_wait_for_event(_eventQueue, &events);
   Point shipPosition;
+  int i;
 
   _needsDraw = false;
 
@@ -19,8 +25,11 @@ bool Galaga::update(unsigned int ticks) {
   }
 
   if (events.type == ALLEGRO_EVENT_KEY_DOWN && events.keyboard.keycode == ALLEGRO_KEY_SPACE) {
-    _ship.fire();
-    std::cout << "[LOG] fire" << std::endl;
+    if (_bullets.size() < MAX_BULLETS) {
+      Bullet newBullet(_ship.getPosition().getX(), _ship.getPosition().getY(), _bullets.size());
+
+      _bullets.push_back(newBullet);
+    }
   }
 
   if (events.type == ALLEGRO_EVENT_TIMER) {
@@ -44,12 +53,27 @@ bool Galaga::update(unsigned int ticks) {
 
   _ship.update(ticks);
 
+  for (i = 0; i < _bullets.size(); i++) {
+    _bullets[i].update(ticks);
+
+    if (_bullets[i].isDead()) {
+      _bullets.erase(_bullets.begin() + i);
+    }
+  }
+
   return true;
 }
 
 void Galaga::render() {
+  int i;
+
   if (_needsDraw) {
+    for (i = 0; i < _bullets.size(); i++) {
+      _bullets[i].render();
+    }
+
     _ship.render();
+    _enemy.render();
 
     al_flip_display();
     al_clear_to_color(al_map_rgb(0, 0, 0));

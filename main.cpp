@@ -44,15 +44,17 @@ int main(int argc, char *argv[]) {
   al_start_timer(timer);
 
   GameModule *game = new Galaga(SCREEN_WIDTH, SCREEN_HEIGHT, eventQueue);
-  bool done = false;
+  bool gameRunning = true;
 
-  while (!done) {
-    done = game->update(ticks);
+  while (gameRunning) {
+    gameRunning = game->update(ticks);
 
     game->render();
 
     ++ticks;
   }
+
+  std::cout << "end" << std::endl;
 
   delete game;
 
