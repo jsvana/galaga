@@ -1,6 +1,6 @@
 #include "galaga.h"
 
-Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueue) {
+Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueue) : _ship(0, 0) {
   _screenWidth = screenWidth;
   _screenHeight = screenHeight;
   _eventQueue = eventQueue;
