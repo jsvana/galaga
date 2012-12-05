@@ -8,12 +8,14 @@ Enemy::Enemy() {
   _alive = true;
 }
 
-Enemy::Enemy(int x, int y) {
+Enemy::Enemy(int x, int y, Rectangle bounds) {
   _container.setX(x);
   _container.setY(y);
   _container.setW(20);
   _container.setH(20);
   _alive = true;
+
+  _bounds = bounds;
 }
 
 Enemy::~Enemy() {
@@ -22,9 +24,9 @@ Enemy::~Enemy() {
 bool Enemy::hitTest(std::list<Bullet> *bullets) {
   int i;
 
-  for (Bullet bullet : *bullets) {
+  for (Bullet& bullet : *bullets) {
     Rectangle bulletContainer = bullet.getContainer();
-    if (_container.collidesWith(bulletContainer)) {
+    if (bullet.isAlive() && _container.collidesWith(bulletContainer)) {
       bullet.kill();
       kill();
       return true;
@@ -34,6 +36,13 @@ bool Enemy::hitTest(std::list<Bullet> *bullets) {
 }
 
 bool Enemy::update(unsigned int ticks) {
+  _container.setX(_container.getX() + _moveSpeed);
+
+  if (_container.getX() <= _bounds.getX()
+    || _container.getX() + _container.getW() >= _bounds.getX() + _bounds.getW()) {
+    _moveSpeed = -_moveSpeed;
+  }
+
   return true;
 }
 

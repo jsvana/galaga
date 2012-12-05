@@ -13,7 +13,7 @@
 
   class Galaga : public GameModule {
     Ship _ship;
-    std::list<Bullet> _bullets;
+    std::list<Bullet> _shipBullets;
     std::list<Enemy> _enemies;
 
     ALLEGRO_EVENT_QUEUE *_eventQueue;
@@ -24,7 +24,7 @@
     bool _needsDraw;
 
     const int MOVE_SPEED = 5;
-    const int MAX_BULLETS = 10;
+    const int MAX_BULLETS = 2;
 
   public:
     Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueue);

@@ -11,11 +11,13 @@
 
   class Enemy {
     Rectangle _container;
+    Rectangle _bounds;
     bool _alive;
+    int _moveSpeed = 2;
 
   public:
     Enemy();
-    Enemy(int x, int y);
+    Enemy(int x, int y, Rectangle bounds);
     ~Enemy();
 
     bool update(unsigned int ticks);

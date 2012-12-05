@@ -14,6 +14,13 @@ Rectangle::Rectangle(int x, int y, int w, int h) {
   _h = h;
 }
 
+void Rectangle::operator=(Rectangle r) {
+  _x = r.getX();
+  _y = r.getY();
+  _w = r.getW();
+  _h = r.getH();
+}
+
 bool Rectangle::containsPoint(Point p) {
   return containsPoint(p.getX(), p.getY());
 }

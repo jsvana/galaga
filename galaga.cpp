@@ -7,16 +7,24 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
   _ship.moveTo(_screenWidth / 2, _screenHeight - 20);
 
   int totalWidth = 6 * 20 + 5 * 10;
+  int innerXMax = 4 * 30;
 
-  for (int i = 0; i < 6; i++) {
-    int x = _screenWidth / 2 - totalWidth / 2 + 30 * i;
-    Enemy enemy(x, 0);
-    _enemies.push_back(enemy);
+  for (int y = 0; y < 2; y++) {
+    int innerXMin = _screenWidth / 2 - 4 * 30;
+
+    for (int x = 0; x < 6; x++) {
+      Rectangle bounds(innerXMin, 0, innerXMax, _screenHeight);
+      int enemyX = _screenWidth / 2 - totalWidth / 2 + 30 * x;
+      Enemy enemy(enemyX, _screenHeight / 4 + 30 * y, bounds);
+      _enemies.push_back(enemy);
+
+      innerXMin += 30;
+    }
   }
 }
 
 Galaga::~Galaga() {
-  _bullets.erase(_bullets.begin(), _bullets.end());
+  _shipBullets.erase(_shipBullets.begin(), _shipBullets.end());
 }
 
 bool Galaga::update(unsigned int ticks) {
@@ -32,10 +40,10 @@ bool Galaga::update(unsigned int ticks) {
   }
 
   if (events.type == ALLEGRO_EVENT_KEY_DOWN && events.keyboard.keycode == ALLEGRO_KEY_SPACE) {
-    if (_bullets.size() < MAX_BULLETS) {
+    if (_shipBullets.size() < MAX_BULLETS) {
       Bullet newBullet(_ship.getContainer().getX() + _ship.getContainer().getW() / 4, _ship.getContainer().getY());
 
-      _bullets.push_back(newBullet);
+      _shipBullets.push_back(newBullet);
     }
   }
 
@@ -58,10 +66,6 @@ bool Galaga::update(unsigned int ticks) {
     _needsDraw = true;
   }
 
-  // if (_enemy.hitTest(&_bullets)) {
-  //   std::cout << "[LOG] hit" << std::endl;
-  // }
-
   _ship.update(ticks);
 
   std::list<Enemy>::iterator enemyIter = _enemies.begin();
@@ -69,7 +73,7 @@ bool Galaga::update(unsigned int ticks) {
   while (enemyIter != _enemies.end()) {
     (*enemyIter).update(ticks);
 
-    (*enemyIter).hitTest(&_bullets);
+    (*enemyIter).hitTest(&_shipBullets);
 
     if (!(*enemyIter).isAlive()) {
       _enemies.erase(enemyIter++);
@@ -78,13 +82,13 @@ bool Galaga::update(unsigned int ticks) {
     }
   }
 
-  std::list<Bullet>::iterator bulletIter = _bullets.begin();
+  std::list<Bullet>::iterator bulletIter = _shipBullets.begin();
 
-  while (bulletIter != _bullets.end()) {
+  while (bulletIter != _shipBullets.end()) {
     (*bulletIter).update(ticks);
 
     if (!(*bulletIter).isAlive()) {
-      _bullets.erase(bulletIter++);
+      _shipBullets.erase(bulletIter++);
     } else {
       ++bulletIter;
     }
@@ -97,7 +101,7 @@ void Galaga::render() {
   int i;
 
   if (_needsDraw) {
-    for (Bullet bullet : _bullets) {
+    for (Bullet bullet : _shipBullets) {
       bullet.render();
     }
 

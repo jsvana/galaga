@@ -13,7 +13,7 @@ Bullet::~Bullet() {
 }
 
 int Bullet::move() {
-  _container.setY(_container.getY() - 4);
+  _container.setY(_container.getY() - _moveSpeed);
 
   return _container.getY();
 }

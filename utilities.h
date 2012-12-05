@@ -32,6 +32,8 @@
     Rectangle();
     Rectangle(int x, int y, int w, int h);
 
+    void operator =(Rectangle r);
+
     int getX() { return _x; }
     void setX(int x) { _x = x; }
     int getY() { return _y; }

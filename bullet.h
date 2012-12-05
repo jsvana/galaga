@@ -8,8 +8,8 @@
 
   class Bullet {
     Rectangle _container;
-    int index;
     bool _alive;
+    int _moveSpeed = 10;
 
   public:
     Bullet(int x, int y);
@@ -17,8 +17,8 @@
     int move();
     Rectangle getContainer() { return _container; }
     bool isAlive() { return _alive; };
-    void kill() { _alive = true; }
-    void vivify() { _alive = false; }
+    void kill() { _alive = false; }
+    void vivify() { _alive = true; }
 
     void update(unsigned int ticks);
 
