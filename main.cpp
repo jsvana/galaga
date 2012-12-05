@@ -5,6 +5,8 @@
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_image.h>
 #include <iostream>
 
 #include "bullet.h"
@@ -34,9 +36,14 @@ int main(int argc, char *argv[]) {
 
   al_set_window_position(display, 200, 200);
 
+  al_install_audio();
+
   al_init_primitives_addon();
+  al_init_acodec_addon();
+  al_reserve_samples(2);
   al_init_font_addon();
   al_init_ttf_addon();
+  al_init_image_addon();
   al_install_keyboard();
 
   ALLEGRO_TIMER *timer = al_create_timer(1.0 / FPS);
@@ -56,8 +63,6 @@ int main(int argc, char *argv[]) {
 
     ++ticks;
   }
-
-  std::cout << "end" << std::endl;
 
   delete game;
 

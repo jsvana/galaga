@@ -3,11 +3,14 @@
 
   #include <allegro5/allegro.h>
   #include <allegro5/allegro_primitives.h>
+  #include <allegro5/allegro_image.h>
   #include <vector>
 
   #include "utilities.h"
 
   class Ship {
+    ALLEGRO_BITMAP *_texture;
+
     Rectangle _container;
     std::vector<Bullet> _bullets;
     const int MAX_BULLETS = 10;

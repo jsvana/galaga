@@ -4,9 +4,15 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
   _screenWidth = screenWidth;
   _screenHeight = screenHeight;
   _eventQueue = eventQueue;
-  _font = al_load_font("arcade.ttf", 20, NULL);
+  _font = al_load_font("assets/fonts/arcade.ttf", 20, NULL);
+  _pewPew = al_load_sample("assets/sounds/pewpew.wav");
 
-  _ship.moveTo(_screenWidth / 2, _screenHeight - 20);
+  _ship.moveTo(_screenWidth / 2, _screenHeight - 32);
+
+  _enemyTextures.push_back(al_load_bitmap("assets/images/moth.png"));
+  _enemyTextures.push_back(al_load_bitmap("assets/images/wasp.png"));
+
+  _bulletTexture = al_load_bitmap("assets/images/bullet.png");
 
   int totalWidth = 6 * 20 + 5 * 10;
   int innerXMax = 4 * 30;
@@ -17,7 +23,7 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
     for (int x = 0; x < 6; x++) {
       Rectangle bounds(innerXMin, 0, innerXMax, _screenHeight);
       int enemyX = _screenWidth / 2 - totalWidth / 2 + 30 * x;
-      Enemy enemy(enemyX, _screenHeight / 4 + 30 * y, bounds);
+      Enemy enemy(enemyX, _screenHeight / 4 + 30 * y, bounds, _enemyTextures[x % 2]);
       _enemies.push_back(enemy);
 
       innerXMin += 30;
@@ -29,6 +35,13 @@ Galaga::~Galaga() {
   _shipBullets.erase(_shipBullets.begin(), _shipBullets.end());
 
   al_destroy_font(_font);
+  al_destroy_sample(_pewPew);
+
+  al_destroy_bitmap(_bulletTexture);
+
+  for (ALLEGRO_BITMAP *enemyTexture : _enemyTextures) {
+    al_destroy_bitmap(enemyTexture);
+  }
 }
 
 bool Galaga::update(unsigned int ticks) {
@@ -39,15 +52,22 @@ bool Galaga::update(unsigned int ticks) {
 
   _needsDraw = false;
 
-  if (events.type == ALLEGRO_EVENT_KEY_UP && events.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
+  if ((events.type == ALLEGRO_EVENT_KEY_UP && events.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+    || events.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
     return false;
   }
 
   if (events.type == ALLEGRO_EVENT_KEY_DOWN && events.keyboard.keycode == ALLEGRO_KEY_SPACE) {
     if (_shipBullets.size() < MAX_BULLETS) {
-      Bullet newBullet(_ship.getContainer().getX() + _ship.getContainer().getW() / 4, _ship.getContainer().getY());
+      Bullet newBullet(_ship.getContainer().getX() + _ship.getContainer().getW() / 4, _ship.getContainer().getY(), _bulletTexture);
 
       _shipBullets.push_back(newBullet);
+
+      ++_shotsFired;
+
+      float pan = (((float)_ship.getContainer().getX() + (float)_ship.getContainer().getW() / 2) - (float)_screenWidth / 2) / ((float)_screenWidth / 2);
+
+      al_play_sample(_pewPew, .8, pan, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
     }
   }
 
@@ -61,12 +81,6 @@ bool Galaga::update(unsigned int ticks) {
       _ship.move(GALAGA_RIGHT, MOVE_SPEED);
     }
 
-    if(al_key_down(&_keyState, ALLEGRO_KEY_UP) && shipContainer.getY() > 0) {
-      _ship.move(GALAGA_UP, MOVE_SPEED);
-    } else if(al_key_down(&_keyState, ALLEGRO_KEY_DOWN) && shipContainer.getY() < _screenHeight - shipContainer.getH()) {
-      _ship.move(GALAGA_DOWN, MOVE_SPEED);
-    }
-
     _needsDraw = true;
   }
 
@@ -77,7 +91,13 @@ bool Galaga::update(unsigned int ticks) {
   while (enemyIter != _enemies.end()) {
     (*enemyIter).update(ticks);
 
-    (*enemyIter).hitTest(&_shipBullets);
+    if ((*enemyIter).hitTest(&_shipBullets)) {
+      ++_shotHits;
+
+      Rectangle enemyContainer = (*enemyIter).getContainer();
+      ParticleManager particleManager(enemyContainer.getX(), enemyContainer.getY());
+      _particleManagers.push_back(particleManager);
+    }
 
     if (!(*enemyIter).isAlive()) {
       _enemies.erase(enemyIter++);
@@ -98,12 +118,24 @@ bool Galaga::update(unsigned int ticks) {
     }
   }
 
+  std::list<ParticleManager>::iterator particleManagerIter = _particleManagers.begin();
+
+  while (particleManagerIter != _particleManagers.end()) {
+    (*particleManagerIter).update(ticks);
+
+    if (!(*particleManagerIter).isAlive()) {
+      _particleManagers.erase(particleManagerIter++);
+    } else {
+      ++particleManagerIter;
+    }
+  }
+
   return true;
 }
 
 void Galaga::render() {
   if (_needsDraw) {
-    int ascent = al_get_font_ascent(_font);
+    int lineHeight = al_get_font_line_height(_font);
 
     for (Bullet bullet : _shipBullets) {
       bullet.render();
@@ -115,11 +147,20 @@ void Galaga::render() {
       enemy.render();
     }
 
-    al_draw_filled_rectangle(0, _screenHeight - 40, _screenWidth / 5, _screenHeight,
-      al_map_rgb(31, 158, 14));
+    for (ParticleManager particleManager : _particleManagers) {
+      particleManager.render();
+    }
 
-    al_draw_textf(_font, al_map_rgb(0, 0, 0), 10, _screenHeight - 20 - ascent / 2,
+    int percentAccuracy = 0;
+
+    if (_shotsFired != 0) {
+      percentAccuracy = (int)((float)_shotHits / _shotsFired * 100);
+    }
+
+    al_draw_textf(_font, al_map_rgb(255, 255, 255), 10, 0,
       ALLEGRO_ALIGN_LEFT, "Enemies left: %d", (int)_enemies.size());
+    al_draw_textf(_font, al_map_rgb(255, 255, 255), 10, lineHeight,
+      ALLEGRO_ALIGN_LEFT, "Accuracy: %d%%", percentAccuracy);
 
     al_flip_display();
     al_clear_to_color(al_map_rgb(0, 0, 0));

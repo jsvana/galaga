@@ -1,12 +1,14 @@
 #include "bullet.h"
 
-Bullet::Bullet(int x, int y) {
+Bullet::Bullet(int x, int y, ALLEGRO_BITMAP *texture) {
   _container.setX(x);
   _container.setY(y);
-  _container.setW(10);
+  _container.setW(5);
   _container.setH(10);
 
   _alive = true;
+
+  _texture = texture;
 }
 
 Bullet::~Bullet() {
@@ -28,8 +30,9 @@ void Bullet::update(unsigned int ticks) {
 
 void Bullet::render() {
   if (_alive) {
-    al_draw_filled_rectangle(_container.getX(), _container.getY(),
-      _container.getX() + _container.getW(), _container.getY() +
-      _container.getH(), al_map_rgb(255, 255, 0));
+    // al_draw_filled_rectangle(_container.getX(), _container.getY(),
+    //   _container.getX() + _container.getW(), _container.getY() +
+    //   _container.getH(), al_map_rgb(255, 255, 0));
+    al_draw_bitmap(_texture, _container.getX(), _container.getY(), NULL);
   }
 }

@@ -4,12 +4,16 @@
   #include <allegro5/allegro.h>
   #include <allegro5/allegro_font.h>
   #include <allegro5/allegro_ttf.h>
+  #include <allegro5/allegro_audio.h>
+  #include <allegro5/allegro_acodec.h>
+  #include <allegro5/allegro_image.h>
   #include <iostream>
   #include <list>
 
   #include "bullet.h"
   #include "enemy.h"
   #include "gamemodule.h"
+  #include "particle_manager.h"
   #include "ship.h"
   #include "utilities.h"
 
@@ -17,10 +21,18 @@
     Ship _ship;
     std::list<Bullet> _shipBullets;
     std::list<Enemy> _enemies;
+    std::list<ParticleManager> _particleManagers;
+    std::vector<ALLEGRO_BITMAP *> _enemyTextures;
 
+    ALLEGRO_BITMAP *_bulletTexture;
     ALLEGRO_EVENT_QUEUE *_eventQueue;
     ALLEGRO_KEYBOARD_STATE _keyState;
     ALLEGRO_FONT *_font;
+    ALLEGRO_SAMPLE *_pewPew;
+
+    unsigned int _shotsFired = 0;
+    unsigned int _shotHits = 0;
+
     int _screenWidth;
     int _screenHeight;
 
