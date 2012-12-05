@@ -3,8 +3,8 @@
 Bullet::Bullet(int x, int y, ALLEGRO_BITMAP *texture) {
   _container.setX(x);
   _container.setY(y);
-  _container.setW(5);
-  _container.setH(10);
+  _container.setW(10);
+  _container.setH(20);
 
   _alive = true;
 

@@ -3,21 +3,22 @@
 Enemy::Enemy() {
   _container.setX(0);
   _container.setY(0);
-  _container.setW(15);
-  _container.setH(12);
+  _container.setW(30);
+  _container.setH(24);
   _alive = true;
 }
 
-Enemy::Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture) {
+Enemy::Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType) {
   _container.setX(x);
   _container.setY(y);
-  _container.setW(15);
-  _container.setH(12);
+  _container.setW(30);
+  _container.setH(24);
   _alive = true;
 
   _bounds = bounds;
 
   _texture = texture;
+  _enemyType = enemyType;
 }
 
 Enemy::~Enemy() {
@@ -55,7 +56,7 @@ bool Enemy::update(unsigned int ticks) {
 void Enemy::render() {
   if (_alive) {
     if (_texture) {
-      al_draw_bitmap_region(_texture, _container.getW() * _frame, 0,
+      al_draw_bitmap_region(_texture, _container.getW() * _frame, _container.getH() * _enemyType,
         _container.getW(), _container.getH(),
         _container.getX(), _container.getY(), NULL);
     } else {

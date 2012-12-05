@@ -23,7 +23,7 @@
     std::list<Bullet> _shipBullets;
     std::list<Enemy> _enemies;
     std::list<ParticleManager> _particleManagers;
-    std::vector<ALLEGRO_BITMAP *> _enemyTextures;
+    ALLEGRO_BITMAP *_enemiesTexture;
     BackgroundManager _backgroundManager;
 
     int _gameState = GALAGA_GAME_START;
@@ -38,6 +38,8 @@
     unsigned int _shotsFired = 0;
     unsigned int _shotHits = 0;
 
+    unsigned int _score = 0;
+
     int _screenWidth;
     int _screenHeight;
 
@@ -49,6 +51,9 @@
   public:
     Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueue);
     ~Galaga();
+
+    void initialize();
+    void cleanup();
 
     bool startGameUpdate(unsigned int ticks, ALLEGRO_EVENT events);
     void startGameRender();

@@ -10,10 +10,9 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
 
   _ship.moveTo(_screenWidth / 2, _screenHeight - 32);
 
-  _enemyTextures.push_back(al_load_bitmap("assets/images/moth.png"));
-  _enemyTextures.push_back(al_load_bitmap("assets/images/wasp.png"));
+  _enemiesTexture = al_load_bitmap("assets/images/enemies.png");
 
-  _bulletTexture = al_load_bitmap("assets/images/bullet.png");
+  _bulletTexture = al_load_bitmap("assets/images/galaga_bullet.png");
 
   _backgroundManager.setBounds(_screenWidth, _screenHeight);
 
@@ -26,7 +25,7 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
     for (int x = 0; x < 6; x++) {
       Rectangle bounds(innerXMin, 0, innerXMax, _screenHeight);
       int enemyX = _screenWidth / 2 - totalWidth / 2 + 30 * x;
-      Enemy enemy(enemyX, _screenHeight / 4 + 30 * y, bounds, _enemyTextures[x % 2]);
+      Enemy enemy(enemyX, _screenHeight / 4 + 30 * y, bounds, _enemiesTexture, x % 2);
       _enemies.push_back(enemy);
 
       innerXMin += 30;
@@ -42,10 +41,39 @@ Galaga::~Galaga() {
   al_destroy_sample(_pewPew);
 
   al_destroy_bitmap(_bulletTexture);
+  al_destroy_bitmap(_enemiesTexture);
+}
 
-  for (ALLEGRO_BITMAP *enemyTexture : _enemyTextures) {
-    al_destroy_bitmap(enemyTexture);
+void Galaga::initialize() {
+  _shotsFired = 0;
+  _shotHits = 0;
+
+  _ship.moveTo(_screenWidth / 2, _screenHeight - 32);
+
+  _gameState = GALAGA_GAME_START;
+
+  _backgroundManager.setBounds(_screenWidth, _screenHeight);
+
+  int totalWidth = 6 * 20 + 5 * 10;
+  int innerXMax = 4 * 30;
+
+  for (int y = 0; y < 2; y++) {
+    int innerXMin = _screenWidth / 2 - 4 * 30;
+
+    for (int x = 0; x < 6; x++) {
+      Rectangle bounds(innerXMin, 0, innerXMax, _screenHeight);
+      int enemyX = _screenWidth / 2 - totalWidth / 2 + 30 * x;
+      Enemy enemy(enemyX, _screenHeight / 4 + 30 * y, bounds, _enemiesTexture, x % 2);
+      _enemies.push_back(enemy);
+
+      innerXMin += 30;
+    }
   }
+}
+
+void Galaga::cleanup() {
+  _shipBullets.clear();
+  _enemies.clear();
 }
 
 bool Galaga::startGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
@@ -114,6 +142,7 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
 
     if ((*enemyIter).hitTest(&_shipBullets)) {
       ++_shotHits;
+      _score += 80;
 
       Rectangle enemyContainer = (*enemyIter).getContainer();
       ParticleManager particleManager(enemyContainer.getX(), enemyContainer.getY());
@@ -184,10 +213,9 @@ void Galaga::mainGameRender() {
       percentAccuracy = (int)((float)_shotHits / _shotsFired * 100);
     }
 
-    al_draw_textf(_font, al_map_rgb(255, 255, 255), 10, 0,
-      ALLEGRO_ALIGN_LEFT, "Enemies left: %d", (int)_enemies.size());
+    al_draw_text(_font, al_map_rgb(255, 0, 0), 10, 0, ALLEGRO_ALIGN_LEFT, "Score");
     al_draw_textf(_font, al_map_rgb(255, 255, 255), 10, lineHeight,
-      ALLEGRO_ALIGN_LEFT, "Accuracy: %d%%", percentAccuracy);
+      ALLEGRO_ALIGN_LEFT, "%d", _score);
 
     al_flip_display();
     al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -195,6 +223,12 @@ void Galaga::mainGameRender() {
 }
 
 bool Galaga::endGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
+  if (events.type == ALLEGRO_EVENT_KEY_DOWN && events.keyboard.keycode == ALLEGRO_KEY_ENTER) {
+    _gameState = GALAGA_GAME_START;
+    cleanup();
+    initialize();
+  }
+
   _needsDraw = true;
 
   _backgroundManager.update(ticks);
@@ -205,10 +239,15 @@ bool Galaga::endGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
 void Galaga::endGameRender() {
   _backgroundManager.render();
 
-  int ascent = al_get_font_ascent(_bigFont);
+  int bigAscent = al_get_font_ascent(_bigFont);
+  int smallAscent = al_get_font_ascent(_font);
 
-  al_draw_textf(_bigFont, al_map_rgb(255, 255, 255), _screenWidth / 2, _screenHeight / 2 - ascent / 2,
-    ALLEGRO_ALIGN_CENTRE, "YOU'RE WINNER");
+  int totalHeight = bigAscent + 20 + smallAscent;
+
+  al_draw_text(_bigFont, al_map_rgb(255, 255, 255), _screenWidth / 2, _screenHeight / 2 - totalHeight / 2,
+    ALLEGRO_ALIGN_CENTRE, "YOU'RE WINNER !");
+  al_draw_text(_font, al_map_rgb(255, 255, 255), _screenWidth / 2, _screenHeight / 2 + totalHeight / 2,
+    ALLEGRO_ALIGN_CENTRE, "PRESS ENTER TO PLAY AGAIN");
 
   al_flip_display();
   al_clear_to_color(al_map_rgb(0, 0, 0));

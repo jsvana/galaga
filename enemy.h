@@ -17,13 +17,14 @@
     ALLEGRO_BITMAP *_texture = NULL;
 
     bool _alive;
+    int _enemyType;
     int _frame = 0;
 
     int _moveSpeed = 2;
 
   public:
     Enemy();
-    Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture);
+    Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType);
     ~Enemy();
 
     bool update(unsigned int ticks);

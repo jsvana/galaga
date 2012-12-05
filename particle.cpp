@@ -19,8 +19,8 @@ Particle::Particle(int x, int y, int ySpeed, Rectangle bounds) {
   _container.setX(x);
   _container.setY(y);
 
-  _container.setW(rand() % 6 + 5);
-  _container.setH(rand() % 6 + 5);
+  _container.setW(rand() % 3 + 3);
+  _container.setH(rand() % 3 + 3);
 
   _xSpeed = 0;
   _ySpeed = ySpeed;

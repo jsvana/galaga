@@ -6,7 +6,7 @@ BackgroundManager::BackgroundManager() {
 
 BackgroundManager::BackgroundManager(int screenWidth, int screenHeight) {
   for (int i = 4; i >= 1; i--) {
-    Background background(screenWidth, screenHeight, i * 5);
+    Background background(screenWidth, screenHeight, i);
     _backgrounds.push_front(background);
   }
 }
@@ -15,7 +15,7 @@ void BackgroundManager::setBounds(int screenWidth, int screenHeight) {
   _backgrounds.clear();
 
   for (int i = 4; i >= 1; i--) {
-    Background background(screenWidth, screenHeight, i * 5);
+    Background background(screenWidth, screenHeight, i);
     _backgrounds.push_front(background);
   }
 }
