@@ -2,6 +2,8 @@
   #define GALAGA_GALAGA
 
   #include <allegro5/allegro.h>
+  #include <allegro5/allegro_font.h>
+  #include <allegro5/allegro_ttf.h>
   #include <iostream>
   #include <list>
 
@@ -18,6 +20,7 @@
 
     ALLEGRO_EVENT_QUEUE *_eventQueue;
     ALLEGRO_KEYBOARD_STATE _keyState;
+    ALLEGRO_FONT *_font;
     int _screenWidth;
     int _screenHeight;
 

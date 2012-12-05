@@ -4,6 +4,7 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_font.h>
 #include <iostream>
 
 #include "bullet.h"
@@ -34,6 +35,8 @@ int main(int argc, char *argv[]) {
   al_set_window_position(display, 200, 200);
 
   al_init_primitives_addon();
+  al_init_font_addon();
+  al_init_ttf_addon();
   al_install_keyboard();
 
   ALLEGRO_TIMER *timer = al_create_timer(1.0 / FPS);

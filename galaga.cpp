@@ -4,6 +4,8 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
   _screenWidth = screenWidth;
   _screenHeight = screenHeight;
   _eventQueue = eventQueue;
+  _font = al_load_font("arcade.ttf", 20, NULL);
+
   _ship.moveTo(_screenWidth / 2, _screenHeight - 20);
 
   int totalWidth = 6 * 20 + 5 * 10;
@@ -25,6 +27,8 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
 
 Galaga::~Galaga() {
   _shipBullets.erase(_shipBullets.begin(), _shipBullets.end());
+
+  al_destroy_font(_font);
 }
 
 bool Galaga::update(unsigned int ticks) {
@@ -98,9 +102,9 @@ bool Galaga::update(unsigned int ticks) {
 }
 
 void Galaga::render() {
-  int i;
-
   if (_needsDraw) {
+    int ascent = al_get_font_ascent(_font);
+
     for (Bullet bullet : _shipBullets) {
       bullet.render();
     }
@@ -110,6 +114,12 @@ void Galaga::render() {
     for (Enemy enemy : _enemies) {
       enemy.render();
     }
+
+    al_draw_filled_rectangle(0, _screenHeight - 40, _screenWidth / 5, _screenHeight,
+      al_map_rgb(31, 158, 14));
+
+    al_draw_textf(_font, al_map_rgb(0, 0, 0), 10, _screenHeight - 20 - ascent / 2,
+      ALLEGRO_ALIGN_LEFT, "Enemies left: %d", (int)_enemies.size());
 
     al_flip_display();
     al_clear_to_color(al_map_rgb(0, 0, 0));
