@@ -14,6 +14,8 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
 
   _bulletTexture = al_load_bitmap("assets/images/bullet.png");
 
+  _backgroundManager.setBounds(_screenWidth, _screenHeight);
+
   int totalWidth = 6 * 20 + 5 * 10;
   int innerXMax = 4 * 30;
 
@@ -84,6 +86,8 @@ bool Galaga::update(unsigned int ticks) {
     _needsDraw = true;
   }
 
+  _backgroundManager.update(ticks);
+
   _ship.update(ticks);
 
   std::list<Enemy>::iterator enemyIter = _enemies.begin();
@@ -136,6 +140,8 @@ bool Galaga::update(unsigned int ticks) {
 void Galaga::render() {
   if (_needsDraw) {
     int lineHeight = al_get_font_line_height(_font);
+
+    _backgroundManager.render();
 
     for (Bullet bullet : _shipBullets) {
       bullet.render();

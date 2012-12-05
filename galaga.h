@@ -10,6 +10,7 @@
   #include <iostream>
   #include <list>
 
+  #include "background_manager.h"
   #include "bullet.h"
   #include "enemy.h"
   #include "gamemodule.h"
@@ -23,6 +24,7 @@
     std::list<Enemy> _enemies;
     std::list<ParticleManager> _particleManagers;
     std::vector<ALLEGRO_BITMAP *> _enemyTextures;
+    BackgroundManager _backgroundManager;
 
     ALLEGRO_BITMAP *_bulletTexture;
     ALLEGRO_EVENT_QUEUE *_eventQueue;

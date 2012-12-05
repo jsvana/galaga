@@ -15,10 +15,15 @@
     int _g;
     int _b;
 
+    bool _decay = true;
+
+    Rectangle _bounds;
+
     bool _alive = true;
 
   public:
     Particle(int x, int y);
+    Particle(int x, int y, int ySpeed, Rectangle bounds);
     ~Particle();
 
     bool update(unsigned int ticks);

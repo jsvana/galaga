@@ -15,17 +15,46 @@ Particle::Particle(int x, int y) {
   _b = rand() % 156 + 100;
 }
 
+Particle::Particle(int x, int y, int ySpeed, Rectangle bounds) {
+  _container.setX(x);
+  _container.setY(y);
+
+  _container.setW(rand() % 6 + 5);
+  _container.setH(rand() % 6 + 5);
+
+  _xSpeed = 0;
+  _ySpeed = ySpeed;
+
+  _r = rand() % 156 + 100;
+  _g = rand() % 156 + 100;
+  _b = rand() % 156 + 100;
+
+  _decay = false;
+
+  _bounds = bounds;
+}
+
 Particle::~Particle() {
 }
 
 bool Particle::update(unsigned int ticks) {
   _container.setX(_container.getX() + _xSpeed);
   _container.setY(_container.getY() + _ySpeed);
-  _container.setW(_container.getW() - 1);
-  _container.setH(_container.getH() - 1);
+  if (_decay) {
+    _container.setW(_container.getW() - 1);
+    _container.setH(_container.getH() - 1);
 
-  if (_container.getW() <= 0 || _container.getH() <= 0) {
-    kill();
+    if (_container.getW() <= 0 || _container.getH() <= 0) {
+      kill();
+    }
+  } else {
+    _r = (_r + 1) % 255;
+    _g = (_g + 1) % 255;
+    _b = (_b + 1) % 255;
+
+    if (_container.getY() >= _bounds.getY() + _bounds.getH()) {
+      _container.setY(0);
+    }
   }
 
   return true;
