@@ -5,7 +5,14 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
   _screenHeight = screenHeight;
   _eventQueue = eventQueue;
   _ship.moveTo(_screenWidth / 2, _screenHeight - 20);
-  _enemy.moveTo(_screenWidth / 2, 10);
+
+  int totalWidth = 6 * 20 + 5 * 10;
+
+  for (int i = 0; i < 6; i++) {
+    int x = _screenWidth / 2 - totalWidth / 2 + 30 * i;
+    Enemy enemy(x, 0);
+    _enemies.push_back(enemy);
+  }
 }
 
 Galaga::~Galaga() {
@@ -15,7 +22,7 @@ Galaga::~Galaga() {
 bool Galaga::update(unsigned int ticks) {
   ALLEGRO_EVENT events;
   al_wait_for_event(_eventQueue, &events);
-  Point shipPosition;
+  Rectangle shipContainer;
   int i;
 
   _needsDraw = false;
@@ -26,7 +33,7 @@ bool Galaga::update(unsigned int ticks) {
 
   if (events.type == ALLEGRO_EVENT_KEY_DOWN && events.keyboard.keycode == ALLEGRO_KEY_SPACE) {
     if (_bullets.size() < MAX_BULLETS) {
-      Bullet newBullet(_ship.getPosition().getX(), _ship.getPosition().getY(), _bullets.size());
+      Bullet newBullet(_ship.getContainer().getX() + _ship.getContainer().getW() / 4, _ship.getContainer().getY());
 
       _bullets.push_back(newBullet);
     }
@@ -34,30 +41,52 @@ bool Galaga::update(unsigned int ticks) {
 
   if (events.type == ALLEGRO_EVENT_TIMER) {
     al_get_keyboard_state(&_keyState);
-    shipPosition = _ship.getPosition();
+    shipContainer = _ship.getContainer();
 
-    if(al_key_down(&_keyState, ALLEGRO_KEY_LEFT) && shipPosition.getX() > 10) {
+    if(al_key_down(&_keyState, ALLEGRO_KEY_LEFT) && shipContainer.getX() > 0) {
       _ship.move(GALAGA_LEFT, MOVE_SPEED);
-    } else if(al_key_down(&_keyState, ALLEGRO_KEY_RIGHT) && shipPosition.getX() < _screenWidth - 10) {
+    } else if(al_key_down(&_keyState, ALLEGRO_KEY_RIGHT) && shipContainer.getX() < _screenWidth - shipContainer.getW()) {
       _ship.move(GALAGA_RIGHT, MOVE_SPEED);
     }
 
-    if(al_key_down(&_keyState, ALLEGRO_KEY_UP) && shipPosition.getY() > 0) {
+    if(al_key_down(&_keyState, ALLEGRO_KEY_UP) && shipContainer.getY() > 0) {
       _ship.move(GALAGA_UP, MOVE_SPEED);
-    } else if(al_key_down(&_keyState, ALLEGRO_KEY_DOWN) && shipPosition.getY() < _screenHeight - 20) {
+    } else if(al_key_down(&_keyState, ALLEGRO_KEY_DOWN) && shipContainer.getY() < _screenHeight - shipContainer.getH()) {
       _ship.move(GALAGA_DOWN, MOVE_SPEED);
     }
 
     _needsDraw = true;
   }
 
+  // if (_enemy.hitTest(&_bullets)) {
+  //   std::cout << "[LOG] hit" << std::endl;
+  // }
+
   _ship.update(ticks);
 
-  for (i = 0; i < _bullets.size(); i++) {
-    _bullets[i].update(ticks);
+  std::list<Enemy>::iterator enemyIter = _enemies.begin();
 
-    if (_bullets[i].isDead()) {
-      _bullets.erase(_bullets.begin() + i);
+  while (enemyIter != _enemies.end()) {
+    (*enemyIter).update(ticks);
+
+    (*enemyIter).hitTest(&_bullets);
+
+    if (!(*enemyIter).isAlive()) {
+      _enemies.erase(enemyIter++);
+    } else {
+      ++enemyIter;
+    }
+  }
+
+  std::list<Bullet>::iterator bulletIter = _bullets.begin();
+
+  while (bulletIter != _bullets.end()) {
+    (*bulletIter).update(ticks);
+
+    if (!(*bulletIter).isAlive()) {
+      _bullets.erase(bulletIter++);
+    } else {
+      ++bulletIter;
     }
   }
 
@@ -68,12 +97,15 @@ void Galaga::render() {
   int i;
 
   if (_needsDraw) {
-    for (i = 0; i < _bullets.size(); i++) {
-      _bullets[i].render();
+    for (Bullet bullet : _bullets) {
+      bullet.render();
     }
 
     _ship.render();
-    _enemy.render();
+
+    for (Enemy enemy : _enemies) {
+      enemy.render();
+    }
 
     al_flip_display();
     al_clear_to_color(al_map_rgb(0, 0, 0));

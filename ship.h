@@ -8,7 +8,7 @@
   #include "utilities.h"
 
   class Ship {
-    Point *_position;
+    Rectangle _container;
     std::vector<Bullet> _bullets;
     const int MAX_BULLETS = 10;
 
@@ -19,7 +19,7 @@
 
     bool move(int direction, int magnitude);
     bool moveTo(int x, int y);
-    Point getPosition();
+    Rectangle getContainer() { return _container; }
 
     bool fire();
 

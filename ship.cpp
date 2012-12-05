@@ -2,52 +2,55 @@
 #include "ship.h"
 
 Ship::Ship() {
-  _position = new Point(0, 0);
+  _container.setX(0);
+  _container.setY(0);
+  _container.setW(20);
+  _container.setH(20);
 }
 
 Ship::Ship(int x, int y) {
-  _position = new Point(x, y);
+  _container.setX(x);
+  _container.setY(y);
+  _container.setW(20);
+  _container.setH(20);
 }
 
 Ship::~Ship() {
-  delete _position;
 }
 
 bool Ship::move(int direction, int magnitude) {
   switch (direction) {
     case GALAGA_LEFT:
-      _position->setX(_position->getX() - magnitude);
+      _container.setX(_container.getX() - magnitude);
       break;
     case GALAGA_RIGHT:
-      _position->setX(_position->getX() + magnitude);
+      _container.setX(_container.getX() + magnitude);
       break;
     case GALAGA_UP:
-      _position->setY(_position->getY() - magnitude);
+      _container.setY(_container.getY() - magnitude);
       break;
     case GALAGA_DOWN:
-      _position->setY(_position->getY() + magnitude);
+      _container.setY(_container.getY() + magnitude);
       break;
   }
 
   return true;
 }
 bool Ship::moveTo(int x, int y) {
-  _position->setX(x);
-  _position->setY(y);
+  _container.setX(x);
+  _container.setY(y);
 
   return true;
-}
-
-Point Ship::getPosition() {
-  return *_position;
 }
 
 void Ship::update(unsigned int ticks) {
 }
 
 void Ship::render() {
-  int x = _position->getX();
-  int y = _position->getY();
+  int x = _container.getX();
+  int y = _container.getY();
+  int w = _container.getW();
+  int h = _container.getH();
 
-  al_draw_filled_triangle(x - 10, y + 20, x, y, x + 10, y + 20, al_map_rgb(255, 0, 0));
+  al_draw_filled_triangle(x, y + h, x + w / 2, y, x + w, y + h, al_map_rgb(255, 0, 0));
 }

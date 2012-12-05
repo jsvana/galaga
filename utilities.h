@@ -1,6 +1,8 @@
 #ifndef GALAGA_UTILITIES
   #define GALAGA_UTILITIES
 
+  #include <iostream>
+
   #define GALAGA_LEFT 0
   #define GALAGA_RIGHT 1
   #define GALAGA_UP 2
@@ -18,5 +20,29 @@
     void setX(int x) { _x = x; }
     int getY() { return _y; }
     void setY(int y) { _y = y; }
+  };
+
+  class Rectangle {
+    int _x;
+    int _y;
+    int _w;
+    int _h;
+
+  public:
+    Rectangle();
+    Rectangle(int x, int y, int w, int h);
+
+    int getX() { return _x; }
+    void setX(int x) { _x = x; }
+    int getY() { return _y; }
+    void setY(int y) { _y = y; }
+    int getW() { return _w; }
+    void setW(int w) { _w = w; }
+    int getH() { return _h; }
+    void setH(int h) { _h = h; }
+
+    bool containsPoint(Point p);
+    bool containsPoint(int x, int y);
+    bool collidesWith(Rectangle target);
   };
 #endif

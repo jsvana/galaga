@@ -1,29 +1,35 @@
 #include "bullet.h"
 
-Bullet::Bullet(int x, int y, int index) {
-  _position.setX(x);
-  _position.setY(y);
+Bullet::Bullet(int x, int y) {
+  _container.setX(x);
+  _container.setY(y);
+  _container.setW(10);
+  _container.setH(10);
 
-  _isDead = false;
+  _alive = true;
 }
 
 Bullet::~Bullet() {
 }
 
 int Bullet::move() {
-  _position.setY(_position.getY() - 4);
+  _container.setY(_container.getY() - 4);
 
-  return _position.getY();
+  return _container.getY();
 }
 
 void Bullet::update(unsigned int ticks) {
   move();
 
-  if (_position.getY() < 0) {
-    _isDead = true;
+  if (_container.getY() < 0) {
+    _alive = false;
   }
 }
 
 void Bullet::render() {
-  al_draw_filled_rectangle(_position.getX() - 5, _position.getY() - 5, _position.getX() + 5, _position.getY() + 5, al_map_rgb(255, 255, 0));
+  if (_alive) {
+    al_draw_filled_rectangle(_container.getX(), _container.getY(),
+      _container.getX() + _container.getW(), _container.getY() +
+      _container.getH(), al_map_rgb(255, 255, 0));
+  }
 }

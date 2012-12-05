@@ -3,7 +3,7 @@
 
   #include <allegro5/allegro.h>
   #include <iostream>
-  #include <vector>
+  #include <list>
 
   #include "bullet.h"
   #include "enemy.h"
@@ -13,8 +13,8 @@
 
   class Galaga : public GameModule {
     Ship _ship;
-    std::vector<Bullet> _bullets;
-    Enemy _enemy;
+    std::list<Bullet> _bullets;
+    std::list<Enemy> _enemies;
 
     ALLEGRO_EVENT_QUEUE *_eventQueue;
     ALLEGRO_KEYBOARD_STATE _keyState;

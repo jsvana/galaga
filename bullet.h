@@ -7,16 +7,18 @@
   #include "utilities.h"
 
   class Bullet {
-    Point _position;
+    Rectangle _container;
     int index;
-    bool _isDead;
+    bool _alive;
 
   public:
-    Bullet(int x, int y, int index);
+    Bullet(int x, int y);
     ~Bullet();
     int move();
-    Point getPosition() { return _position; }
-    bool isDead() { return _isDead; };
+    Rectangle getContainer() { return _container; }
+    bool isAlive() { return _alive; };
+    void kill() { _alive = true; }
+    void vivify() { _alive = false; }
 
     void update(unsigned int ticks);
 
