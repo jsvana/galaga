@@ -8,6 +8,12 @@
   #define GALAGA_UP 2
   #define GALAGA_DOWN 3
 
+  // Game states
+  #define GALAGA_GAME_START 0
+  #define GALAGA_GAME_PLAYING 1
+  #define GALAGA_GAME_PAUSED 2
+  #define GALAGA_GAME_ENDED 3
+
   class Point {
     int _x;
     int _y;

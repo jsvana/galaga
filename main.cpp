@@ -1,6 +1,3 @@
-// C++ ALLEGRO 5 MADE EASY TUTORIAL 9 - KEYBOARD INPUT
-// CODINGMADEEASY
-
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_primitives.h>

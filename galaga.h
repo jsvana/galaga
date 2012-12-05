@@ -26,10 +26,13 @@
     std::vector<ALLEGRO_BITMAP *> _enemyTextures;
     BackgroundManager _backgroundManager;
 
+    int _gameState = GALAGA_GAME_START;
+
     ALLEGRO_BITMAP *_bulletTexture;
     ALLEGRO_EVENT_QUEUE *_eventQueue;
     ALLEGRO_KEYBOARD_STATE _keyState;
     ALLEGRO_FONT *_font;
+    ALLEGRO_FONT *_bigFont;
     ALLEGRO_SAMPLE *_pewPew;
 
     unsigned int _shotsFired = 0;
@@ -46,6 +49,13 @@
   public:
     Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueue);
     ~Galaga();
+
+    bool startGameUpdate(unsigned int ticks, ALLEGRO_EVENT events);
+    void startGameRender();
+    bool mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events);
+    void mainGameRender();
+    bool endGameUpdate(unsigned int ticks, ALLEGRO_EVENT events);
+    void endGameRender();
 
     bool update(unsigned int ticks);
     void render();

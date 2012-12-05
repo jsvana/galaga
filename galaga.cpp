@@ -5,6 +5,7 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
   _screenHeight = screenHeight;
   _eventQueue = eventQueue;
   _font = al_load_font("assets/fonts/arcade.ttf", 20, NULL);
+  _bigFont = al_load_font("assets/fonts/arcade.ttf", 40, NULL);
   _pewPew = al_load_sample("assets/sounds/pewpew.wav");
 
   _ship.moveTo(_screenWidth / 2, _screenHeight - 32);
@@ -37,6 +38,7 @@ Galaga::~Galaga() {
   _shipBullets.erase(_shipBullets.begin(), _shipBullets.end());
 
   al_destroy_font(_font);
+  al_destroy_font(_bigFont);
   al_destroy_sample(_pewPew);
 
   al_destroy_bitmap(_bulletTexture);
@@ -46,18 +48,33 @@ Galaga::~Galaga() {
   }
 }
 
-bool Galaga::update(unsigned int ticks) {
-  ALLEGRO_EVENT events;
-  al_wait_for_event(_eventQueue, &events);
+bool Galaga::startGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
+  if (events.type == ALLEGRO_EVENT_KEY_DOWN && events.keyboard.keycode == ALLEGRO_KEY_ENTER) {
+    _gameState = GALAGA_GAME_PLAYING;
+  }
+
+  _backgroundManager.update(ticks);
+
+  return true;
+}
+
+void Galaga::startGameRender() {
+  _backgroundManager.render();
+
+  int ascent = al_get_font_ascent(_bigFont);
+
+  al_draw_textf(_bigFont, al_map_rgb(255, 255, 255), _screenWidth / 2, _screenHeight / 2 - ascent / 2,
+    ALLEGRO_ALIGN_CENTRE, "PRESS ENTER TO START");
+
+  al_flip_display();
+  al_clear_to_color(al_map_rgb(0, 0, 0));
+}
+
+bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
   Rectangle shipContainer;
   int i;
 
   _needsDraw = false;
-
-  if ((events.type == ALLEGRO_EVENT_KEY_UP && events.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
-    || events.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-    return false;
-  }
 
   if (events.type == ALLEGRO_EVENT_KEY_DOWN && events.keyboard.keycode == ALLEGRO_KEY_SPACE) {
     if (_shipBullets.size() < MAX_BULLETS) {
@@ -134,10 +151,14 @@ bool Galaga::update(unsigned int ticks) {
     }
   }
 
+  if (_enemies.size() == 0) {
+    _gameState = GALAGA_GAME_ENDED;
+  }
+
   return true;
 }
 
-void Galaga::render() {
+void Galaga::mainGameRender() {
   if (_needsDraw) {
     int lineHeight = al_get_font_line_height(_font);
 
@@ -170,5 +191,60 @@ void Galaga::render() {
 
     al_flip_display();
     al_clear_to_color(al_map_rgb(0, 0, 0));
+  }
+}
+
+bool Galaga::endGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
+  _needsDraw = true;
+
+  _backgroundManager.update(ticks);
+
+  return true;
+}
+
+void Galaga::endGameRender() {
+  _backgroundManager.render();
+
+  int ascent = al_get_font_ascent(_bigFont);
+
+  al_draw_textf(_bigFont, al_map_rgb(255, 255, 255), _screenWidth / 2, _screenHeight / 2 - ascent / 2,
+    ALLEGRO_ALIGN_CENTRE, "YOU'RE WINNER");
+
+  al_flip_display();
+  al_clear_to_color(al_map_rgb(0, 0, 0));
+}
+
+bool Galaga::update(unsigned int ticks) {
+  ALLEGRO_EVENT events;
+  al_wait_for_event(_eventQueue, &events);
+
+  if ((events.type == ALLEGRO_EVENT_KEY_UP && events.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+    || events.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+    return false;
+  }
+
+  switch (_gameState) {
+    case GALAGA_GAME_START:
+      return startGameUpdate(ticks, events);
+    case GALAGA_GAME_PLAYING:
+      return mainGameUpdate(ticks, events);
+    case GALAGA_GAME_ENDED:
+      return endGameUpdate(ticks, events);
+  }
+
+  return true;
+}
+
+void Galaga::render() {
+  switch (_gameState) {
+    case GALAGA_GAME_START:
+      startGameRender();
+      break;
+    case GALAGA_GAME_PLAYING:
+      mainGameRender();
+      break;
+    case GALAGA_GAME_ENDED:
+      endGameRender();
+      break;
   }
 }
