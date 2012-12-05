@@ -1,3 +1,4 @@
 *.o
 galaga
 *.dSYM
+.DS_Store
