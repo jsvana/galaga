@@ -92,6 +92,7 @@ void Galaga::initialize() {
 void Galaga::cleanup() {
   _shipBullets.clear();
   _enemies.clear();
+  _particleManagers.clear();
   _powerups.clear();
   _ship.clearActivePowerups();
 }
