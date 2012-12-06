@@ -14,6 +14,8 @@
   #define GALAGA_GAME_PAUSED 2
   #define GALAGA_GAME_ENDED 3
 
+  #define GALAGA_PI 3.14159
+
   typedef struct {
     int lifetime;
     int duration;

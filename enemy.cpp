@@ -5,6 +5,8 @@ Enemy::Enemy() {
   _container.setY(0);
   _container.setW(30);
   _container.setH(24);
+  _initialPosition.setX(0);
+  _initialPosition.setY(0);
   _alive = true;
 }
 
@@ -13,6 +15,8 @@ Enemy::Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyT
   _container.setY(y);
   _container.setW(30);
   _container.setH(24);
+  _initialPosition.setX(x);
+  _initialPosition.setY(y);
   _alive = true;
 
   _bounds = bounds;
@@ -41,11 +45,14 @@ bool Enemy::hitTest(std::list<Bullet> *bullets) {
 }
 
 bool Enemy::update(unsigned int ticks) {
-  _container.setX(_container.getX() + _moveSpeed);
+  switch (_currentState) {
+    case GALAGA_ENEMY_STATE_IDLE:
+      _rotation += _rotationSpeed;
 
-  if (_container.getX() <= _bounds.getX()
-    || _container.getX() + _container.getW() >= _bounds.getX() + _bounds.getW()) {
-    _moveSpeed = -_moveSpeed;
+      if (_rotation >= 2 * GALAGA_PI || _rotation <= GALAGA_PI) {
+        _rotationSpeed = -_rotationSpeed;
+      }
+      break;
   }
 
   if (ticks % 30 == 0) {
@@ -58,9 +65,12 @@ bool Enemy::update(unsigned int ticks) {
 void Enemy::render() {
   if (_alive) {
     if (_texture) {
+      int xRotation = (float)_idleRadius * cos(_rotation);
+      int yRotation = (float)_idleRadius * sin(_rotation);
+
       al_draw_bitmap_region(_texture, _container.getW() * _frame, _container.getH() * _enemyType,
         _container.getW(), _container.getH(),
-        _container.getX(), _container.getY(), NULL);
+        _container.getX() + xRotation, _container.getY() + yRotation, NULL);
     } else {
       al_draw_filled_rectangle(_container.getX(), _container.getY(),
         _container.getX() + _container.getW(), _container.getY() + _container.getH(),

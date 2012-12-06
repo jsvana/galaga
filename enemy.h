@@ -5,15 +5,21 @@
   #include <allegro5/allegro_audio.h>
   #include <allegro5/allegro_image.h>
   #include <allegro5/allegro_primitives.h>
+  #include <cmath>
   #include <iostream>
   #include <list>
 
   #include "bullet.h"
   #include "utilities.h"
 
+  #define GALAGA_ENEMY_STATE_IDLE 0
+  #define GALAGA_ENEMY_STATE_MOVE 0
+  #define GALAGA_ENEMY_STATE_STRIKE 0
+
   class Enemy {
     Rectangle _container;
     Rectangle _bounds;
+    Point _initialPosition;
 
     ALLEGRO_BITMAP *_texture = NULL;
     ALLEGRO_SAMPLE *_sample;
@@ -23,6 +29,13 @@
     int _frame = 0;
 
     int _moveSpeed = 2;
+
+    int _previousState = NULL;
+    int _currentState = GALAGA_ENEMY_STATE_IDLE;
+
+    int _idleRadius = 5;
+    float _rotation = 3 * GALAGA_PI / 2;
+    float _rotationSpeed = GALAGA_PI / 16;
 
   public:
     Enemy();
