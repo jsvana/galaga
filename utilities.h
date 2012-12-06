@@ -14,6 +14,13 @@
   #define GALAGA_GAME_PAUSED 2
   #define GALAGA_GAME_ENDED 3
 
+  typedef struct {
+    int lifetime;
+    int duration;
+    int type;
+    bool complete;
+  } ActivePowerup;
+
   class Point {
     int _x;
     int _y;

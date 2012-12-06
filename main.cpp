@@ -12,8 +12,8 @@
 #include "ship.h"
 #include "utilities.h"
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 600
+#define SCREEN_HEIGHT 700
 
 int main(int argc, char *argv[]) {
   ALLEGRO_DISPLAY *display;
@@ -31,13 +31,13 @@ int main(int argc, char *argv[]) {
     al_show_native_message_box(NULL, "Error", NULL, "Could not create Allegro Display", NULL, NULL);
   }
 
-  al_set_window_position(display, 200, 200);
-
   al_install_audio();
 
   al_init_primitives_addon();
   al_init_acodec_addon();
-  al_reserve_samples(2);
+  if (!al_reserve_samples(10)) {
+    std::cout << "[ERROR] Unable to reserve sound samples, quitting." << std::endl;
+  }
   al_init_font_addon();
   al_init_ttf_addon();
   al_init_image_addon();

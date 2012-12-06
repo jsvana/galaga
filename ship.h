@@ -4,16 +4,17 @@
   #include <allegro5/allegro.h>
   #include <allegro5/allegro_primitives.h>
   #include <allegro5/allegro_image.h>
-  #include <vector>
+  #include <list>
 
+  #include "powerup.h"
   #include "utilities.h"
 
   class Ship {
     ALLEGRO_BITMAP *_texture;
 
     Rectangle _container;
-    std::vector<Bullet> _bullets;
-    const int MAX_BULLETS = 10;
+
+    std::list<ActivePowerup> _activePowerups;
 
   public:
     Ship();
@@ -24,7 +25,13 @@
     bool moveTo(int x, int y);
     Rectangle getContainer() { return _container; }
 
+    void addPowerup(int type, int duration);
+
     bool fire();
+
+    bool hitTest(std::list<Powerup> *powerups);
+
+    std::list<ActivePowerup> getActivePowerups();
 
     void update(unsigned int ticks);
 

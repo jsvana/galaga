@@ -17,13 +17,11 @@ Ship::Ship(int x, int y) {
   _container.setH(32);
 
   _texture = al_load_bitmap("assets/images/galaga.png");
-  if (!_texture) {
-    std::cout << "nope" << std::endl;
-  }
 }
 
 Ship::~Ship() {
   al_destroy_bitmap(_texture);
+  _activePowerups.clear();
 }
 
 bool Ship::move(int direction, int magnitude) {
@@ -44,6 +42,7 @@ bool Ship::move(int direction, int magnitude) {
 
   return true;
 }
+
 bool Ship::moveTo(int x, int y) {
   _container.setX(x);
   _container.setY(y);
@@ -51,7 +50,29 @@ bool Ship::moveTo(int x, int y) {
   return true;
 }
 
+bool Ship::hitTest(std::list<Powerup> *powerups) {
+  for (Powerup& powerup : *powerups) {
+    Rectangle powerupContainer = powerup.getContainer();
+    if (powerup.isAlive() && _container.collidesWith(powerupContainer)) {
+      powerup.kill();
+      powerup.hit();
+      return true;
+    }
+  }
+
+  return false;
+}
+
 void Ship::update(unsigned int ticks) {
+  std::list<ActivePowerup>::iterator powerupIter = _activePowerups.begin();
+
+  for (ActivePowerup& powerup : _activePowerups) {
+    ++powerup.lifetime;
+
+    if (powerup.lifetime >= powerup.duration) {
+      powerup.complete = true;
+    }
+  }
 }
 
 void Ship::render() {
@@ -60,9 +81,35 @@ void Ship::render() {
   int w = _container.getW();
   int h = _container.getH();
 
-  // al_draw_filled_triangle(x, y + h, x + w / 2, y, x + w, y + h, al_map_rgb(255, 0, 0));
-
   if (_texture) {
     al_draw_bitmap(_texture, x, y, NULL);
   }
+}
+
+std::list<ActivePowerup> Ship::getActivePowerups() {
+  std::list<ActivePowerup> oldPowerups(_activePowerups);
+
+  std::list<ActivePowerup>::iterator powerupIter = _activePowerups.begin();
+
+  while (powerupIter != _activePowerups.end()) {
+    ++(*powerupIter).lifetime;
+
+    if ((*powerupIter).complete) {
+      _activePowerups.erase(powerupIter++);
+    } else {
+      ++powerupIter;
+    }
+  }
+
+  return oldPowerups;
+}
+
+void Ship::addPowerup(int type, int duration) {
+  ActivePowerup newPowerup;
+  newPowerup.type = type;
+  newPowerup.lifetime = 0;
+  newPowerup.duration = duration;
+  newPowerup.complete = false;
+
+  _activePowerups.push_back(newPowerup);
 }

@@ -15,6 +15,7 @@
   #include "enemy.h"
   #include "gamemodule.h"
   #include "particle_manager.h"
+  #include "powerup.h"
   #include "ship.h"
   #include "utilities.h"
 
@@ -23,16 +24,26 @@
     std::list<Bullet> _shipBullets;
     std::list<Enemy> _enemies;
     std::list<ParticleManager> _particleManagers;
-    ALLEGRO_BITMAP *_enemiesTexture;
+    std::list<Powerup> _powerups;
     BackgroundManager _backgroundManager;
 
     int _gameState = GALAGA_GAME_START;
+    int _prevGameState = NULL;
+
+    unsigned int _stateTicks = 0;
 
     ALLEGRO_BITMAP *_bulletTexture;
+    ALLEGRO_BITMAP *_enemiesTexture;
+    ALLEGRO_BITMAP *_powerupsTexture;
+
     ALLEGRO_EVENT_QUEUE *_eventQueue;
     ALLEGRO_KEYBOARD_STATE _keyState;
+
     ALLEGRO_FONT *_font;
     ALLEGRO_FONT *_bigFont;
+    ALLEGRO_FONT *_hugeFont;
+
+    ALLEGRO_SAMPLE *_beginningMusic;
     ALLEGRO_SAMPLE *_pewPew;
 
     unsigned int _shotsFired = 0;
@@ -46,7 +57,8 @@
     bool _needsDraw;
 
     const int MOVE_SPEED = 5;
-    const int MAX_BULLETS = 2;
+    int _bulletCount = 1;
+    int _maxBullets = 2;
 
   public:
     Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueue);
@@ -57,12 +69,23 @@
 
     bool startGameUpdate(unsigned int ticks, ALLEGRO_EVENT events);
     void startGameRender();
+
     bool mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events);
     void mainGameRender();
+
+    bool pausedGameUpdate(unsigned int ticks, ALLEGRO_EVENT events);
+    void pausedGameRender();
+
     bool endGameUpdate(unsigned int ticks, ALLEGRO_EVENT events);
     void endGameRender();
 
     bool update(unsigned int ticks);
     void render();
+
+    void renderScore();
+    void renderPowerups();
+
+    void usePowerup(int type);
+    void removePowerup(int type);
   };
 #endif
