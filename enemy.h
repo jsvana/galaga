@@ -2,8 +2,9 @@
   #define GALAGA_ENEMY
 
   #include <allegro5/allegro.h>
-  #include <allegro5/allegro_primitives.h>
+  #include <allegro5/allegro_audio.h>
   #include <allegro5/allegro_image.h>
+  #include <allegro5/allegro_primitives.h>
   #include <iostream>
   #include <list>
 
@@ -15,6 +16,7 @@
     Rectangle _bounds;
 
     ALLEGRO_BITMAP *_texture = NULL;
+    ALLEGRO_SAMPLE *_sample;
 
     bool _alive;
     int _enemyType;
@@ -24,7 +26,7 @@
 
   public:
     Enemy();
-    Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType);
+    Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType, ALLEGRO_SAMPLE *sample);
     ~Enemy();
 
     bool update(unsigned int ticks);

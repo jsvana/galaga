@@ -9,6 +9,7 @@
   #include <allegro5/allegro_image.h>
   #include <iostream>
   #include <list>
+  #include <vector>
 
   #include "background_manager.h"
   #include "bullet.h"
@@ -44,7 +45,8 @@
     ALLEGRO_FONT *_hugeFont;
 
     ALLEGRO_SAMPLE *_beginningMusic;
-    ALLEGRO_SAMPLE *_pewPew;
+    ALLEGRO_SAMPLE *_shotSample;
+    std::vector<ALLEGRO_SAMPLE *>_enemyDeathSamples;
 
     unsigned int _shotsFired = 0;
     unsigned int _shotHits = 0;

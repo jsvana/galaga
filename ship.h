@@ -32,6 +32,7 @@
     bool hitTest(std::list<Powerup> *powerups);
 
     std::list<ActivePowerup> getActivePowerups();
+    void clearActivePowerups() { _activePowerups.clear(); }
 
     void update(unsigned int ticks);
 

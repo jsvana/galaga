@@ -8,7 +8,7 @@ Enemy::Enemy() {
   _alive = true;
 }
 
-Enemy::Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType) {
+Enemy::Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType, ALLEGRO_SAMPLE *sample) {
   _container.setX(x);
   _container.setY(y);
   _container.setW(30);
@@ -18,6 +18,7 @@ Enemy::Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyT
   _bounds = bounds;
 
   _texture = texture;
+  _sample = sample;
   _enemyType = enemyType;
 }
 
@@ -32,6 +33,7 @@ bool Enemy::hitTest(std::list<Bullet> *bullets) {
     if (bullet.isAlive() && _container.collidesWith(bulletContainer)) {
       bullet.kill();
       kill();
+      al_play_sample(_sample, .8, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
       return true;
     }
   }

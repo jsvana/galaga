@@ -10,7 +10,10 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
   _hugeFont = al_load_font("assets/fonts/arcade.ttf", 60, NULL);
 
   _beginningMusic = al_load_sample("assets/sounds/beginning.wav");
-  _pewPew = al_load_sample("assets/sounds/pewpew.wav");
+  _shotSample = al_load_sample("assets/sounds/fighter.wav");
+
+  _enemyDeathSamples.push_back(al_load_sample("assets/sounds/enemy1death.wav"));
+  _enemyDeathSamples.push_back(al_load_sample("assets/sounds/enemy2death.wav"));
 
   Rectangle shipSize = _ship.getContainer();
 
@@ -31,7 +34,8 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
     for (int x = 0; x < 6; x++) {
       Rectangle bounds(innerXMin, 0, innerXMax, _screenHeight);
       int enemyX = _screenWidth / 2 - totalWidth / 2 + 30 * x;
-      Enemy enemy(enemyX, _screenHeight / 4 + 30 * y, bounds, _enemiesTexture, x % 2);
+      Enemy enemy(enemyX, _screenHeight / 4 + 30 * y, bounds, _enemiesTexture,
+        x % 2, _enemyDeathSamples[x % 2]);
       _enemies.push_back(enemy);
 
       innerXMin += 30;
@@ -40,15 +44,17 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
 }
 
 Galaga::~Galaga() {
-  _shipBullets.erase(_shipBullets.begin(), _shipBullets.end());
+  _shipBullets.clear();
 
   al_destroy_font(_font);
   al_destroy_font(_bigFont);
-  al_destroy_sample(_pewPew);
+  al_destroy_sample(_shotSample);
 
   al_destroy_bitmap(_bulletTexture);
   al_destroy_bitmap(_enemiesTexture);
   al_destroy_bitmap(_powerupsTexture);
+
+  _enemyDeathSamples.clear();
 }
 
 void Galaga::initialize() {
@@ -74,7 +80,8 @@ void Galaga::initialize() {
     for (int x = 0; x < 6; x++) {
       Rectangle bounds(innerXMin, 0, innerXMax, _screenHeight);
       int enemyX = _screenWidth / 2 - totalWidth / 2 + 30 * x;
-      Enemy enemy(enemyX, _screenHeight / 4 + 30 * y, bounds, _enemiesTexture, x % 2);
+      Enemy enemy(enemyX, _screenHeight / 4 + 30 * y, bounds, _enemiesTexture,
+        x % 2, _enemyDeathSamples[x % 2]);
       _enemies.push_back(enemy);
 
       innerXMin += 30;
@@ -85,6 +92,8 @@ void Galaga::initialize() {
 void Galaga::cleanup() {
   _shipBullets.clear();
   _enemies.clear();
+  _powerups.clear();
+  _ship.clearActivePowerups();
 }
 
 bool Galaga::startGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
@@ -106,8 +115,8 @@ void Galaga::startGameRender() {
 
   int ascent = al_get_font_ascent(_bigFont);
 
-  al_draw_text(_bigFont, al_map_rgb(255, 255, 255), _screenWidth / 2, _screenHeight / 2 - ascent / 2,
-    ALLEGRO_ALIGN_CENTRE, "PRESS ENTER TO START");
+  al_draw_text(_bigFont, al_map_rgb(255, 255, 255), _screenWidth / 2,
+    _screenHeight / 2 - ascent / 2, ALLEGRO_ALIGN_CENTRE, "PRESS ENTER TO START");
 
   al_flip_display();
   al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -144,7 +153,7 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
 
         float pan = (((float)_ship.getContainer().getX() + (float)_ship.getContainer().getW() / 2) - (float)_screenWidth / 2) / ((float)_screenWidth / 2);
 
-        al_play_sample(_pewPew, .8, pan, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+        al_play_sample(_shotSample, .8, pan, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
       }
     } else if (events.keyboard.keycode == ALLEGRO_KEY_P) {
       _prevGameState = _gameState;
@@ -468,11 +477,13 @@ void Galaga::renderPowerups() {
   int y = _screenHeight - 32;
   int textOffset = 0;
   int ascent = al_get_font_ascent(_font);
+  int toRender = 0;
 
   for (int i = 0; i < 2; i++) {
     if (powerupsToRender[i] > 0) {
       al_draw_bitmap_region(_powerupsTexture, 0, 32 * i,
         32, 32, 40 * i + textOffset, y, NULL);
+      ++toRender;
 
       if (powerupsToRender[i] > 1) {
         al_draw_textf(_font, al_map_rgb(255, 255, 255),
