@@ -23,6 +23,7 @@
   class Galaga : public GameModule {
     Ship _ship;
     std::list<Bullet> _shipBullets;
+    std::list<Bullet> _enemyBullets;
     std::list<Enemy> _enemies;
     std::list<ParticleManager> _particleManagers;
     std::list<Powerup> _powerups;
@@ -33,6 +34,7 @@
 
     unsigned int _stateTicks = 0;
 
+    ALLEGRO_BITMAP *_shipTexture;
     ALLEGRO_BITMAP *_bulletTexture;
     ALLEGRO_BITMAP *_enemiesTexture;
     ALLEGRO_BITMAP *_powerupsTexture;
@@ -87,6 +89,7 @@
     bool update(unsigned int ticks);
     void render();
 
+    void renderLives();
     void renderScore();
     void renderPowerups();
 

@@ -5,6 +5,8 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_image.h>
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 
 #include "bullet.h"
 #include "galaga.h"
@@ -18,6 +20,8 @@
 int main(int argc, char *argv[]) {
   ALLEGRO_DISPLAY *display;
   unsigned int ticks = 0;
+
+  srand(time(NULL));
 
   const float FPS = 60.0;
 

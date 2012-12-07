@@ -16,13 +16,15 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
   _enemyDeathSamples.push_back(al_load_sample("assets/sounds/enemy1death.wav"));
   _enemyDeathSamples.push_back(al_load_sample("assets/sounds/enemy2death.wav"));
 
-  Rectangle shipSize = _ship.getContainer();
-
-  _ship.moveTo(_screenWidth / 2 - shipSize.getW() / 2, _screenHeight - shipSize.getH());
-
+  _shipTexture = al_load_bitmap("assets/images/galaga.png");
   _enemiesTexture = al_load_bitmap("assets/images/enemies.png");
   _bulletTexture = al_load_bitmap("assets/images/galaga_bullet.png");
   _powerupsTexture = al_load_bitmap("assets/images/powerups.png");
+
+  Rectangle shipSize = _ship.getContainer();
+
+  _ship.moveTo(_screenWidth / 2 - shipSize.getW() / 2, _screenHeight - shipSize.getH());
+  _ship.setTexture(_shipTexture);
 
   _backgroundManager.setBounds(_screenWidth, _screenHeight);
 
@@ -30,9 +32,15 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
 
   for (int y = 0; y < 2; y++) {
     for (int x = 0; x < 6; x++) {
+      int type;
+      if (x < 2 || x > 3) {
+        type = 0;
+      } else {
+        type = 1;
+      }
       int enemyX = _screenWidth / 2 - totalWidth + 42 * x;
-      Enemy enemy(enemyX, _screenHeight / 4 + 42 * y, _enemiesTexture,
-        x % 2, _enemyDeathSamples[x % 2]);
+      Enemy enemy(enemyX, _screenHeight / 4 + 42 * y, _enemiesTexture, type,
+        _enemyDeathSamples[x % 2]);
       _enemies.push_back(enemy);
     }
   }
@@ -40,6 +48,7 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
 
 Galaga::~Galaga() {
   _shipBullets.clear();
+  _enemyBullets.clear();
 
   al_destroy_font(_font);
   al_destroy_font(_bigFont);
@@ -47,6 +56,7 @@ Galaga::~Galaga() {
   al_destroy_sample(_endMusic);
   al_destroy_sample(_shotSample);
 
+  al_destroy_bitmap(_shipTexture);
   al_destroy_bitmap(_bulletTexture);
   al_destroy_bitmap(_enemiesTexture);
   al_destroy_bitmap(_powerupsTexture);
@@ -72,9 +82,15 @@ void Galaga::initialize() {
 
   for (int y = 0; y < 2; y++) {
     for (int x = 0; x < 6; x++) {
+      int type;
+      if (x < 2 || x > 3) {
+        type = 0;
+      } else {
+        type = 1;
+      }
       int enemyX = _screenWidth / 2 - totalWidth + 42 * x;
-      Enemy enemy(enemyX, _screenHeight / 4 + 42 * y, _enemiesTexture,
-        x % 2, _enemyDeathSamples[x % 2]);
+      Enemy enemy(enemyX, _screenHeight / 4 + 42 * y, _enemiesTexture, type,
+        _enemyDeathSamples[x % 2]);
       _enemies.push_back(enemy);
     }
   }
@@ -82,6 +98,7 @@ void Galaga::initialize() {
 
 void Galaga::cleanup() {
   _shipBullets.clear();
+  _enemyBullets.clear();
   _enemies.clear();
   _particleManagers.clear();
   _powerups.clear();
@@ -138,7 +155,9 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
 
         for (int i = 0; i < _bulletCount; i++) {
           int x = _ship.getContainer().getX() + _ship.getContainer().getW() / 4;
-          Bullet newBullet(x - width / 2 + 12 * i, _ship.getContainer().getY(), _bulletTexture);
+          Rectangle bounds(0, 0, _screenWidth, _screenHeight);
+          Bullet newBullet(x - width / 2 + 12 * i, _ship.getContainer().getY(),
+            _bulletTexture, true, bounds);
 
           _shipBullets.push_back(newBullet);
         }
@@ -175,6 +194,7 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
   _ship.update(ticks);
 
   _ship.hitTest(&_powerups);
+  _ship.hitTest(&_enemyBullets);
 
   for (ActivePowerup powerup : _ship.getActivePowerups()) {
     if (powerup.complete) {
@@ -205,11 +225,34 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
     if (!(*enemyIter).isAlive()) {
       _enemies.erase(enemyIter++);
     } else {
+      if ((*enemyIter).needsFire()) {
+        int x = (*enemyIter).getContainer().getX() +
+          (*enemyIter).getContainer().getW() / 4;
+        Rectangle bounds(0, 0, _screenWidth, _screenHeight);
+        Bullet newBullet(x, (*enemyIter).getContainer().getY(), _bulletTexture,
+          false, bounds);
+
+        _enemyBullets.push_back(newBullet);
+        (*enemyIter).fire();
+      }
+
       ++enemyIter;
     }
   }
 
-  std::list<Bullet>::iterator bulletIter = _shipBullets.begin();
+  std::list<Bullet>::iterator bulletIter = _enemyBullets.begin();
+
+  while (bulletIter != _enemyBullets.end()) {
+    (*bulletIter).update(ticks);
+
+    if (!(*bulletIter).isAlive()) {
+      _enemyBullets.erase(bulletIter++);
+    } else {
+      ++bulletIter;
+    }
+  }
+
+  bulletIter = _shipBullets.begin();
 
   while (bulletIter != _shipBullets.end()) {
     (*bulletIter).update(ticks);
@@ -249,7 +292,7 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
     }
   }
 
-  if (_enemies.size() == 0) {
+  if (_ship.lifeCount() == 0) {
     _prevGameState = _gameState;
     _gameState = GALAGA_GAME_ENDED;
     _stateTicks = 0;
@@ -285,6 +328,10 @@ void Galaga::mainGameRender() {
         bullet.render();
       }
 
+      for (Bullet bullet : _enemyBullets) {
+        bullet.render();
+      }
+
       for (Powerup powerup : _powerups) {
         powerup.render();
       }
@@ -305,6 +352,7 @@ void Galaga::mainGameRender() {
         percentAccuracy = (int)((float)_shotHits / _shotsFired * 100);
       }
 
+      renderLives();
       renderScore();
       renderPowerups();
 
@@ -352,6 +400,7 @@ void Galaga::pausedGameRender() {
 
   int totalHeight = bigAscent + 20 + smallAscent;
 
+  renderLives();
   renderScore();
   renderPowerups();
 
@@ -480,7 +529,7 @@ void Galaga::renderPowerups() {
   for (int i = 0; i < 2; i++) {
     if (powerupsToRender[i] > 0) {
       al_draw_bitmap_region(_powerupsTexture, 0, 32 * i,
-        32, 32, 40 * i + textOffset, y, NULL);
+        32, 32, 40 * toRender + textOffset, y, NULL);
       ++toRender;
 
       if (powerupsToRender[i] > 1) {
@@ -490,6 +539,12 @@ void Galaga::renderPowerups() {
         textOffset += al_get_text_width(_font, "x1");
       }
     }
+  }
+}
+
+void Galaga::renderLives() {
+  for (int i = 0; i < _ship.lifeCount(); i++) {
+    al_draw_bitmap(_shipTexture, _screenWidth - 42 * i, _screenHeight - 42, NULL);
   }
 }
 

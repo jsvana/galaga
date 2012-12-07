@@ -8,6 +8,8 @@ Enemy::Enemy() {
   _initialPosition.setX(0);
   _initialPosition.setY(0);
   _alive = true;
+
+  _fireRate = rand() % 150;
 }
 
 Enemy::Enemy(int x, int y, ALLEGRO_BITMAP *texture, int enemyType, ALLEGRO_SAMPLE *sample) {
@@ -22,6 +24,8 @@ Enemy::Enemy(int x, int y, ALLEGRO_BITMAP *texture, int enemyType, ALLEGRO_SAMPL
   _texture = texture;
   _sample = sample;
   _enemyType = enemyType;
+
+  _fireRate = (rand() % 50) + 100;
 }
 
 Enemy::~Enemy() {
@@ -48,7 +52,11 @@ bool Enemy::update(unsigned int ticks) {
   ++_stateTicks;
 
   switch (_currentState) {
-    case GALAGA_ENEMY_STATE_IDLE:
+    case GALAGA_ENEMY_STATE_MOVE:
+      if (ticks % _fireRate == 0 && rand() % 10 < 2) {
+        trigger();
+      }
+
       if (_stateTicks >= 200) {
         _previousState = _currentState;
         _currentState = GALAGA_ENEMY_STATE_GROW;
@@ -70,9 +78,13 @@ bool Enemy::update(unsigned int ticks) {
       }
       break;
     case GALAGA_ENEMY_STATE_GROW:
+      if (ticks % _fireRate == 0 && rand() % 10 < 2) {
+        trigger();
+      }
+
       if (_stateTicks >= 100) {
         _previousState = _currentState;
-        _currentState = GALAGA_ENEMY_STATE_IDLE;
+        _currentState = GALAGA_ENEMY_STATE_MOVE;
 
         _container.setX(_initialPosition.getX());
         _container.setY(_initialPosition.getY());

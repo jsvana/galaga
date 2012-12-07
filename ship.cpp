@@ -6,21 +6,18 @@ Ship::Ship() {
   _container.setY(0);
   _container.setW(32);
   _container.setH(32);
-
-  _texture = al_load_bitmap("assets/images/galaga.png");
 }
 
-Ship::Ship(int x, int y) {
+Ship::Ship(int x, int y, ALLEGRO_BITMAP *texture) {
   _container.setX(x);
   _container.setY(y);
   _container.setW(32);
   _container.setH(32);
 
-  _texture = al_load_bitmap("assets/images/galaga.png");
+  _texture = texture;
 }
 
 Ship::~Ship() {
-  al_destroy_bitmap(_texture);
   _activePowerups.clear();
 }
 
@@ -63,6 +60,27 @@ bool Ship::hitTest(std::list<Powerup> *powerups) {
   return false;
 }
 
+bool Ship::hitTest(std::list<Bullet> *bullets) {
+  for (Bullet& bullet : *bullets) {
+    Rectangle bulletContainer = bullet.getContainer();
+    if (bullet.isAlive() && _container.collidesWith(bulletContainer)) {
+      bullet.kill();
+      kill();
+      return true;
+    }
+  }
+
+  return false;
+}
+
+void Ship::kill() {
+  --_lives;
+
+  if (_lives < 0) {
+    _alive = false;
+  }
+}
+
 void Ship::update(unsigned int ticks) {
   std::list<ActivePowerup>::iterator powerupIter = _activePowerups.begin();
 
@@ -78,8 +96,6 @@ void Ship::update(unsigned int ticks) {
 void Ship::render() {
   int x = _container.getX();
   int y = _container.getY();
-  int w = _container.getW();
-  int h = _container.getH();
 
   if (_texture) {
     al_draw_bitmap(_texture, x, y, NULL);

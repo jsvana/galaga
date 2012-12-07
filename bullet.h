@@ -15,8 +15,14 @@
     bool _alive;
     int _moveSpeed = 10;
 
+    bool _shipBullet;
+
+    Rectangle _bounds;
+
+
+
   public:
-    Bullet(int x, int y, ALLEGRO_BITMAP *texture);
+    Bullet(int x, int y, ALLEGRO_BITMAP *texture, bool shipBullet, Rectangle bounds);
     ~Bullet();
     int move();
     Rectangle getContainer() { return _container; }

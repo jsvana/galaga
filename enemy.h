@@ -12,10 +12,9 @@
   #include "bullet.h"
   #include "utilities.h"
 
-  #define GALAGA_ENEMY_STATE_IDLE 0
-  #define GALAGA_ENEMY_STATE_MOVE 1
-  #define GALAGA_ENEMY_STATE_GROW 2
-  #define GALAGA_ENEMY_STATE_STRIKE 3
+  #define GALAGA_ENEMY_STATE_MOVE 0
+  #define GALAGA_ENEMY_STATE_GROW 1
+  #define GALAGA_ENEMY_STATE_STRIKE 2
 
   class Enemy {
     Rectangle _container;
@@ -31,14 +30,18 @@
 
     Point _initialPosition;
 
-    int _xSpeed = -3;
+    int _xSpeed = 3;
+
+    int _fireRate;
 
     bool _alive;
     int _enemyType;
     int _frame = 0;
 
     int _previousState = NULL;
-    int _currentState = GALAGA_ENEMY_STATE_IDLE;
+    int _currentState = GALAGA_ENEMY_STATE_MOVE;
+
+    bool _needsFire = false;
 
     unsigned int _stateTicks;
 
@@ -51,6 +54,10 @@
     void render();
 
     Rectangle getContainer() { return _container; }
+
+    void trigger() { _needsFire = true; }
+    bool needsFire() { return _needsFire; }
+    void fire() { _needsFire = false; }
 
     bool isAlive() { return _alive; }
 
