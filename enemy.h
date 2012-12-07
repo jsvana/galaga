@@ -13,33 +13,38 @@
   #include "utilities.h"
 
   #define GALAGA_ENEMY_STATE_IDLE 0
-  #define GALAGA_ENEMY_STATE_MOVE 0
-  #define GALAGA_ENEMY_STATE_STRIKE 0
+  #define GALAGA_ENEMY_STATE_MOVE 1
+  #define GALAGA_ENEMY_STATE_GROW 2
+  #define GALAGA_ENEMY_STATE_STRIKE 3
 
   class Enemy {
     Rectangle _container;
-    Rectangle _bounds;
-    Point _initialPosition;
 
     ALLEGRO_BITMAP *_texture = NULL;
     ALLEGRO_SAMPLE *_sample;
+
+    float _growX = 0.0;
+    float _growY = 0.0;
+
+    float _growRateX = 0.0;
+    float _growRateY = 0.0;
+
+    Point _initialPosition;
+
+    int _xSpeed = -3;
 
     bool _alive;
     int _enemyType;
     int _frame = 0;
 
-    int _moveSpeed = 2;
-
     int _previousState = NULL;
     int _currentState = GALAGA_ENEMY_STATE_IDLE;
 
-    int _idleRadius = 5;
-    float _rotation = 3 * GALAGA_PI / 2;
-    float _rotationSpeed = GALAGA_PI / 16;
+    unsigned int _stateTicks;
 
   public:
     Enemy();
-    Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType, ALLEGRO_SAMPLE *sample);
+    Enemy(int x, int y, ALLEGRO_BITMAP *texture, int enemyType, ALLEGRO_SAMPLE *sample);
     ~Enemy();
 
     bool update(unsigned int ticks);

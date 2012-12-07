@@ -7,7 +7,7 @@ Rectangle::Rectangle() {
   _h = 0;
 }
 
-Rectangle::Rectangle(int x, int y, int w, int h) {
+Rectangle::Rectangle(float x, float y, float w, float h) {
   _x = x;
   _y = y;
   _w = w;
@@ -25,7 +25,7 @@ bool Rectangle::containsPoint(Point p) {
   return containsPoint(p.getX(), p.getY());
 }
 
-bool Rectangle::containsPoint(int x, int y) {
+bool Rectangle::containsPoint(float x, float y) {
   return _x <= x && _x + _w >= x && _y <= y && _y + _h >= y;
 }
 

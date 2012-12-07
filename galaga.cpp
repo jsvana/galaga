@@ -10,6 +10,7 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
   _hugeFont = al_load_font("assets/fonts/arcade.ttf", 60, NULL);
 
   _beginningMusic = al_load_sample("assets/sounds/beginning.wav");
+  _endMusic = al_load_sample("assets/sounds/end.wav");
   _shotSample = al_load_sample("assets/sounds/fighter.wav");
 
   _enemyDeathSamples.push_back(al_load_sample("assets/sounds/enemy1death.wav"));
@@ -25,20 +26,14 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
 
   _backgroundManager.setBounds(_screenWidth, _screenHeight);
 
-  int totalWidth = 6 * 20 + 5 * 10;
-  int innerXMax = 4 * 30;
+  int totalWidth = 6 * 32 + 5 * 10;
 
   for (int y = 0; y < 2; y++) {
-    int innerXMin = _screenWidth / 2 - 4 * 30;
-
     for (int x = 0; x < 6; x++) {
-      Rectangle bounds(innerXMin, 0, innerXMax, _screenHeight);
-      int enemyX = _screenWidth / 2 - totalWidth / 2 + 30 * x;
-      Enemy enemy(enemyX, _screenHeight / 4 + 30 * y, bounds, _enemiesTexture,
+      int enemyX = _screenWidth / 2 - totalWidth + 42 * x;
+      Enemy enemy(enemyX, _screenHeight / 4 + 42 * y, _enemiesTexture,
         x % 2, _enemyDeathSamples[x % 2]);
       _enemies.push_back(enemy);
-
-      innerXMin += 30;
     }
   }
 }
@@ -48,6 +43,8 @@ Galaga::~Galaga() {
 
   al_destroy_font(_font);
   al_destroy_font(_bigFont);
+  al_destroy_sample(_beginningMusic);
+  al_destroy_sample(_endMusic);
   al_destroy_sample(_shotSample);
 
   al_destroy_bitmap(_bulletTexture);
@@ -71,20 +68,14 @@ void Galaga::initialize() {
 
   _backgroundManager.setBounds(_screenWidth, _screenHeight);
 
-  int totalWidth = 6 * 20 + 5 * 10;
-  int innerXMax = 4 * 30;
+  int totalWidth = 6 * 32 + 5 * 10;
 
   for (int y = 0; y < 2; y++) {
-    int innerXMin = _screenWidth / 2 - 4 * 30;
-
     for (int x = 0; x < 6; x++) {
-      Rectangle bounds(innerXMin, 0, innerXMax, _screenHeight);
-      int enemyX = _screenWidth / 2 - totalWidth / 2 + 30 * x;
-      Enemy enemy(enemyX, _screenHeight / 4 + 30 * y, bounds, _enemiesTexture,
+      int enemyX = _screenWidth / 2 - totalWidth + 42 * x;
+      Enemy enemy(enemyX, _screenHeight / 4 + 42 * y, _enemiesTexture,
         x % 2, _enemyDeathSamples[x % 2]);
       _enemies.push_back(enemy);
-
-      innerXMin += 30;
     }
   }
 }
@@ -95,6 +86,8 @@ void Galaga::cleanup() {
   _particleManagers.clear();
   _powerups.clear();
   _ship.clearActivePowerups();
+
+  al_stop_sample(&_endSampleID);
 }
 
 bool Galaga::startGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
@@ -130,7 +123,7 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
   _needsDraw = false;
 
   if (_stateTicks == 1 && _prevGameState == GALAGA_GAME_START) {
-    al_play_sample(_beginningMusic, .8, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+    al_play_sample(_beginningMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
     ++_stateTicks;
     return true;
   } else if (_stateTicks < 380 && _prevGameState == GALAGA_GAME_START) {
@@ -154,7 +147,7 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
 
         float pan = (((float)_ship.getContainer().getX() + (float)_ship.getContainer().getW() / 2) - (float)_screenWidth / 2) / ((float)_screenWidth / 2);
 
-        al_play_sample(_shotSample, .8, pan, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+        al_play_sample(_shotSample, 1.0, pan, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
       }
     } else if (events.keyboard.keycode == ALLEGRO_KEY_P) {
       _prevGameState = _gameState;
@@ -372,6 +365,10 @@ void Galaga::pausedGameRender() {
 }
 
 bool Galaga::endGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
+  if (_stateTicks == 1 && _prevGameState == GALAGA_GAME_PLAYING) {
+    al_play_sample(_endMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, &_endSampleID);
+  }
+
   if (events.type == ALLEGRO_EVENT_KEY_DOWN && events.keyboard.keycode == ALLEGRO_KEY_ENTER) {
     _prevGameState = _gameState;
     _gameState = GALAGA_GAME_START;

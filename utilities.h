@@ -24,42 +24,42 @@
   } ActivePowerup;
 
   class Point {
-    int _x;
-    int _y;
+    float _x;
+    float _y;
 
   public:
     Point() { _x = 0; _y = 0; }
-    Point(int x, int y) { _x = x; _y = y; }
+    Point(float x, float y) { _x = x; _y = y; }
 
-    int getX() { return _x; }
-    void setX(int x) { _x = x; }
-    int getY() { return _y; }
-    void setY(int y) { _y = y; }
+    float getX() { return _x; }
+    void setX(float x) { _x = x; }
+    float getY() { return _y; }
+    void setY(float y) { _y = y; }
   };
 
   class Rectangle {
-    int _x;
-    int _y;
-    int _w;
-    int _h;
+    float _x;
+    float _y;
+    float _w;
+    float _h;
 
   public:
     Rectangle();
-    Rectangle(int x, int y, int w, int h);
+    Rectangle(float x, float y, float w, float h);
 
     void operator =(Rectangle r);
 
-    int getX() { return _x; }
-    void setX(int x) { _x = x; }
-    int getY() { return _y; }
-    void setY(int y) { _y = y; }
-    int getW() { return _w; }
-    void setW(int w) { _w = w; }
-    int getH() { return _h; }
-    void setH(int h) { _h = h; }
+    float getX() { return _x; }
+    void setX(float x) { _x = x; }
+    float getY() { return _y; }
+    void setY(float y) { _y = y; }
+    float getW() { return _w; }
+    void setW(float w) { _w = w; }
+    float getH() { return _h; }
+    void setH(float h) { _h = h; }
 
     bool containsPoint(Point p);
-    bool containsPoint(int x, int y);
+    bool containsPoint(float x, float y);
     bool collidesWith(Rectangle target);
   };
 #endif

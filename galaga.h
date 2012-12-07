@@ -45,8 +45,11 @@
     ALLEGRO_FONT *_hugeFont;
 
     ALLEGRO_SAMPLE *_beginningMusic;
+    ALLEGRO_SAMPLE *_endMusic;
     ALLEGRO_SAMPLE *_shotSample;
     std::vector<ALLEGRO_SAMPLE *>_enemyDeathSamples;
+
+    ALLEGRO_SAMPLE_ID _endSampleID;
 
     unsigned int _shotsFired = 0;
     unsigned int _shotHits = 0;
