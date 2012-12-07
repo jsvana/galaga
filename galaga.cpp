@@ -12,11 +12,13 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
   _beginningMusic = al_load_sample("assets/sounds/beginning.wav");
   _endMusic = al_load_sample("assets/sounds/end.wav");
   _shotSample = al_load_sample("assets/sounds/fighter.wav");
+  _explosionSample = al_load_sample("assets/sounds/explosion.wav");
 
   _enemyDeathSamples.push_back(al_load_sample("assets/sounds/enemy1death.wav"));
   _enemyDeathSamples.push_back(al_load_sample("assets/sounds/enemy2death.wav"));
 
   _shipTexture = al_load_bitmap("assets/images/galaga.png");
+  _explosionTexture = al_load_bitmap("assets/images/explosion.png");
   _enemiesTexture = al_load_bitmap("assets/images/enemies.png");
   _bulletTexture = al_load_bitmap("assets/images/galaga_bullet.png");
   _powerupsTexture = al_load_bitmap("assets/images/powerups.png");
@@ -25,6 +27,7 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
 
   _ship.moveTo(_screenWidth / 2 - shipSize.getW() / 2, _screenHeight - shipSize.getH());
   _ship.setTexture(_shipTexture);
+  _ship.setExplodingTexture(_explosionTexture);
 
   _backgroundManager.setBounds(_screenWidth, _screenHeight);
 
@@ -52,11 +55,14 @@ Galaga::~Galaga() {
 
   al_destroy_font(_font);
   al_destroy_font(_bigFont);
+
   al_destroy_sample(_beginningMusic);
   al_destroy_sample(_endMusic);
   al_destroy_sample(_shotSample);
+  al_destroy_sample(_explosionSample);
 
   al_destroy_bitmap(_shipTexture);
+  al_destroy_bitmap(_explosionTexture);
   al_destroy_bitmap(_bulletTexture);
   al_destroy_bitmap(_enemiesTexture);
   al_destroy_bitmap(_powerupsTexture);
@@ -102,7 +108,7 @@ void Galaga::cleanup() {
   _enemies.clear();
   _particleManagers.clear();
   _powerups.clear();
-  _ship.clearActivePowerups();
+  _ship.reset();
 
   al_stop_sample(&_endSampleID);
 }
@@ -194,7 +200,14 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
   _ship.update(ticks);
 
   _ship.hitTest(&_powerups);
+
+  int prevLifeCount = _ship.lifeCount();
+
   _ship.hitTest(&_enemyBullets);
+
+  if (_ship.lifeCount() < prevLifeCount) {
+    al_play_sample(_explosionSample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+  }
 
   for (ActivePowerup powerup : _ship.getActivePowerups()) {
     if (powerup.complete) {
@@ -543,7 +556,7 @@ void Galaga::renderPowerups() {
 }
 
 void Galaga::renderLives() {
-  for (int i = 0; i < _ship.lifeCount(); i++) {
+  for (int i = 0; i <= _ship.lifeCount(); i++) {
     al_draw_bitmap(_shipTexture, _screenWidth - 42 * i, _screenHeight - 42, NULL);
   }
 }

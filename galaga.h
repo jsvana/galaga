@@ -35,6 +35,7 @@
     unsigned int _stateTicks = 0;
 
     ALLEGRO_BITMAP *_shipTexture;
+    ALLEGRO_BITMAP *_explosionTexture;
     ALLEGRO_BITMAP *_bulletTexture;
     ALLEGRO_BITMAP *_enemiesTexture;
     ALLEGRO_BITMAP *_powerupsTexture;
@@ -49,6 +50,8 @@
     ALLEGRO_SAMPLE *_beginningMusic;
     ALLEGRO_SAMPLE *_endMusic;
     ALLEGRO_SAMPLE *_shotSample;
+    ALLEGRO_SAMPLE *_explosionSample;
+
     std::vector<ALLEGRO_SAMPLE *>_enemyDeathSamples;
 
     ALLEGRO_SAMPLE_ID _endSampleID;

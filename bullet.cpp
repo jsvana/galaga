@@ -22,7 +22,7 @@ int Bullet::move() {
   if (_shipBullet) {
     _container.setY(_container.getY() - _moveSpeed);
   } else {
-    _container.setY(_container.getY() + _moveSpeed);
+    _container.setY(_container.getY() + _moveSpeed / 2);
   }
 
   return _container.getY();

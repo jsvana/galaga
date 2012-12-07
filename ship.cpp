@@ -8,17 +8,29 @@ Ship::Ship() {
   _container.setH(32);
 }
 
-Ship::Ship(int x, int y, ALLEGRO_BITMAP *texture) {
+Ship::Ship(int x, int y, ALLEGRO_BITMAP *texture, ALLEGRO_BITMAP *explodingTexture) {
   _container.setX(x);
   _container.setY(y);
   _container.setW(32);
   _container.setH(32);
 
   _texture = texture;
+  _explodingTexture = explodingTexture;
 }
 
 Ship::~Ship() {
   _activePowerups.clear();
+}
+
+void Ship::reset() {
+  _previousState = NULL;
+  _currentState = GALAGA_SHIP_STATE_MAIN;
+  _stateTicks = 0;
+  _frame = 0;
+
+  _lives = 3;
+
+  clearActivePowerups();
 }
 
 bool Ship::move(int direction, int magnitude) {
@@ -48,12 +60,14 @@ bool Ship::moveTo(int x, int y) {
 }
 
 bool Ship::hitTest(std::list<Powerup> *powerups) {
-  for (Powerup& powerup : *powerups) {
-    Rectangle powerupContainer = powerup.getContainer();
-    if (powerup.isAlive() && _container.collidesWith(powerupContainer)) {
-      powerup.kill();
-      powerup.hit();
-      return true;
+  if (_currentState == GALAGA_SHIP_STATE_MAIN) {
+    for (Powerup& powerup : *powerups) {
+      Rectangle powerupContainer = powerup.getContainer();
+      if (powerup.isAlive() && _container.collidesWith(powerupContainer)) {
+        powerup.kill();
+        powerup.hit();
+        return true;
+      }
     }
   }
 
@@ -76,6 +90,12 @@ bool Ship::hitTest(std::list<Bullet> *bullets) {
 void Ship::kill() {
   --_lives;
 
+  _previousState = _currentState;
+  _currentState = GALAGA_SHIP_STATE_EXPLODING;
+  _stateTicks = 0;
+
+  _activePowerups.clear();
+
   if (_lives < 0) {
     _alive = false;
   }
@@ -84,21 +104,44 @@ void Ship::kill() {
 void Ship::update(unsigned int ticks) {
   std::list<ActivePowerup>::iterator powerupIter = _activePowerups.begin();
 
-  for (ActivePowerup& powerup : _activePowerups) {
-    ++powerup.lifetime;
+  switch (_currentState) {
+    case GALAGA_SHIP_STATE_MAIN:
+      for (ActivePowerup& powerup : _activePowerups) {
+        ++powerup.lifetime;
 
-    if (powerup.lifetime >= powerup.duration) {
-      powerup.complete = true;
-    }
+        if (powerup.lifetime >= powerup.duration) {
+          powerup.complete = true;
+        }
+      }
+
+      break;
+    case GALAGA_SHIP_STATE_EXPLODING:
+      if (_stateTicks != 0 && _stateTicks % 15 == 0) {
+        ++_frame;
+      }
+
+      if (_frame == 4) {
+        _frame = 0;
+
+        _previousState = _currentState;
+        _currentState = GALAGA_SHIP_STATE_MAIN;
+        _stateTicks = 0;
+      }
+
+      break;
   }
+
+  ++_stateTicks;
 }
 
 void Ship::render() {
   int x = _container.getX();
   int y = _container.getY();
 
-  if (_texture) {
+  if (_currentState == GALAGA_SHIP_STATE_MAIN) {
     al_draw_bitmap(_texture, x, y, NULL);
+  } else {
+    al_draw_bitmap_region(_explodingTexture, 32 * _frame, 0, 32, 32, x, y, NULL);
   }
 }
 
