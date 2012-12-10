@@ -155,7 +155,7 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
   }
 
   if (events.type == ALLEGRO_EVENT_KEY_DOWN) {
-    if (events.keyboard.keycode == ALLEGRO_KEY_SPACE) {
+    if (events.keyboard.keycode == ALLEGRO_KEY_SPACE && !_ship.isExploding()) {
       if (_shipBullets.size() < _maxBullets) {
         int width = _bulletCount * 10 + (_bulletCount - 1) * 2;
 
@@ -186,14 +186,18 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
     al_get_keyboard_state(&_keyState);
     shipContainer = _ship.getContainer();
 
-    if(al_key_down(&_keyState, ALLEGRO_KEY_LEFT) && shipContainer.getX() > 0) {
+    if(al_key_down(&_keyState, ALLEGRO_KEY_LEFT) && shipContainer.getX() > 0 && !_ship.isExploding()) {
       _ship.move(GALAGA_LEFT, MOVE_SPEED);
-    } else if(al_key_down(&_keyState, ALLEGRO_KEY_RIGHT) && shipContainer.getX() < _screenWidth - shipContainer.getW()) {
+    } else if(al_key_down(&_keyState, ALLEGRO_KEY_RIGHT)
+      && shipContainer.getX() < _screenWidth - shipContainer.getW()
+      && !_ship.isExploding()) {
       _ship.move(GALAGA_RIGHT, MOVE_SPEED);
     }
 
     _needsDraw = true;
   }
+
+  // Update game objects
 
   _backgroundManager.update(ticks);
 
@@ -201,12 +205,14 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
 
   _ship.hitTest(&_powerups);
 
-  int prevLifeCount = _ship.lifeCount();
+  if (!_ship.isExploding()) {
+    int prevLifeCount = _ship.lifeCount();
 
-  _ship.hitTest(&_enemyBullets);
+    _ship.hitTest(&_enemyBullets);
 
-  if (_ship.lifeCount() < prevLifeCount) {
-    al_play_sample(_explosionSample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+    if (_ship.lifeCount() < prevLifeCount) {
+      al_play_sample(_explosionSample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+    }
   }
 
   for (ActivePowerup powerup : _ship.getActivePowerups()) {

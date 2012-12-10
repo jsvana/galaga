@@ -52,6 +52,7 @@
     void kill();
     void vivify() { _alive = true; }
     bool isAlive() { return _alive; }
+    bool isExploding() { return _currentState == GALAGA_SHIP_STATE_EXPLODING; }
 
     int lifeCount() { return _lives; }
 
