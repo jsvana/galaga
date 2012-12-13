@@ -31,6 +31,34 @@ Enemy::Enemy(int x, int y, ALLEGRO_BITMAP *texture, int enemyType, ALLEGRO_SAMPL
 Enemy::~Enemy() {
 }
 
+void Enemy::decideShot(Ship ship) {
+  if (_stateTicks % _fireRate == 0) {
+    int ticksToImpact = (ship.getContainer().getY() - _container.getY()) / 5;
+    int shipDirection = ship.getDirection();
+    int shipSpeed = ship.getMoveSpeed();
+    int shipX = ship.getContainer().getX();
+    int shipY = ship.getContainer().getY();
+    int newShipX;
+
+    if (shipDirection == GALAGA_LEFT) {
+      newShipX = shipX - shipSpeed * ticksToImpact;
+    } else if (shipDirection == GALAGA_RIGHT) {
+      newShipX = shipX + shipSpeed * ticksToImpact;
+    } else {
+      newShipX = shipX;
+    }
+
+    int enemyMiddle = _container.getX() + _container.getW() / 4;
+
+    if (newShipX <= enemyMiddle
+      && newShipX + ship.getContainer().getW() >= enemyMiddle && rand() % 10 < 2) {
+      trigger();
+    } else if (rand() % 10 < 2) {
+      trigger();
+    }
+  }
+}
+
 bool Enemy::hitTest(std::list<Bullet> *bullets) {
   int i;
 
@@ -53,10 +81,6 @@ bool Enemy::update(unsigned int ticks) {
 
   switch (_currentState) {
     case GALAGA_ENEMY_STATE_MOVE:
-      if (ticks % _fireRate == 0 && rand() % 10 < 2) {
-        trigger();
-      }
-
       if (_stateTicks >= 200) {
         _previousState = _currentState;
         _currentState = GALAGA_ENEMY_STATE_GROW;
@@ -78,9 +102,6 @@ bool Enemy::update(unsigned int ticks) {
       }
       break;
     case GALAGA_ENEMY_STATE_GROW:
-      if (ticks % _fireRate == 0 && rand() % 10 < 2) {
-        trigger();
-      }
 
       if (_stateTicks >= 100) {
         _previousState = _currentState;

@@ -32,6 +32,10 @@
 
     int _frame = 0;
 
+    int _direction = GALAGA_NONE;
+
+    const int MOVE_SPEED = 5;
+
   public:
     Ship();
     Ship(int x, int y, ALLEGRO_BITMAP *_texture, ALLEGRO_BITMAP *_explodingTexture);
@@ -39,11 +43,15 @@
 
     void reset();
 
-    bool move(int direction, int magnitude);
+    bool move(int direction);
+    void stopMovement() { _direction = GALAGA_NONE; }
     bool moveTo(int x, int y);
     void setTexture(ALLEGRO_BITMAP *texture) { _texture = texture; }
     void setExplodingTexture(ALLEGRO_BITMAP *explodingTexture) { _explodingTexture = explodingTexture; }
     Rectangle getContainer() { return _container; }
+
+    int getDirection() { return _direction; }
+    int getMoveSpeed() { return MOVE_SPEED; }
 
     void addPowerup(int type, int duration);
 

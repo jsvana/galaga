@@ -33,20 +33,13 @@ void Ship::reset() {
   clearActivePowerups();
 }
 
-bool Ship::move(int direction, int magnitude) {
-  switch (direction) {
-    case GALAGA_LEFT:
-      _container.setX(_container.getX() - magnitude);
-      break;
-    case GALAGA_RIGHT:
-      _container.setX(_container.getX() + magnitude);
-      break;
-    case GALAGA_UP:
-      _container.setY(_container.getY() - magnitude);
-      break;
-    case GALAGA_DOWN:
-      _container.setY(_container.getY() + magnitude);
-      break;
+bool Ship::move(int direction) {
+  if (direction == GALAGA_LEFT) {
+    _container.setX(_container.getX() - MOVE_SPEED);
+    _direction = GALAGA_LEFT;
+  } else if (direction == GALAGA_RIGHT) {
+    _container.setX(_container.getX() + MOVE_SPEED);
+    _direction = GALAGA_RIGHT;
   }
 
   return true;

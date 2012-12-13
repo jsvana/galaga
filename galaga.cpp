@@ -43,7 +43,7 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
       }
       int enemyX = _screenWidth / 2 - totalWidth + 42 * x;
       Enemy enemy(enemyX, _screenHeight / 4 + 42 * y, _enemiesTexture, type,
-        _enemyDeathSamples[x % 2]);
+        _enemyDeathSamples[type]);
       _enemies.push_back(enemy);
     }
   }
@@ -96,7 +96,7 @@ void Galaga::initialize() {
       }
       int enemyX = _screenWidth / 2 - totalWidth + 42 * x;
       Enemy enemy(enemyX, _screenHeight / 4 + 42 * y, _enemiesTexture, type,
-        _enemyDeathSamples[x % 2]);
+        _enemyDeathSamples[type]);
       _enemies.push_back(enemy);
     }
   }
@@ -187,11 +187,13 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
     shipContainer = _ship.getContainer();
 
     if(al_key_down(&_keyState, ALLEGRO_KEY_LEFT) && shipContainer.getX() > 0 && !_ship.isExploding()) {
-      _ship.move(GALAGA_LEFT, MOVE_SPEED);
+      _ship.move(GALAGA_LEFT);
     } else if(al_key_down(&_keyState, ALLEGRO_KEY_RIGHT)
       && shipContainer.getX() < _screenWidth - shipContainer.getW()
       && !_ship.isExploding()) {
-      _ship.move(GALAGA_RIGHT, MOVE_SPEED);
+      _ship.move(GALAGA_RIGHT);
+    } else if (!al_key_down(&_keyState, ALLEGRO_KEY_LEFT) && !al_key_down(&_keyState, ALLEGRO_KEY_RIGHT)) {
+      _ship.stopMovement();
     }
 
     _needsDraw = true;
@@ -225,6 +227,7 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
 
   while (enemyIter != _enemies.end()) {
     (*enemyIter).update(ticks);
+    (*enemyIter).decideShot(_ship);
 
     if ((*enemyIter).hitTest(&_shipBullets)) {
       ++_shotHits;

@@ -8,6 +8,8 @@
   #define GALAGA_UP 2
   #define GALAGA_DOWN 3
 
+  #define GALAGA_NONE -1
+
   // Game states
   #define GALAGA_GAME_START 0
   #define GALAGA_GAME_PLAYING 1

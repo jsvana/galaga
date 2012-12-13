@@ -10,6 +10,7 @@
   #include <list>
 
   #include "bullet.h"
+  #include "ship.h"
   #include "utilities.h"
 
   #define GALAGA_ENEMY_STATE_MOVE 0
@@ -55,6 +56,7 @@
 
     Rectangle getContainer() { return _container; }
 
+    void decideShot(Ship ship);
     void trigger() { _needsFire = true; }
     bool needsFire() { return _needsFire; }
     void fire() { _needsFire = false; }

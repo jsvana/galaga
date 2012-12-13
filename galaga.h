@@ -66,7 +66,6 @@
 
     bool _needsDraw;
 
-    const int MOVE_SPEED = 5;
     int _bulletCount = 1;
     int _maxBullets = 2;
 
