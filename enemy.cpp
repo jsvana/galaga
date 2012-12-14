@@ -81,7 +81,7 @@ bool Enemy::update(unsigned int ticks) {
 
   switch (_currentState) {
     case GALAGA_ENEMY_STATE_MOVE:
-      if (_stateTicks >= 200) {
+      if (_stateTicks >= 200 || _container.getX() < _initialPosition.getX()) {
         _previousState = _currentState;
         _currentState = GALAGA_ENEMY_STATE_GROW;
 
