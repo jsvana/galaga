@@ -1,0 +1,2599 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ticks",
+				"ticksToImpact"
+			],
+			[
+				"GALAGA_",
+				"GALAGA_NONE"
+			],
+			[
+				"GALAGA",
+				"GALAGA_RIGHT"
+			],
+			[
+				"ALLEGRO_KEY_",
+				"ALLEGRO_KEY_LEFT"
+			],
+			[
+				"_exp",
+				"_explosionTexture"
+			],
+			[
+				"_ex",
+				"_explosionTexture"
+			],
+			[
+				"GALAGA_SHIP",
+				"GALAGA_SHIP_STATE_MAIN"
+			],
+			[
+				"AL",
+				"ALLEGRO_PLAYMODE_ONCE"
+			],
+			[
+				"al_des",
+				"al_destroy_sample"
+			],
+			[
+				"_s",
+				"_screenHeight"
+			],
+			[
+				"_ene",
+				"_enemyBullets"
+			],
+			[
+				"_sc",
+				"_screenHeight"
+			],
+			[
+				"_grow",
+				"_growRateY"
+			],
+			[
+				"_growR",
+				"_growRateY"
+			],
+			[
+				"GALA",
+				"GALAGA_ENEMY_STATE_GROW"
+			],
+			[
+				"_endM",
+				"_endSampleID"
+			],
+			[
+				"_rota",
+				"_rotationSpeed"
+			],
+			[
+				"_power",
+				"_powerups"
+			],
+			[
+				"al_get_",
+				"al_get_font_ascent"
+			],
+			[
+				"ALLE",
+				"ALLEGRO_ALIGN_LEFT"
+			],
+			[
+				"power",
+				"powerupsToRender"
+			],
+			[
+				"_bull",
+				"_bulletCount"
+			],
+			[
+				"enemy",
+				"enemyContainer"
+			],
+			[
+				"disp",
+				"displayHeight"
+			],
+			[
+				"SCREEN",
+				"SCREEN_HEIGHT"
+			],
+			[
+				"_scre",
+				"_screenWidth"
+			],
+			[
+				"al_draw",
+				"al_draw_text"
+			],
+			[
+				"al_get",
+				"al_get_font_line_height"
+			],
+			[
+				"pause",
+				"pausedGameRender"
+			],
+			[
+				"paused",
+				"pausedGameUpdate"
+			],
+			[
+				"_sho",
+				"_shotHits"
+			],
+			[
+				"start",
+				"startGameRender"
+			],
+			[
+				"startG",
+				"startGameUpdate"
+			],
+			[
+				"mainG",
+				"mainGameRender"
+			],
+			[
+				"GALAGA_GAME",
+				"GALAGA_GAME_PLAYING"
+			],
+			[
+				"_e",
+				"_enemies"
+			],
+			[
+				"_back",
+				"_backgroundManager"
+			],
+			[
+				"Back",
+				"BackgroundManager"
+			],
+			[
+				"sc",
+				"screenHeight"
+			],
+			[
+				"Ba",
+				"BackgroundManager"
+			],
+			[
+				"s",
+				"screenHeight"
+			],
+			[
+				"scre",
+				"screenWidth"
+			],
+			[
+				"ene",
+				"enemyContainer"
+			],
+			[
+				"Par",
+				"Particle"
+			],
+			[
+				"_",
+				"_particles"
+			],
+			[
+				"Parti",
+				"ParticleManager"
+			],
+			[
+				"_shot",
+				"_shotsFired"
+			],
+			[
+				"_enem",
+				"_enemyTextures"
+			],
+			[
+				"al_d",
+				"al_draw_bitmap_region"
+			],
+			[
+				"ALL",
+				"ALLEGRO_ALIGN_LEFT"
+			],
+			[
+				"_scree",
+				"_screenHeight"
+			],
+			[
+				"inner",
+				"innerXMax"
+			],
+			[
+				"SC",
+				"SCREEN_HEIGHT"
+			],
+			[
+				"SCREEN_",
+				"SCREEN_WIDTH"
+			],
+			[
+				"scree",
+				"screenHeight"
+			],
+			[
+				"Scre",
+				"ScreenHeight"
+			],
+			[
+				"Allegro_key",
+				"ALLEGRO_KEY_RIGHT"
+			],
+			[
+				"dire",
+				"directionIndex"
+			],
+			[
+				"curr",
+				"currentMap"
+			],
+			[
+				"curre",
+				"currentMapY"
+			],
+			[
+				"image",
+				"imageWidth"
+			],
+			[
+				"tile",
+				"tilesetDimensions"
+			],
+			[
+				"tileset",
+				"tilesetPosition"
+			],
+			[
+				"di",
+				"dimensions"
+			],
+			[
+				"map",
+				"mapTween"
+			],
+			[
+				"current",
+				"currentMap"
+			],
+			[
+				"oldMini",
+				"oldMiniMapFill"
+			],
+			[
+				"currentM",
+				"currentMap"
+			],
+			[
+				"mini",
+				"miniMapContext"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"fill",
+				"fillStyle"
+			],
+			[
+				"campaign-mo",
+				"campaign-modal-title"
+			],
+			[
+				"Cam",
+				"Campaigns"
+			],
+			[
+				"selectedC",
+				"selectedCampaignObject"
+			],
+			[
+				"cam",
+				"campaign_object_id"
+			],
+			[
+				"camp",
+				"campaign"
+			],
+			[
+				"objec",
+				"object_id"
+			],
+			[
+				"ob",
+				"observable"
+			],
+			[
+				"campa",
+				"campaign"
+			],
+			[
+				"new-ca",
+				"new-campaign-object-label"
+			],
+			[
+				"new-camp",
+				"new-campaign-type"
+			],
+			[
+				"obser",
+				"observableArray"
+			],
+			[
+				"backgro",
+				"background-color"
+			],
+			[
+				"Campa",
+				"Campaigns"
+			],
+			[
+				"li",
+				"linkedListToNumber"
+			],
+			[
+				"getRight",
+				"getRightHeight"
+			],
+			[
+				"getRi",
+				"getRightHeight"
+			],
+			[
+				"inser",
+				"insertedNode"
+			],
+			[
+				"setRight",
+				"setRightHeight"
+			],
+			[
+				"setl",
+				"setLeftHeight"
+			],
+			[
+				"setRi",
+				"setRightHeight"
+			],
+			[
+				"getL",
+				"getLeftHeight"
+			],
+			[
+				"getRI",
+				"getRightHeight"
+			],
+			[
+				"getLeft",
+				"getLeftHeight"
+			],
+			[
+				"calcula",
+				"calculateHeight"
+			],
+			[
+				"crea",
+				"createjs"
+			],
+			[
+				"create",
+				"createJSStage"
+			],
+			[
+				"merge",
+				"mergeSort"
+			],
+			[
+				"Unor",
+				"UnorderedPriorityQueue"
+			],
+			[
+				"emplo",
+				"employer_id"
+			],
+			[
+				"sha",
+				"shareParams"
+			],
+			[
+				"student_",
+				"student_category"
+			],
+			[
+				"survey",
+				"survey_response"
+			],
+			[
+				"respond_",
+				"respond_with"
+			],
+			[
+				"ch",
+				"check_box"
+			],
+			[
+				"ques",
+				"question_option_responses"
+			],
+			[
+				"su",
+				"submit_survey_path"
+			],
+			[
+				"checkbox",
+				"checkbox_tag"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/Users/jsvana/Projects/tests/c++/galaga/galaga.h",
+			"settings":
+			{
+				"buffer_size": 2460,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/jsvana/Projects/tests/c++/galaga/galaga.cpp",
+			"settings":
+			{
+				"buffer_size": 16225,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/jsvana/Projects/tests/c++/galaga/utilities.h",
+			"settings":
+			{
+				"buffer_size": 1340,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/jsvana/Projects/tests/c++/galaga/utilities.cpp",
+			"settings":
+			{
+				"buffer_size": 1008,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/jsvana/Projects/tests/c++/galaga/enemy.h",
+			"settings":
+			{
+				"buffer_size": 1522,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "#include \"enemy.h\"\n\nEnemy::Enemy() {\n  _container.setX(0);\n  _container.setY(0);\n  _container.setW(30);\n  _container.setH(24);\n  _initialPosition.setX(0);\n  _initialPosition.setY(0);\n  _alive = true;\n\n  _fireRate = rand() % 150;\n}\n\nEnemy::Enemy(int x, int y, ALLEGRO_BITMAP *texture, int enemyType, ALLEGRO_SAMPLE *sample) {\n  _container.setX(x);\n  _container.setY(y);\n  _container.setW(30);\n  _container.setH(24);\n  _initialPosition.setX(x);\n  _initialPosition.setY(y);\n  _alive = true;\n\n  _texture = texture;\n  _sample = sample;\n  _enemyType = enemyType;\n\n  _fireRate = (rand() % 50) + 100;\n}\n\nEnemy::~Enemy() {\n}\n\nvoid Enemy::decideShot(Ship ship) {\n  if (_stateTicks % _fireRate == 0) {\n    int ticksToImpact = (ship.getContainer().getY() - _container.getY()) / 5;\n    int shipDirection = ship.getDirection();\n    int shipSpeed = ship.getMoveSpeed();\n    int shipX = ship.getContainer().getX();\n    int shipY = ship.getContainer().getY();\n    int newShipX;\n\n    if (shipDirection == GALAGA_LEFT) {\n      newShipX = shipX - shipSpeed * ticksToImpact;\n    } else if (shipDirection == GALAGA_RIGHT) {\n      newShipX = shipX + shipSpeed * ticksToImpact;\n    } else {\n      newShipX = shipX;\n    }\n\n    int enemyMiddle = _container.getX() + _container.getW() / 4;\n\n    if (newShipX <= enemyMiddle\n      && newShipX + ship.getContainer().getW() >= enemyMiddle && rand() % 10 < 2) {\n      trigger();\n    } else if (rand() % 10 < 2) {\n      trigger();\n    }\n  }\n}\n\nbool Enemy::hitTest(std::list<Bullet> *bullets) {\n  int i;\n\n  for (Bullet& bullet : *bullets) {\n    Rectangle bulletContainer = bullet.getContainer();\n\n    if (bullet.isAlive() && _container.collidesWith(bulletContainer)) {\n      bullet.kill();\n      kill();\n      al_play_sample(_sample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);\n\n      return true;\n    }\n  }\n  return false;\n}\n\nbool Enemy::update(unsigned int ticks) {\n  ++_stateTicks;\n\n  switch (_currentState) {\n    case GALAGA_ENEMY_STATE_MOVE:\n      if (_stateTicks >= 200 || _container.getX() < _initialPosition.getX()) {\n        _previousState = _currentState;\n        _currentState = GALAGA_ENEMY_STATE_GROW;\n\n        _growRateX = (float)_container.getX() / 100.0;\n        _growRateY = (float)_container.getY() / 117.0;\n\n        if (_xSpeed < 0) {\n          _xSpeed = -_xSpeed;\n        }\n\n        _stateTicks = 0;\n      } else {\n        _container.setX(_container.getX() + _xSpeed);\n\n        if (_stateTicks % 100 == 0) {\n          _xSpeed = -_xSpeed;\n        }\n      }\n      break;\n    case GALAGA_ENEMY_STATE_GROW:\n\n      if (_stateTicks >= 100) {\n        _previousState = _currentState;\n        _currentState = GALAGA_ENEMY_STATE_MOVE;\n\n        _container.setX(_initialPosition.getX());\n        _container.setY(_initialPosition.getY());\n\n        _stateTicks = 0;\n      } else {\n        _container.setX(_container.getX() + _growRateX);\n        _container.setY(_container.getY() + _growRateY);\n\n        if (_stateTicks % 50 == 0) {\n          _growRateX = -_growRateX;\n          _growRateY = -_growRateY;\n        }\n      }\n      break;\n  }\n\n  if (ticks % 30 == 0) {\n    _frame = (_frame + 1) % 2;\n  }\n\n  return true;\n}\n\nvoid Enemy::render() {\n  if (_alive) {\n    al_draw_bitmap_region(_texture, _container.getW() * _frame, _container.getH() * _enemyType,\n      _container.getW(), _container.getH(),\n      _container.getX() + (int)_growX, _container.getY() + (int)_growY, NULL);\n  }\n}\n\nvoid Enemy::moveTo(int x, int y) {\n  _container.setX(x);\n  _container.setY(y);\n}\n",
+			"file": "/Users/jsvana/Projects/tests/c++/galaga/enemy.cpp",
+			"file_size": 3489,
+			"file_write_time": 1355529802000000,
+			"settings":
+			{
+				"buffer_size": 3489,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/jsvana/Projects/tests/c++/galaga/bullet.cpp",
+			"settings":
+			{
+				"buffer_size": 823,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/jsvana/Projects/tests/c++/galaga/bullet.h",
+			"settings":
+			{
+				"buffer_size": 766,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/jsvana/Projects/tests/c++/galaga/ship.cpp",
+			"settings":
+			{
+				"buffer_size": 3517,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/jsvana/Projects/tests/c++/galaga/ship.h",
+			"settings":
+			{
+				"buffer_size": 1878,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/jsvana/Projects/tests/c++/galaga/Makefile",
+			"settings":
+			{
+				"buffer_size": 591,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 269.0,
+		"selected_items":
+		[
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				"linter",
+				"SublimeLinter: Disable Linting"
+			],
+			[
+				"search",
+				"Stackoverflow: Search from Input"
+			],
+			[
+				"sta",
+				"Stackoverflow: Search Selection"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"scss",
+				"Set Syntax: CSS"
+			],
+			[
+				"ruby",
+				"Set Syntax: Ruby"
+			],
+			[
+				"rub",
+				"Set Syntax: Ruby"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				":",
+				":w - Save"
+			],
+			[
+				"perl",
+				"Set Syntax: Perl"
+			],
+			[
+				"p",
+				"Package Control: Enable Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"haml",
+				"Set Syntax: Ruby Haml"
+			],
+			[
+				"gua",
+				"Guard: Start Guard"
+			],
+			[
+				":ham",
+				"Set Syntax: Ruby Haml"
+			],
+			[
+				":ruby",
+				"Set Syntax: Ruby"
+			],
+			[
+				":s",
+				":w - Save"
+			],
+			[
+				"sto",
+				"Guard: Stop Guard"
+			],
+			[
+				"coffee",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"guar",
+				"Guard: Stop Guard"
+			],
+			[
+				"g",
+				"Guard: Start Guard"
+			],
+			[
+				"stop",
+				"Guard: Stop Guard"
+			],
+			[
+				"gu",
+				"Guard: Start Guard"
+			],
+			[
+				"guard",
+				"Guard: Stop Guard"
+			]
+		],
+		"width": 435.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/jsvana/Projects/tests/c++/3d.cpp",
+		"/Users/jsvana/Desktop/SAT3511 Study Guide",
+		"/Users/jsvana/Projects/tests/c/cs3331/Makefile",
+		"/Users/jsvana/Projects/tests/c++/g.cpp",
+		"/Users/jsvana/Projects/tests/c++/galaga/Makefile",
+		"/Users/jsvana/Projects/tests/c++/galaga/main.cpp",
+		"/Users/jsvana/Projects/tests/c++/galaga/allegro5.cfg",
+		"/Users/jsvana/Desktop/xss.php",
+		"/Users/jsvana/Projects/tests/c++/galaga/ship.cpp",
+		"/Users/jsvana/Projects/tests/c++/galaga/ship.h",
+		"/Users/jsvana/Projects/tests/c++/galaga/particle.cpp",
+		"/Users/jsvana/Projects/tests/c++/galaga/background_manager.cpp",
+		"/Users/jsvana/Projects/tests/c++/galaga/bullet.cpp",
+		"/Users/jsvana/Projects/tests/c++/galaga/powerup.cpp",
+		"/Users/jsvana/Projects/tests/c++/galaga/powerup.h",
+		"/Users/jsvana/Projects/tests/c++/galaga/enemy.cpp",
+		"/Users/jsvana/Projects/tests/c++/galaga/enemy.h",
+		"/Users/jsvana/Projects/tests/c++/galaga/.gitignore",
+		"/Users/jsvana/Projects/tests/c++/galaga/particle_manager.cpp",
+		"/Users/jsvana/Projects/tests/c++/galaga/particle.h",
+		"/Users/jsvana/Projects/tests/c++/galaga/particle_manager.h",
+		"/Users/jsvana/Projects/tests/c++/galaga/background_manager.h",
+		"/Users/jsvana/Projects/tests/c++/galaga/background.h",
+		"/Users/jsvana/Projects/tests/c++/galaga/background.cpp",
+		"/Users/jsvana/Projects/tests/c++/galaga/galaga.cpp",
+		"/Users/jsvana/Projects/tests/c++/galaga/galaga.h",
+		"/Users/jsvana/Projects/tests/c++/galaga/bullet.h",
+		"/Users/jsvana/Projects/tests/c++/galaga/utilities.h",
+		"/Users/jsvana/Projects/tests/c++/galaga/utilities.cpp",
+		"/Users/jsvana/Projects/tests/c++/galaga/gamemodule.cpp",
+		"/Users/jsvana/Projects/tests/c++/galaga/gamemodule.h",
+		"/Users/jsvana/Projects/tests/c++/test.cpp",
+		"/Users/jsvana/Library/Application Support/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
+		"/Users/jsvana/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/jsvana/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/jsvana/Projects/tests/javascript/test/rpg/new/js/map.js",
+		"/Users/jsvana/Projects/tests/javascript/test/rpg/External.js",
+		"/Users/jsvana/Projects/tests/javascript/inherit.js",
+		"/Users/jsvana/Projects/trajectory/app/assets/stylesheets/campaigns.css.scss",
+		"/Users/jsvana/Projects/trajectory/config/routes.rb",
+		"/Users/jsvana/Projects/trajectory/app/controllers/campaigns_controller.rb",
+		"/Users/jsvana/Projects/trajectory/db/migrate/20121125061644_rename_object_id_in_campaigns.rb",
+		"/Users/jsvana/Projects/trajectory/app/models/campaign.rb",
+		"/Users/jsvana/Projects/trajectory/db/seeds.rb",
+		"/Users/jsvana/Projects/trajectory/app/views/application/_topbar.html.haml",
+		"/Users/jsvana/Projects/trajectory/app/views/layouts/application.html.haml",
+		"/Users/jsvana/Projects/trajectory/app/views/campaigns/index.html.haml",
+		"/Users/jsvana/Projects/trajectory/app/helpers/bootstrap_helper.rb",
+		"/Users/jsvana/Projects/trajectory/app/views/appointments/index.html.haml",
+		"/Users/jsvana/Projects/trajectory/app/views/application/_campaign_modal.html.haml",
+		"/Users/jsvana/Projects/trajectory/app/assets/javascripts/messages/index.js.coffee",
+		"/Users/jsvana/Projects/trajectory/app/assets/javascripts/campaigns/index.js.coffee",
+		"/Users/jsvana/Projects/trajectory/app/assets/javascripts/campaigns/campaign_modal.js.coffee",
+		"/Users/jsvana/Projects/trajectory/app/helpers/campaign_helper.rb",
+		"/Users/jsvana/Projects/trajectory/app/assets/javascripts/campaign_modal.js.coffee",
+		"/Users/jsvana/Projects/trajectory/app/models/tracking.rb",
+		"/Users/jsvana/Projects/trajectory/app/controllers/application_controller.rb",
+		"/Users/jsvana/Projects/trajectory/app/controllers/users_controller.rb",
+		"/Users/jsvana/Projects/trajectory/app/controllers/internal_messages_controller.rb",
+		"/Users/jsvana/Projects/trajectory/app/controllers/employers_controller.rb",
+		"/Users/jsvana/Projects/trajectory/app/views/campaigns/new.html.haml",
+		"/Users/jsvana/Projects/trajectory/app/models/user.rb",
+		"/Users/jsvana/Projects/trajectory/app/assets/javascripts/campaigns/new.js.coffee",
+		"/Users/jsvana/Projects/trajectory/db/migrate/20121125030924_create_campaigns.rb",
+		"/Users/jsvana/Projects/trajectory/app/models/campaign_label.rb",
+		"/Users/jsvana/Projects/trajectory/app/views/internal_messages/index.html.haml",
+		"/Users/jsvana/Projects/trajectory/app/views/jobs/index.html.haml",
+		"/Users/jsvana/Projects/trajectory/app/models/activity.rb",
+		"/Users/jsvana/Projects/trajectory/Rakefile",
+		"/Users/jsvana/Projects/trajectory/lib/tasks/elasticsearch.rake",
+		"/Users/jsvana/Projects/trajectory/lib/tasks/sync_elasticsearch.task",
+		"/Users/jsvana/Projects/tests/javascript/datastructures/linkedlist.js",
+		"/Users/jsvana/Projects/tests/javascript/datastructures/tests/add.js",
+		"/Users/jsvana/Projects/tests/javascript/fun/test.fun",
+		"/Users/jsvana/Projects/tests/bountify/index.html",
+		"/Users/jsvana/Projects/tests/javascript/test/index.html",
+		"/Users/jsvana/Projects/tests/scala/Test.scala",
+		"/Users/jsvana/Projects/tests/ruby/logger.rb",
+		"/Users/jsvana/Projects/tests/javascript/conway.html",
+		"/Users/jsvana/Projects/tests/javascript/fun/parse.js",
+		"/Users/jsvana/Projects/tests/javascript/test/asdf.html",
+		"/Users/jsvana/Projects/tests/scala/OpenGL.scala",
+		"/Users/jsvana/Projects/tests/javascript/test/rpg/index.html",
+		"/Users/jsvana/Projects/tests/javascript/datastructures/avltree.js",
+		"/Users/jsvana/Projects/tests/javascript/test/treevis.html",
+		"/Users/jsvana/Projects/tests/bountify/zipme.rb",
+		"/Users/jsvana/Projects/tests/bountify/zipme.js",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/avltree.js",
+		"/Users/jsvana/Projects/tests/javascript/test/rpg/jquery.timers.js",
+		"/Users/jsvana/Projects/tests/javascript/test/rpg/Styles.css",
+		"/Users/jsvana/Projects/tests/javascript/test/rpg/jquery-1.3.2.js",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/dictionary.js",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/heap.js",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/binarytree.js",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/tree.js",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/hashmap.js",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/sorts.js",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/priorityqueue.js",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/arraysequence.js",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/linkedlist.js",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/test.html",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/test.js",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/heap_with_tree.js",
+		"/Users/jsvana/Projects/tests/javascript/data.structures/linked list",
+		"/Users/jsvana/Notes/Artists to Get",
+		"/Users/jsvana/Notes/CS3421/12 September 2012",
+		"/Users/jsvana/Notes/SAT3812/17 September 2012",
+		"/Users/jsvana/Notes/SAT3511/12 September 2012",
+		"/Users/jsvana/Notes/SAT3200/19 September 2012",
+		"/Users/jsvana/Notes/SAT3200/17 September 2012",
+		"/Users/jsvana/.vimrc",
+		"/Users/jsvana/Notes/SAT3200/12 September 2012",
+		"/Users/jsvana/Projects/tests/javascript/scrollorama/index.html",
+		"/Users/jsvana/Projects/tests/javascript/scrollorama/scrolltest.html",
+		"/Users/jsvana/Projects/tests/javascript/scrollAnimate/index.html",
+		"/Users/jsvana/Notes/CS3421/17 September 2012",
+		"/Users/jsvana/Projects/Project Files/ITOxygen/Code Standards/Ruby.md",
+		"/Users/jsvana/Projects/Project Files/ITOxygen/Code Standards/Git.md",
+		"/Users/jsvana/Projects/Project Files/tests/ruby/post.rb",
+		"/Users/jsvana/Projects/Project Files/tests/c/socket.c",
+		"/Users/jsvana/Projects/Project Files/tests/go/server.go",
+		"/Users/jsvana/Projects/tests/ruby/ldap.rb",
+		"/Users/jsvana/Notes/CS3421/11 September 2012",
+		"/Users/jsvana/Notes/SAT3812/12 September 2012",
+		"/Users/jsvana/Projects/tests/ruby/elastic.rb",
+		"/Users/jsvana/Notes/SAT3200/10 September 2012",
+		"/Users/jsvana/Notes/SAT3200/5 September 2012",
+		"/Users/jsvana/Notes/SAT3812/10 September 2012"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/Users/jsvana/Projects/trajectory"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"powerup",
+			"_shipBullets",
+			"Bullet",
+			"int",
+			"    int _x;\n",
+			"int",
+			"al_play_sample",
+			"_pewPew",
+			"_powerups",
+			"particleManagerIter",
+			"bulletIter",
+			"_shipBullets",
+			"enemyIter",
+			"_enemies",
+			"cstr",
+			"_bullets",
+			"_BULLETS",
+			"_bullets",
+			"iter",
+			"}\n",
+			"shipPosition",
+			"_position",
+			"_container",
+			"_position",
+			"is_point_in_rectangle",
+			"void",
+			"keyState",
+			"ship",
+			"moveSpeed",
+			"ScreenHeight",
+			"ScreenWidth",
+			"curMapY",
+			"curMapX",
+			"ctx",
+			"2",
+			"gameContext",
+			"context",
+			"console",
+			"tiles",
+			"this",
+			"new Array(",
+			"selectedCampaign",
+			"labels",
+			"Messages",
+			"Appointment",
+			"appointment",
+			"Appointment",
+			"appointment",
+			"eval",
+			"keys",
+			"ship",
+			"type=\"text/javascript\"",
+			"=\"../",
+			"  <",
+			"getLength",
+			"pushLast",
+			"pushFirst",
+			"add",
+			"../img/",
+			".attr(\"data-value\"",
+			".attr(\"data-value\",d",
+			".value",
+			"-1",
+			"']\n",
+			"select",
+			"row",
+			"      &&",
+			"Date"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"1",
+			"[",
+			"/assets/",
+			"row-fluid"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 5,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/Users/jsvana/Projects/tests/c++/galaga/galaga.h",
+					"settings":
+					{
+						"buffer_size": 2460,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1663,
+								1663
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 458.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/jsvana/Projects/tests/c++/galaga/galaga.cpp",
+					"settings":
+					{
+						"buffer_size": 16225,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2749,
+								2749
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 764.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/jsvana/Projects/tests/c++/galaga/utilities.h",
+					"settings":
+					{
+						"buffer_size": 1340,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								196,
+								196
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/jsvana/Projects/tests/c++/galaga/utilities.cpp",
+					"settings":
+					{
+						"buffer_size": 1008,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								429,
+								429
+							],
+							[
+								438,
+								438
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/Users/jsvana/Projects/tests/c++/galaga/enemy.h",
+					"settings":
+					{
+						"buffer_size": 1522,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1190,
+								1190
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 187.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/Users/jsvana/Projects/tests/c++/galaga/enemy.cpp",
+					"settings":
+					{
+						"buffer_size": 3489,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1964,
+								1964
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1150.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Users/jsvana/Projects/tests/c++/galaga/bullet.cpp",
+					"settings":
+					{
+						"buffer_size": 823,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								479,
+								479
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Users/jsvana/Projects/tests/c++/galaga/bullet.h",
+					"settings":
+					{
+						"buffer_size": 766,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								607,
+								587
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/Users/jsvana/Projects/tests/c++/galaga/ship.cpp",
+					"settings":
+					{
+						"buffer_size": 3517,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								842,
+								842
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 61.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/Users/jsvana/Projects/tests/c++/galaga/ship.h",
+					"settings":
+					{
+						"buffer_size": 1878,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1293,
+								1293
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 352.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "/Users/jsvana/Projects/tests/c++/galaga/Makefile",
+					"settings":
+					{
+						"buffer_size": 591,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								181,
+								302
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 136.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 36.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 102.0
+	},
+	"output.guard":
+	{
+		"height": 126.0
+	},
+	"replace":
+	{
+		"height": 66.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"ma",
+				"Makefile"
+			],
+			[
+				"ship",
+				"ship.h"
+			],
+			[
+				"mai",
+				"main.cpp"
+			],
+			[
+				"shi",
+				"ship.cpp"
+			],
+			[
+				"ene",
+				"enemy.cpp"
+			],
+			[
+				"main",
+				"main.cpp"
+			],
+			[
+				"bull",
+				"bullet.cpp"
+			],
+			[
+				"ga",
+				"galaga.cpp"
+			],
+			[
+				"util",
+				"utilities.h"
+			],
+			[
+				"e",
+				"enemy.h"
+			],
+			[
+				"campaignjs",
+				"app/assets/javascripts/campaigns/campaign_modal.js.coffee"
+			],
+			[
+				"camhel",
+				"app/helpers/campaign_helper.rb"
+			],
+			[
+				"jobht",
+				"app/views/employers/jobs.html.haml"
+			],
+			[
+				"application.h",
+				"app/views/layouts/application.html.haml"
+			],
+			[
+				"appli",
+				"app/views/layouts/application.html.haml"
+			],
+			[
+				"cam",
+				"app/models/campaign.rb"
+			],
+			[
+				"se",
+				"db/seeds.rb"
+			],
+			[
+				"tra",
+				"app/models/tracking.rb"
+			],
+			[
+				"routes",
+				"config/routes.rb"
+			],
+			[
+				"users_",
+				"app/controllers/users_controller.rb"
+			],
+			[
+				"messa",
+				"app/controllers/internal_messages_controller.rb"
+			],
+			[
+				"campa",
+				"app/controllers/campaigns_controller.rb"
+			],
+			[
+				"index.js",
+				"app/assets/javascripts/messages/index.js.coffee"
+			],
+			[
+				"index",
+				"app/views/campaigns/index.html.haml"
+			],
+			[
+				"index.js.",
+				"app/assets/javascripts/campaigns/index.js.coffee"
+			],
+			[
+				"message",
+				"app/views/internal_messages/index.html.haml"
+			],
+			[
+				"see",
+				"db/seeds.rb"
+			],
+			[
+				"seeds",
+				"db/seeds.rb"
+			],
+			[
+				"users_c",
+				"app/controllers/users_controller.rb"
+			],
+			[
+				"inde",
+				"app/views/jobs/index.html.haml"
+			],
+			[
+				"user",
+				"app/models/user.rb"
+			],
+			[
+				"create_cam",
+				"db/migrate/20121125030924_create_campaigns.rb"
+			],
+			[
+				"ro",
+				"config/routes.rb"
+			],
+			[
+				"empl",
+				"app/controllers/employers_controller.rb"
+			],
+			[
+				"seed",
+				"db/seeds.rb"
+			],
+			[
+				"show",
+				"app/views/surveys/show.html.haml"
+			],
+			[
+				"survey.",
+				"app/models/survey.rb"
+			],
+			[
+				"survey",
+				"app/controllers/surveys_controller.rb"
+			],
+			[
+				"users",
+				"app/views/users/_form.html.haml"
+			],
+			[
+				"events",
+				"app/views/events/_form.html.haml"
+			],
+			[
+				"survey_sh",
+				"app/models/survey_share.rb"
+			],
+			[
+				"surv",
+				"app/assets/javascripts/surveys.js.coffee"
+			],
+			[
+				"surveys.j",
+				"app/assets/javascripts/surveys.js.coffee"
+			],
+			[
+				"major",
+				"app/models/major.rb"
+			],
+			[
+				"job",
+				"app/models/job.rb"
+			],
+			[
+				"data",
+				"config/database.yml.example"
+			],
+			[
+				"sche",
+				"db/schema.rb"
+			],
+			[
+				"stude",
+				"app/models/student.rb"
+			],
+			[
+				"rou",
+				"config/routes.rb"
+			],
+			[
+				"boot",
+				"app/helpers/bootstrap_helper.rb"
+			],
+			[
+				"surveys",
+				"app/views/surveys/index.html.haml"
+			],
+			[
+				"stu",
+				"app/models/student.rb"
+			],
+			[
+				"organizations",
+				"app/views/organizations/show.html.haml"
+			],
+			[
+				"create_or",
+				"db/migrate/20120815124937_create_students_organizations.rb"
+			],
+			[
+				"abili",
+				"app/models/ability.rb"
+			],
+			[
+				"route",
+				"config/routes.rb"
+			],
+			[
+				"add_n",
+				"db/migrate/20120815122310_add_new_to_student.rb"
+			],
+			[
+				"surveys.js",
+				"app/assets/javascripts/surveys.js.coffee"
+			],
+			[
+				"surveys_",
+				"app/controllers/surveys_controller.rb"
+			],
+			[
+				"_form",
+				"app/views/events/_form.html.haml"
+			],
+			[
+				"gem",
+				"Gemfile"
+			],
+			[
+				"_form.",
+				"app/views/surveys/_form.html.haml"
+			],
+			[
+				"dash",
+				"app/assets/javascripts/dashboards.js.coffee"
+			],
+			[
+				"student",
+				"app/models/student.rb"
+			],
+			[
+				"app",
+				"app/assets/stylesheets/application.css"
+			],
+			[
+				"groups",
+				"app/controllers/groups_controller.rb"
+			],
+			[
+				"hel",
+				"app/helpers/bootstrap_helper.rb"
+			],
+			[
+				"event",
+				"app/views/events/show.html.haml"
+			],
+			[
+				"eve",
+				"app/models/event.rb"
+			],
+			[
+				"application_co",
+				"app/controllers/application_controller.rb"
+			],
+			[
+				"event.r",
+				"app/models/event.rb"
+			],
+			[
+				"evene",
+				"app/views/events/edit.html.haml"
+			],
+			[
+				"a",
+				"app/assets/javascripts/application.js"
+			],
+			[
+				"even",
+				"app/models/event.rb"
+			],
+			[
+				"job.",
+				"app/models/job.rb"
+			],
+			[
+				"de",
+				"config/deploy.rb"
+			],
+			[
+				"cap",
+				"Capfile"
+			],
+			[
+				"stud",
+				"app/models/student.rb"
+			],
+			[
+				"question",
+				"app/models/question_response.rb"
+			],
+			[
+				"survey_respo",
+				"app/controllers/survey_responses_controller.rb"
+			],
+			[
+				"job_ty",
+				"app/models/job_type.rb"
+			],
+			[
+				"surve",
+				"app/assets/javascripts/surveys.js.coffee"
+			],
+			[
+				"sur",
+				"app/controllers/survey_responses_controller.rb"
+			],
+			[
+				"question_op",
+				"app/models/question_option.rb"
+			],
+			[
+				"_for",
+				"app/views/survey_responses/_form.html.haml"
+			],
+			[
+				"_",
+				"app/views/survey_responses/_form.html.haml"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 210.0,
+	"status_bar_visible": true
+}

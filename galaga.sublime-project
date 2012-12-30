@@ -1,0 +1,9 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/jsvana/Projects/galaga",
+			"folder_exclude_patterns": [ "galaga.dSYM" ]
+		}
+	]
+}

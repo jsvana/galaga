@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "asset_manager.h"
 #include "bullet.h"
 #include "galaga.h"
 #include "gamemodule.h"
@@ -26,26 +27,29 @@ int main(int argc, char *argv[]) {
   const float FPS = 60.0;
 
   if (!al_init()) {
-    al_show_native_message_box(NULL, "Error", NULL, "Could not Initialize Allegro", NULL, NULL);
+    std::cerr << "Error initializing Allegro" << std::endl;
   }
 
   display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
 
   if (!display) {
-    al_show_native_message_box(NULL, "Error", NULL, "Could not create Allegro Display", NULL, NULL);
+    std::cerr << "Error creating Allegro display" << std::endl;
   }
 
   al_install_audio();
+  al_install_keyboard();
 
   al_init_primitives_addon();
   al_init_acodec_addon();
-  if (!al_reserve_samples(10)) {
-    std::cout << "[ERROR] Unable to reserve sound samples, quitting." << std::endl;
-  }
   al_init_font_addon();
   al_init_ttf_addon();
   al_init_image_addon();
-  al_install_keyboard();
+
+  al_reserve_samples(10);
+
+  if (!AssetManager::init()) {
+    std::cerr << "Error initializing assets" << std::endl;
+  }
 
   ALLEGRO_TIMER *timer = al_create_timer(1.0 / FPS);
   ALLEGRO_EVENT_QUEUE *eventQueue = al_create_event_queue();
@@ -55,11 +59,8 @@ int main(int argc, char *argv[]) {
   al_start_timer(timer);
 
   GameModule *game = new Galaga(SCREEN_WIDTH, SCREEN_HEIGHT, eventQueue);
-  bool gameRunning = true;
 
-  while (gameRunning) {
-    gameRunning = game->update(ticks);
-
+  while (game->update(ticks)) {
     game->render();
 
     ++ticks;
