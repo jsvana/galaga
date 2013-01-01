@@ -21,7 +21,8 @@
     Rectangle _container;
 
     ALLEGRO_BITMAP *_texture = NULL;
-    ALLEGRO_SAMPLE *_sample;
+
+    std::string _sample;
 
     float _growX = 0.0;
     float _growY = 0.0;
@@ -48,7 +49,7 @@
 
   public:
     Enemy();
-    Enemy(int x, int y, ALLEGRO_BITMAP *texture, int enemyType, ALLEGRO_SAMPLE *sample);
+    Enemy(int x, int y, ALLEGRO_BITMAP *texture, int enemyType, std::string sample);
     ~Enemy();
 
     bool update(unsigned int ticks);
@@ -62,6 +63,9 @@
     void fire() { _needsFire = false; }
 
     bool isAlive() { return _alive; }
+    std::string getSample() { return _sample; }
+
+    int getPointsWorth();
 
     void kill() { _alive = false; }
     void vivify() { _alive = false; }

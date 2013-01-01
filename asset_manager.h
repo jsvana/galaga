@@ -9,18 +9,18 @@
 	#include <list>
 	#include <map>
 
-	class AssetManager {
-		static std::map<std::string, ALLEGRO_FONT *> _fonts;
-		static std::map<std::string, ALLEGRO_SAMPLE *> _samples;
-		static std::map<std::string, ALLEGRO_BITMAP *> _textures;
+	#include "config_manager.h"
 
-	public:
-		static bool init();
+	namespace AssetManager {
+		bool initialize();
 
-		static ALLEGRO_FONT *getFont(std::string font);
-		static ALLEGRO_SAMPLE *getSample(std::string sample);
-		static ALLEGRO_BITMAP *getTexture(std::string texture);
+		ALLEGRO_FONT *getFont(std::string font);
+		ALLEGRO_SAMPLE *getSample(std::string sample);
+		ALLEGRO_BITMAP *getTexture(std::string texture);
 
-		static void cleanup();
+		void playSample(std::string sample, ALLEGRO_SAMPLE_ID *sampleID);
+		void stopSample(ALLEGRO_SAMPLE_ID *sampleID);
+
+		void destroy();
 	};
 #endif

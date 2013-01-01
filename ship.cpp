@@ -20,6 +20,7 @@ Ship::Ship(int x, int y, ALLEGRO_BITMAP *texture, ALLEGRO_BITMAP *explodingTextu
 
 Ship::~Ship() {
   _activePowerups.clear();
+  _bullets.clear();
 }
 
 void Ship::reset() {
@@ -29,6 +30,8 @@ void Ship::reset() {
   _frame = 0;
 
   _lives = 3;
+
+  _bullets.clear();
 
   clearActivePowerups();
 }
@@ -96,9 +99,20 @@ void Ship::kill() {
 
 void Ship::update(unsigned int ticks) {
   std::list<ActivePowerup>::iterator powerupIter = _activePowerups.begin();
+  std::list<Bullet>::iterator bulletIter = _bullets.begin();
 
   switch (_currentState) {
     case GALAGA_SHIP_STATE_MAIN:
+      while (bulletIter != _bullets.end()) {
+        bulletIter->update(ticks);
+
+        if (!bulletIter->isAlive()) {
+          _bullets.erase(bulletIter++);
+        } else {
+          ++bulletIter;
+        }
+      }
+
       for (ActivePowerup& powerup : _activePowerups) {
         ++powerup.lifetime;
 
@@ -131,6 +145,10 @@ void Ship::render() {
   int x = _container.getX();
   int y = _container.getY();
 
+  for (Bullet bullet : _bullets) {
+    bullet.render();
+  }
+
   if (_currentState == GALAGA_SHIP_STATE_MAIN) {
     al_draw_bitmap(_texture, x, y, NULL);
   } else {
@@ -144,9 +162,9 @@ std::list<ActivePowerup> Ship::getActivePowerups() {
   std::list<ActivePowerup>::iterator powerupIter = _activePowerups.begin();
 
   while (powerupIter != _activePowerups.end()) {
-    ++(*powerupIter).lifetime;
+    ++powerupIter->lifetime;
 
-    if ((*powerupIter).complete) {
+    if (powerupIter->complete) {
       _activePowerups.erase(powerupIter++);
     } else {
       ++powerupIter;
@@ -164,4 +182,8 @@ void Ship::addPowerup(int type, int duration) {
   newPowerup.complete = false;
 
   _activePowerups.push_back(newPowerup);
+}
+
+void Ship::addBullet(Bullet bullet) {
+  _bullets.push_back(bullet);
 }

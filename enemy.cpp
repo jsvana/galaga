@@ -12,7 +12,7 @@ Enemy::Enemy() {
   _fireRate = rand() % 150;
 }
 
-Enemy::Enemy(int x, int y, ALLEGRO_BITMAP *texture, int enemyType, ALLEGRO_SAMPLE *sample) {
+Enemy::Enemy(int x, int y, ALLEGRO_BITMAP *texture, int enemyType, std::string sample) {
   _container.setX(x);
   _container.setY(y);
   _container.setW(30);
@@ -68,7 +68,6 @@ bool Enemy::hitTest(std::list<Bullet> *bullets) {
     if (bullet.isAlive() && _container.collidesWith(bulletContainer)) {
       bullet.kill();
       kill();
-      al_play_sample(_sample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
       return true;
     }
@@ -141,4 +140,8 @@ void Enemy::render() {
 void Enemy::moveTo(int x, int y) {
   _container.setX(x);
   _container.setY(y);
+}
+
+int Enemy::getPointsWorth() {
+  return 80;
 }

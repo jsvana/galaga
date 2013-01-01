@@ -19,6 +19,7 @@
 
     Rectangle _container;
 
+    std::list<Bullet> _bullets;
     std::list<ActivePowerup> _activePowerups;
 
     bool _alive = true;
@@ -74,5 +75,9 @@
 
     void render();
     void render(int x, int y);
+
+    std::list<Bullet> *getBullets() { return &_bullets; }
+    int getBulletCount() { return _bullets.size(); }
+    void addBullet(Bullet bullet);
   };
 #endif

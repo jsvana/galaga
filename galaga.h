@@ -11,10 +11,13 @@
   #include <list>
   #include <vector>
 
+  #include "asset_manager.h"
   #include "background_manager.h"
   #include "bullet.h"
   #include "enemy.h"
   #include "gamemodule.h"
+  #include "level.h"
+  #include "level_manager.h"
   #include "particle_manager.h"
   #include "powerup.h"
   #include "ship.h"
@@ -28,6 +31,7 @@
     std::list<ParticleManager> _particleManagers;
     std::list<Powerup> _powerups;
     BackgroundManager _backgroundManager;
+    LevelManager _levelManager;
 
     int _gameState = GALAGA_GAME_START;
     int _prevGameState = NULL;

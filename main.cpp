@@ -9,6 +9,8 @@
 #include <time.h>
 
 #include "asset_manager.h"
+#include "config_manager.h"
+
 #include "bullet.h"
 #include "galaga.h"
 #include "gamemodule.h"
@@ -27,13 +29,13 @@ int main(int argc, char *argv[]) {
   const float FPS = 60.0;
 
   if (!al_init()) {
-    std::cerr << "Error initializing Allegro" << std::endl;
+    std::cerr << "[ERROR] Error initializing Allegro" << std::endl;
   }
 
   display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
 
   if (!display) {
-    std::cerr << "Error creating Allegro display" << std::endl;
+    std::cerr << "[ERROR] Error creating Allegro display" << std::endl;
   }
 
   al_install_audio();
@@ -47,8 +49,12 @@ int main(int argc, char *argv[]) {
 
   al_reserve_samples(10);
 
-  if (!AssetManager::init()) {
-    std::cerr << "Error initializing assets" << std::endl;
+  if (!AssetManager::initialize()) {
+    std::cerr << "[ERROR] Error initializing assets" << std::endl;
+  }
+
+  if (!ConfigManager::initialize()) {
+    std::cerr << "[ERROR] Error initializing config" << std::endl;
   }
 
   ALLEGRO_TIMER *timer = al_create_timer(1.0 / FPS);
@@ -67,6 +73,9 @@ int main(int argc, char *argv[]) {
   }
 
   delete game;
+
+  AssetManager::destroy();
+  ConfigManager::destroy();
 
   al_destroy_display(display);
   al_destroy_timer(timer);

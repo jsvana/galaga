@@ -3,7 +3,21 @@
 	[
 		{
 			"path": "/Users/jsvana/Projects/galaga",
-			"folder_exclude_patterns": [ "galaga.dSYM" ]
+			"folder_exclude_patterns": [ "galaga.dSYM" ],
+			"file_exclude_patterns":
+			[
+				"*.o",
+				"*.o-*",
+				"*.d"
+			]
+		}
+	],
+	"build_systems":
+	[
+		{
+			"name": "Galaga",
+			"cmd": ["make"],
+			"working_dir": "${file_path}"
 		}
 	]
 }
