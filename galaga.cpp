@@ -11,6 +11,7 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
 
   Rectangle shipSize = _ship.getContainer();
 
+  _ship.setScreenBounds(_screenWidth, _screenHeight);
   _ship.moveTo(_screenWidth / 2 - shipSize.getW() / 2, _screenHeight - shipSize.getH());
   _ship.setTexture(AssetManager::getTexture("ship"));
   _ship.setExplodingTexture(AssetManager::getTexture("explosion"));
@@ -42,9 +43,6 @@ void Galaga::initialize() {
 }
 
 void Galaga::cleanup() {
-  _enemyBullets.clear();
-  _enemies.clear();
-  _particleManagers.clear();
   _powerups.clear();
   _ship.reset();
 
@@ -93,23 +91,8 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
   }
 
   if (events.type == ALLEGRO_EVENT_KEY_DOWN) {
-    if (events.keyboard.keycode == ALLEGRO_KEY_SPACE && !_ship.isExploding()) {
-      if (_ship.getBulletCount() < _maxBullets) {
-        int width = _bulletCount * 10 + (_bulletCount - 1) * 2;
-
-        for (int i = 0; i < _bulletCount; i++) {
-          int x = _ship.getContainer().getX() + _ship.getContainer().getW() / 4;
-          Rectangle bounds(0, 0, _screenWidth, _screenHeight);
-          Bullet newBullet(x - width / 2 + 12 * i, _ship.getContainer().getY(),
-            AssetManager::getTexture("bullet"), true, bounds);
-
-          _ship.addBullet(newBullet);
-        }
-
-        ++_shotsFired;
-
-        AssetManager::playSample("shot", NULL);
-      }
+    if (events.keyboard.keycode == ALLEGRO_KEY_SPACE) {
+      _ship.fire();
     } else if (events.keyboard.keycode == ALLEGRO_KEY_P) {
       _prevGameState = _gameState;
       _gameState = GALAGA_GAME_PAUSED;
@@ -122,12 +105,9 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
     al_get_keyboard_state(&_keyState);
     shipContainer = _ship.getContainer();
 
-    if(al_key_down(&_keyState, ALLEGRO_KEY_LEFT) && shipContainer.getX() > 0
-      && !_ship.isExploding()) {
+    if(al_key_down(&_keyState, ALLEGRO_KEY_LEFT)) {
       _ship.move(GALAGA_LEFT);
-    } else if(al_key_down(&_keyState, ALLEGRO_KEY_RIGHT)
-      && shipContainer.getX() < _screenWidth - shipContainer.getW()
-      && !_ship.isExploding()) {
+    } else if(al_key_down(&_keyState, ALLEGRO_KEY_RIGHT)) {
       _ship.move(GALAGA_RIGHT);
     } else if (!al_key_down(&_keyState, ALLEGRO_KEY_LEFT)
       && !al_key_down(&_keyState, ALLEGRO_KEY_RIGHT)) {
@@ -142,40 +122,6 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
   _backgroundManager.update(ticks);
 
   _ship.update(ticks);
-
-  _ship.hitTest(&_powerups);
-
-  if (!_ship.isExploding()) {
-    int prevLifeCount = _ship.lifeCount();
-
-    _ship.hitTest(&_enemyBullets);
-
-    if (_ship.lifeCount() < prevLifeCount) {
-      AssetManager::playSample("explosion", NULL);
-    }
-  }
-
-  for (ActivePowerup powerup : _ship.getActivePowerups()) {
-    if (powerup.complete) {
-      removePowerup(powerup.type);
-    }
-  }
-
-  // std::list<Powerup>::iterator powerupIter = _powerups.begin();
-
-  // while (powerupIter != _powerups.end()) {
-  //   powerupIter->update(ticks);
-
-  //   if (powerupIter->didHit()) {
-  //     usePowerup(powerupIter->getType());
-  //   }
-
-  //   if (!powerupIter->isAlive()) {
-  //     _powerups.erase(powerupIter++);
-  //   } else {
-  //     ++powerupIter;
-  //   }
-  // }
 
   _levelManager.update(ticks);
 
@@ -207,27 +153,14 @@ void Galaga::mainGameRender() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
   } else {
     if (_needsDraw) {
-      int lineHeight = al_get_font_line_height(_font);
-
       _backgroundManager.render();
 
       _levelManager.render();
 
       _ship.render();
 
-      for (ParticleManager particleManager : _particleManagers) {
-        particleManager.render();
-      }
-
-      int percentAccuracy = 0;
-
-      if (_shotsFired != 0) {
-        percentAccuracy = (int)((float)_shotHits / _shotsFired * 100);
-      }
-
       renderLives();
       renderScore();
-      renderPowerups();
 
       al_flip_display();
       al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -265,7 +198,6 @@ void Galaga::pausedGameRender() {
 
   renderLives();
   renderScore();
-  renderPowerups();
 
   al_draw_text(_bigFont, al_map_rgb(255, 255, 255), _screenWidth / 2,
     _screenHeight / 2 - totalHeight / 2, ALLEGRO_ALIGN_CENTRE, "GAME PAUSED");
@@ -377,70 +309,9 @@ void Galaga::renderScore() {
     ALLEGRO_ALIGN_LEFT, "%d", _levelManager.getScore());
 }
 
-void Galaga::renderPowerups() {
-  std::list<ActivePowerup> powerups = _ship.getActivePowerups();
-  int powerupsToRender[2] = {0, 0};
-
-  for (ActivePowerup powerup : powerups) {
-    if (!powerup.complete) {
-      ++powerupsToRender[powerup.type];
-    }
-  }
-
-  int y = _screenHeight - 32;
-  int textOffset = 0;
-  int ascent = al_get_font_ascent(_font);
-  int toRender = 0;
-
-  for (int i = 0; i < 2; i++) {
-    if (powerupsToRender[i] > 0) {
-      al_draw_bitmap_region(AssetManager::getTexture("powerups"), 0, 32 * i,
-        32, 32, 40 * toRender + textOffset, y, NULL);
-      ++toRender;
-
-      if (powerupsToRender[i] > 1) {
-        al_draw_textf(_font, al_map_rgb(255, 255, 255),
-          40 * (i + 1) + textOffset, y + 16 - ascent / 2, ALLEGRO_ALIGN_LEFT,
-          "x%d", powerupsToRender[i]);
-        textOffset += al_get_text_width(_font, "x1");
-      }
-    }
-  }
-}
-
 void Galaga::renderLives() {
   for (int i = 0; i <= _ship.lifeCount(); i++) {
     al_draw_bitmap(AssetManager::getTexture("ship"), _screenWidth - 42 * i,
       _screenHeight - 42, NULL);
-  }
-}
-
-// TODO: move inside Ship
-void Galaga::usePowerup(int type) {
-  switch (type) {
-    case GALAGA_POWERUP_DOUBLE:
-      _ship.addPowerup(type, 500);
-      _maxBullets /= _bulletCount;
-      ++_bulletCount;
-      _maxBullets *= _bulletCount;
-      break;
-    case GALAGA_POWERUP_MORE_BULLETS:
-      _ship.addPowerup(type, 500);
-      _maxBullets += 2;
-      break;
-  }
-}
-
-// TODO: move inside Ship
-void Galaga::removePowerup(int type) {
-  switch (type) {
-    case GALAGA_POWERUP_DOUBLE:
-      _maxBullets /= _bulletCount;
-      --_bulletCount;
-      _maxBullets *= _bulletCount;
-      break;
-    case GALAGA_POWERUP_MORE_BULLETS:
-      _maxBullets -= 2;
-      break;
   }
 }

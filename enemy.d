@@ -99,4 +99,8 @@ enemy.o enemy.d : enemy.cpp enemy.h \
   /usr/bin/../lib/c++/v1/istream /usr/bin/../lib/c++/v1/ostream \
   /usr/bin/../lib/c++/v1/locale /usr/include/nl_types.h \
   /usr/bin/../lib/c++/v1/bitset /usr/bin/../lib/c++/v1/__bit_reference \
-  /usr/bin/../lib/c++/v1/list bullet.h utilities.h ship.h powerup.h
+  /usr/bin/../lib/c++/v1/list bullet.h utilities.h ship.h \
+  asset_manager.h \
+  /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_font.h \
+  /usr/bin/../lib/c++/v1/map /usr/bin/../lib/c++/v1/__tree \
+  config_manager.h powerup.h

@@ -6,6 +6,7 @@
   #include <allegro5/allegro_image.h>
   #include <list>
 
+  #include "asset_manager.h"
   #include "bullet.h"
   #include "powerup.h"
   #include "utilities.h"
@@ -18,6 +19,9 @@
     ALLEGRO_BITMAP *_explodingTexture;
 
     Rectangle _container;
+
+    int _screenWidth;
+    int _screenHeight;
 
     std::list<Bullet> _bullets;
     std::list<ActivePowerup> _activePowerups;
@@ -35,6 +39,11 @@
 
     int _direction = GALAGA_NONE;
 
+    int _maxBullets = 2;
+    int _bulletCount = 1;
+
+    int _shotsFired = 0;
+
     const int MOVE_SPEED = 5;
 
   public:
@@ -43,6 +52,8 @@
     ~Ship();
 
     void reset();
+
+    void setScreenBounds(int screenWidth, int screenHeight);
 
     bool move(int direction);
     void stopMovement() { _direction = GALAGA_NONE; }
@@ -54,7 +65,7 @@
     int getDirection() { return _direction; }
     int getMoveSpeed() { return MOVE_SPEED; }
 
-    void addPowerup(int type, int duration);
+    void addPowerup(int type);
 
     bool fire();
 
@@ -79,5 +90,7 @@
     std::list<Bullet> *getBullets() { return &_bullets; }
     int getBulletCount() { return _bullets.size(); }
     void addBullet(Bullet bullet);
+
+    int getShotCount() { return _shotsFired; }
   };
 #endif

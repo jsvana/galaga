@@ -35,12 +35,31 @@ Level::~Level() {
 	_enemies.clear();
 	_enemyBullets.clear();
 	_particleManagers.clear();
+	_powerups.clear();
 }
 
 bool Level::update(unsigned int ticks) {
 	std::list<Enemy>::iterator enemyIter = _enemies.begin();
 
 	_ship->hitTest(&_enemyBullets);
+
+	_ship->hitTest(&_powerups);
+
+  std::list<Powerup>::iterator powerupIter = _powerups.begin();
+
+  while (powerupIter != _powerups.end()) {
+    powerupIter->update(ticks);
+
+    if (powerupIter->didHit()) {
+      _ship->addPowerup(powerupIter->getType());
+    }
+
+    if (!powerupIter->isAlive()) {
+      _powerups.erase(powerupIter++);
+    } else {
+      ++powerupIter;
+    }
+  }
 
 	bool enemyDead = false;
 
@@ -65,9 +84,9 @@ bool Level::update(unsigned int ticks) {
 			// TODO: make less constant-y
 			if (rand() % 100 < 20) {
 				Rectangle bounds(0, 0, _screenWidth, _screenHeight);
-				// Powerup powerup(enemyContainer.getX(), enemyContainer.getY(),
-				// 	AssetManager::getTexture("powerups"), rand() % 2, bounds);
-				// _powerups.push_back(powerup);
+				Powerup powerup(enemyContainer.getX(), enemyContainer.getY(),
+					AssetManager::getTexture("powerups"), rand() % 2, bounds);
+				_powerups.push_back(powerup);
 			}
 		}
 
@@ -125,12 +144,51 @@ void Level::render() {
 		particleManager.render();
 	}
 
+	for (Powerup powerup : _powerups) {
+		powerup.render();
+	}
+
 	for (Enemy enemy : _enemies) {
 		enemy.render();
 	}
+
+  renderPowerups();
 }
 
 bool Level::levelComplete() {
 	return _enemies.size() == 0 && _enemyBullets.size() == 0
 		&& _particleManagers.size() == 0;
+}
+
+void Level::renderPowerups() {
+	ALLEGRO_FONT *font = AssetManager::getFont("normal");
+
+	int y = _screenHeight - 32;
+  int textOffset = 0;
+  int ascent = al_get_font_ascent(font);
+  int toRender = 0;
+
+  std::list<ActivePowerup> powerups = _ship->getActivePowerups();
+  int powerupsToRender[2] = {0, 0};
+
+  for (ActivePowerup powerup : powerups) {
+    if (!powerup.complete) {
+      ++powerupsToRender[powerup.type];
+    }
+  }
+
+  for (int i = 0; i < 2; i++) {
+    if (powerupsToRender[i] > 0) {
+      al_draw_bitmap_region(AssetManager::getTexture("powerups"), 0, 32 * i,
+        32, 32, 40 * toRender + textOffset, y, NULL);
+      ++toRender;
+
+      if (powerupsToRender[i] > 1) {
+        al_draw_textf(font, al_map_rgb(255, 255, 255),
+          40 * (i + 1) + textOffset, y + 16 - ascent / 2, ALLEGRO_ALIGN_LEFT,
+          "x%d", powerupsToRender[i]);
+        textOffset += al_get_text_width(font, "x1");
+      }
+    }
+  }
 }

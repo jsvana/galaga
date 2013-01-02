@@ -25,10 +25,6 @@
 
   class Galaga : public GameModule {
     Ship _ship;
-    std::list<Bullet> _shipBullets;
-    std::list<Bullet> _enemyBullets;
-    std::list<Enemy> _enemies;
-    std::list<ParticleManager> _particleManagers;
     std::list<Powerup> _powerups;
     BackgroundManager _backgroundManager;
     LevelManager _levelManager;
@@ -37,11 +33,6 @@
     int _prevGameState = NULL;
 
     unsigned int _stateTicks = 0;
-
-    ALLEGRO_BITMAP *_shipTexture;
-    ALLEGRO_BITMAP *_explosionTexture;
-    ALLEGRO_BITMAP *_bulletTexture;
-    ALLEGRO_BITMAP *_enemiesTexture;
     ALLEGRO_BITMAP *_powerupsTexture;
 
     ALLEGRO_EVENT_QUEUE *_eventQueue;
@@ -50,13 +41,6 @@
     ALLEGRO_FONT *_font;
     ALLEGRO_FONT *_bigFont;
     ALLEGRO_FONT *_hugeFont;
-
-    ALLEGRO_SAMPLE *_beginningMusic;
-    ALLEGRO_SAMPLE *_endMusic;
-    ALLEGRO_SAMPLE *_shotSample;
-    ALLEGRO_SAMPLE *_explosionSample;
-
-    std::vector<ALLEGRO_SAMPLE *>_enemyDeathSamples;
 
     ALLEGRO_SAMPLE_ID _endSampleID;
 

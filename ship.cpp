@@ -23,6 +23,11 @@ Ship::~Ship() {
   _bullets.clear();
 }
 
+void Ship::setScreenBounds(int screenWidth, int screenHeight) {
+  _screenWidth = screenWidth;
+  _screenHeight = screenHeight;
+}
+
 void Ship::reset() {
   _previousState = NULL;
   _currentState = GALAGA_SHIP_STATE_MAIN;
@@ -37,15 +42,47 @@ void Ship::reset() {
 }
 
 bool Ship::move(int direction) {
-  if (direction == GALAGA_LEFT) {
-    _container.setX(_container.getX() - MOVE_SPEED);
-    _direction = GALAGA_LEFT;
-  } else if (direction == GALAGA_RIGHT) {
-    _container.setX(_container.getX() + MOVE_SPEED);
-    _direction = GALAGA_RIGHT;
+  if (isExploding()) {
+    return false;
   }
 
-  return true;
+  if (direction == GALAGA_LEFT && _container.getX() > 0) {
+    _container.setX(_container.getX() - MOVE_SPEED);
+    _direction = GALAGA_LEFT;
+
+    return true;
+  } else if (direction == GALAGA_RIGHT
+    && _container.getX() < _screenWidth - _container.getW()) {
+    _container.setX(_container.getX() + MOVE_SPEED);
+    _direction = GALAGA_RIGHT;
+
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool Ship::fire() {
+  if (getBulletCount() < _maxBullets && !isExploding()) {
+    int width = _bulletCount * 10 + (_bulletCount - 1) * 2;
+
+    for (int i = 0; i < _bulletCount; i++) {
+      int x = _container.getX() + _container.getW() / 4;
+      Rectangle bounds(0, 0, _screenWidth, _screenHeight);
+      Bullet newBullet(x - width / 2 + 12 * i, _container.getY(),
+        AssetManager::getTexture("bullet"), true, bounds);
+
+      addBullet(newBullet);
+    }
+
+    ++_shotsFired;
+
+    AssetManager::playSample("shot", NULL);
+
+    return true;
+  } else {
+    return false;
+  }
 }
 
 bool Ship::moveTo(int x, int y) {
@@ -56,7 +93,7 @@ bool Ship::moveTo(int x, int y) {
 }
 
 bool Ship::hitTest(std::list<Powerup> *powerups) {
-  if (_currentState == GALAGA_SHIP_STATE_MAIN) {
+  if (!isExploding()) {
     for (Powerup& powerup : *powerups) {
       Rectangle powerupContainer = powerup.getContainer();
       if (powerup.isAlive() && _container.collidesWith(powerupContainer)) {
@@ -71,12 +108,14 @@ bool Ship::hitTest(std::list<Powerup> *powerups) {
 }
 
 bool Ship::hitTest(std::list<Bullet> *bullets) {
-  for (Bullet& bullet : *bullets) {
-    Rectangle bulletContainer = bullet.getContainer();
-    if (bullet.isAlive() && _container.collidesWith(bulletContainer)) {
-      bullet.kill();
-      kill();
-      return true;
+  if (!isExploding()) {
+    for (Bullet& bullet : *bullets) {
+      Rectangle bulletContainer = bullet.getContainer();
+      if (bullet.isAlive() && _container.collidesWith(bulletContainer)) {
+        bullet.kill();
+        kill();
+        return true;
+      }
     }
   }
 
@@ -92,6 +131,8 @@ void Ship::kill() {
 
   _activePowerups.clear();
 
+  AssetManager::playSample("explosion", NULL);
+
   if (_lives < 0) {
     _alive = false;
   }
@@ -101,17 +142,18 @@ void Ship::update(unsigned int ticks) {
   std::list<ActivePowerup>::iterator powerupIter = _activePowerups.begin();
   std::list<Bullet>::iterator bulletIter = _bullets.begin();
 
+  while (bulletIter != _bullets.end()) {
+    bulletIter->update(ticks);
+
+    if (!bulletIter->isAlive()) {
+      _bullets.erase(bulletIter++);
+    } else {
+      ++bulletIter;
+    }
+  }
+
   switch (_currentState) {
     case GALAGA_SHIP_STATE_MAIN:
-      while (bulletIter != _bullets.end()) {
-        bulletIter->update(ticks);
-
-        if (!bulletIter->isAlive()) {
-          _bullets.erase(bulletIter++);
-        } else {
-          ++bulletIter;
-        }
-      }
 
       for (ActivePowerup& powerup : _activePowerups) {
         ++powerup.lifetime;
@@ -165,6 +207,18 @@ std::list<ActivePowerup> Ship::getActivePowerups() {
     ++powerupIter->lifetime;
 
     if (powerupIter->complete) {
+      switch (powerupIter->type) {
+        case GALAGA_POWERUP_DOUBLE:
+          _maxBullets /= _bulletCount;
+          --_bulletCount;
+          _maxBullets *= _bulletCount;
+          break;
+
+        case GALAGA_POWERUP_MORE_BULLETS:
+          _maxBullets -= 2;
+          break;
+      }
+
       _activePowerups.erase(powerupIter++);
     } else {
       ++powerupIter;
@@ -174,12 +228,27 @@ std::list<ActivePowerup> Ship::getActivePowerups() {
   return oldPowerups;
 }
 
-void Ship::addPowerup(int type, int duration) {
+void Ship::addPowerup(int type) {
   ActivePowerup newPowerup;
   newPowerup.type = type;
   newPowerup.lifetime = 0;
-  newPowerup.duration = duration;
   newPowerup.complete = false;
+
+  switch (type) {
+    case GALAGA_POWERUP_DOUBLE:
+      newPowerup.duration = 500;
+
+      _maxBullets /= _bulletCount;
+      ++_bulletCount;
+      _maxBullets *= _bulletCount;
+      break;
+
+    case GALAGA_POWERUP_MORE_BULLETS:
+      newPowerup.duration = 500;
+
+      _maxBullets += 2;
+      break;
+  }
 
   _activePowerups.push_back(newPowerup);
 }

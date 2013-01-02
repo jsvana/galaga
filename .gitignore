@@ -1,4 +1,6 @@
 *.o
+*.d
+*.o-*
 galaga
 *.dSYM
 .DS_Store

@@ -22,10 +22,9 @@
 		int _shotHits;
 
 		std::list<Enemy> _enemies;
-
 		std::list<Bullet> _enemyBullets;
-
 		std::list<ParticleManager> _particleManagers;
+		std::list<Powerup> _powerups;
 
 	public:
 		Level(int screenWidth, int screenHeight, int difficulty, Ship *ship, int score, int shotHits);
@@ -38,5 +37,10 @@
 		int getShotHits() { return _shotHits; }
 
 		bool levelComplete();
+
+		void usePowerup(int type);
+		void removePowerup(int type);
+
+		void renderPowerups();
 	};
 #endif
