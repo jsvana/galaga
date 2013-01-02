@@ -64,6 +64,8 @@ main.o main.d : main.cpp \
   /usr/include/sys/select.h /usr/include/sys/_select.h \
   /usr/include/signal.h /usr/include/pthread.h \
   /usr/include/pthread_impl.h /usr/include/sched.h \
+  /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_audio.h \
+  /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_acodec.h \
   /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_native_dialog.h \
   /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_primitives.h \
   /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_font.h \
@@ -100,13 +102,10 @@ main.o main.d : main.cpp \
   /usr/bin/../lib/c++/v1/istream /usr/bin/../lib/c++/v1/ostream \
   /usr/bin/../lib/c++/v1/locale /usr/include/nl_types.h \
   /usr/bin/../lib/c++/v1/bitset /usr/bin/../lib/c++/v1/__bit_reference \
-  asset_manager.h \
-  /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_audio.h \
-  /usr/bin/../lib/c++/v1/list /usr/bin/../lib/c++/v1/map \
+  asset_manager.h /usr/bin/../lib/c++/v1/list /usr/bin/../lib/c++/v1/map \
   /usr/bin/../lib/c++/v1/__tree config_manager.h bullet.h utilities.h \
-  galaga.h \
-  /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_acodec.h \
-  /usr/bin/../lib/c++/v1/vector /usr/bin/../lib/c++/v1/__split_buffer \
-  background_manager.h background.h particle.h enemy.h \
-  /usr/bin/../lib/c++/v1/cmath /usr/include/math.h ship.h powerup.h \
-  gamemodule.h level.h particle_manager.h level_manager.h
+  galaga.h /usr/bin/../lib/c++/v1/vector \
+  /usr/bin/../lib/c++/v1/__split_buffer background_manager.h \
+  background.h particle.h enemy.h /usr/bin/../lib/c++/v1/cmath \
+  /usr/include/math.h ship.h powerup.h gamemodule.h level.h \
+  particle_manager.h level_manager.h

@@ -36,7 +36,9 @@
 		int getScore() { return _score; }
 		int getShotHits() { return _shotHits; }
 
-		bool levelComplete();
+		int getDifficulty() { return _difficulty; }
+
+		bool isComplete();
 
 		void usePowerup(int type);
 		void removePowerup(int type);

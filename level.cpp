@@ -155,7 +155,7 @@ void Level::render() {
   renderPowerups();
 }
 
-bool Level::levelComplete() {
+bool Level::isComplete() {
 	return _enemies.size() == 0 && _enemyBullets.size() == 0
 		&& _particleManagers.size() == 0;
 }

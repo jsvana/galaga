@@ -1,4 +1,4 @@
-level_manager.o level_manager.d : level_manager.cpp level_manager.h level.h \
+level_manager.o level_manager.d : level_manager.cpp level_manager.h \
   /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro.h \
   /usr/local/Cellar/allegro5/5.0.7/include/allegro5/base.h \
   /usr/include/errno.h /usr/include/sys/errno.h /usr/include/sys/cdefs.h \
@@ -64,7 +64,9 @@ level_manager.o level_manager.d : level_manager.cpp level_manager.h level.h \
   /usr/include/sys/select.h /usr/include/sys/_select.h \
   /usr/include/signal.h /usr/include/pthread.h \
   /usr/include/pthread_impl.h /usr/include/sched.h \
-  /usr/bin/../lib/c++/v1/list /usr/bin/../lib/c++/v1/__config \
+  /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_font.h \
+  /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_ttf.h \
+  level.h /usr/bin/../lib/c++/v1/list /usr/bin/../lib/c++/v1/__config \
   /usr/bin/../lib/c++/v1/memory /usr/bin/../lib/c++/v1/type_traits \
   /usr/bin/../lib/c++/v1/cstddef /usr/bin/../lib/c++/v1/typeinfo \
   /usr/bin/../lib/c++/v1/exception /usr/bin/../lib/c++/v1/cstdint \
@@ -78,7 +80,6 @@ level_manager.o level_manager.d : level_manager.cpp level_manager.h level.h \
   /usr/bin/../lib/c++/v1/algorithm /usr/bin/../lib/c++/v1/cstdlib \
   asset_manager.h \
   /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_audio.h \
-  /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_font.h \
   /usr/bin/../lib/c++/v1/iostream /usr/bin/../lib/c++/v1/ios \
   /usr/bin/../lib/c++/v1/__locale /usr/bin/../lib/c++/v1/string \
   /usr/bin/../lib/c++/v1/cstdio /usr/bin/../lib/c++/v1/cwchar \

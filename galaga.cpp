@@ -142,9 +142,9 @@ void Galaga::mainGameRender() {
 
     _ship.render();
 
-    int bigLineHeight = al_get_font_line_height(_bigFont);
-
     renderScore();
+
+    int bigLineHeight = al_get_font_line_height(_bigFont);
 
     al_draw_text(_bigFont, al_map_rgb(255, 0, 0), _screenWidth / 2,
       _screenHeight / 2 - bigLineHeight / 2, ALLEGRO_ALIGN_CENTRE, "READY!");

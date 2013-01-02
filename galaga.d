@@ -66,8 +66,6 @@ galaga.o galaga.d : galaga.cpp galaga.h \
   /usr/include/pthread_impl.h /usr/include/sched.h \
   /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_font.h \
   /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_ttf.h \
-  /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_audio.h \
-  /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_acodec.h \
   /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_image.h \
   /usr/bin/../lib/c++/v1/iostream /usr/bin/../lib/c++/v1/__config \
   /usr/bin/../lib/c++/v1/ios /usr/bin/../lib/c++/v1/iosfwd \
@@ -102,6 +100,7 @@ galaga.o galaga.d : galaga.cpp galaga.h \
   /usr/bin/../lib/c++/v1/bitset /usr/bin/../lib/c++/v1/__bit_reference \
   /usr/bin/../lib/c++/v1/list /usr/bin/../lib/c++/v1/vector \
   /usr/bin/../lib/c++/v1/__split_buffer asset_manager.h \
+  /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_audio.h \
   /usr/bin/../lib/c++/v1/map /usr/bin/../lib/c++/v1/__tree \
   config_manager.h background_manager.h background.h \
   /usr/local/Cellar/allegro5/5.0.7/include/allegro5/allegro_primitives.h \
