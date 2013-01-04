@@ -138,6 +138,7 @@ void Galaga::mainGameRender() {
 
     _ship.render();
 
+    renderLives();
     renderScore();
 
     int bigLineHeight = al_get_font_line_height(_bigFont);
@@ -307,7 +308,7 @@ void Galaga::renderScore() {
 }
 
 void Galaga::renderLives() {
-  for (int i = 0; i <= _ship.lifeCount(); i++) {
+  for (int i = _ship.lifeCount(); i >= 0; i--) {
     al_draw_bitmap(AssetManager::getTexture("ship"), _screenWidth - 42 * i,
       _screenHeight - 32, NULL);
   }

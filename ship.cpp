@@ -207,14 +207,11 @@ std::list<ActivePowerup> Ship::getActivePowerups() {
     ++powerupIter->lifetime;
 
     if (powerupIter->complete) {
-      std::cout << "[LOG] delete type " << powerupIter->type << std::endl;
       switch (powerupIter->type) {
         case GALAGA_POWERUP_DOUBLE:
-          std::cout << "[LOG] maxBullets: " << _maxBullets << ", bulletCount: " << _bulletCount << std::endl;
           _maxBullets /= _bulletCount;
           --_bulletCount;
           _maxBullets *= _bulletCount;
-          std::cout << "[LOG] maxBullets: " << _maxBullets << ", bulletCount: " << _bulletCount << std::endl;
           break;
 
         case GALAGA_POWERUP_MORE_BULLETS:
@@ -241,11 +238,9 @@ void Ship::addPowerup(int type) {
     case GALAGA_POWERUP_DOUBLE:
       newPowerup.duration = 500;
 
-      std::cout << "[LOG] maxBullets: " << _maxBullets << ", bulletCount: " << _bulletCount << std::endl;
       _maxBullets /= _bulletCount;
       ++_bulletCount;
       _maxBullets *= _bulletCount;
-      std::cout << "[LOG] maxBullets: " << _maxBullets << ", bulletCount: " << _bulletCount << std::endl;
       break;
 
     case GALAGA_POWERUP_MORE_BULLETS:
