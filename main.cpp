@@ -26,8 +26,6 @@ int main(int argc, char *argv[]) {
   ALLEGRO_DISPLAY *display;
   unsigned int ticks = 0;
 
-  srand(time(NULL));
-
   const float FPS = 60.0;
 
   if (!al_init()) {
@@ -58,6 +56,8 @@ int main(int argc, char *argv[]) {
   if (!ConfigManager::initialize()) {
     std::cerr << "[ERROR] Error initializing config" << std::endl;
   }
+
+  srand(time(NULL));
 
   ALLEGRO_TIMER *timer = al_create_timer(1.0 / FPS);
   ALLEGRO_EVENT_QUEUE *eventQueue = al_create_event_queue();
