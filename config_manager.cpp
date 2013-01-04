@@ -20,6 +20,10 @@ namespace ConfigManager {
 	}
 
 	bool audioEnabled() {
+		if (_config == NULL) {
+			return true;
+		}
+
 		const char *enabled = al_get_config_value(_config, "audio", "enabled");
 
 		if (enabled == NULL) {

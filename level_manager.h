@@ -32,6 +32,7 @@
 		void render();
 
 		int getScore();
+		int getShotsHit();
 
 		int getCurrentLevel() { return _currentLevel; }
 	};

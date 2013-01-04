@@ -19,7 +19,7 @@
 		Ship *_ship;
 		int _difficulty;
 		int _score;
-		int _shotHits;
+		int _shotsHit;
 
 		std::list<Enemy> _enemies;
 		std::list<Bullet> _enemyBullets;
@@ -27,14 +27,14 @@
 		std::list<Powerup> _powerups;
 
 	public:
-		Level(int screenWidth, int screenHeight, int difficulty, Ship *ship, int score, int shotHits);
+		Level(int screenWidth, int screenHeight, int difficulty, Ship *ship, int score, int shotsHit);
 		~Level();
 
 		bool update(unsigned int ticks);
 		void render();
 
 		int getScore() { return _score; }
-		int getShotHits() { return _shotHits; }
+		int getShotsHit() { return _shotsHit; }
 
 		int getDifficulty() { return _difficulty; }
 

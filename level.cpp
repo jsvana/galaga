@@ -1,12 +1,12 @@
 #include "level.h"
 
-Level::Level(int screenWidth, int screenHeight, int difficulty, Ship *ship, int score, int shotHits) {
+Level::Level(int screenWidth, int screenHeight, int difficulty, Ship *ship, int score, int shotsHit) {
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;
 	_difficulty = difficulty;
 	_ship = ship;
 	_score = score;
-	_shotHits = shotHits;
+	_shotsHit = shotsHit;
 
 	int totalWidth = 6 * 32 + 5 * 10;
 
@@ -23,8 +23,9 @@ Level::Level(int screenWidth, int screenHeight, int difficulty, Ship *ship, int 
         deathSound = "enemy_death_2";
       }
 
+      Rectangle bounds(42 * x, 0, _screenWidth - 42 * (5 - x), _screenHeight);
       int enemyX = _screenWidth / 2 - totalWidth + 42 * x;
-      Enemy enemy(enemyX, _screenHeight / 4 + 42 * y,
+      Enemy enemy(enemyX, _screenHeight / 4 + 42 * y, bounds,
         AssetManager::getTexture("enemies"), type, deathSound);
       _enemies.push_back(enemy);
     }
@@ -74,7 +75,7 @@ bool Level::update(unsigned int ticks) {
 				AssetManager::playSample(enemyIter->getSample(), NULL);
 			}
 
-			++_shotHits;
+			++_shotsHit;
 			_score += enemyIter->getPointsWorth();
 
 			Rectangle enemyContainer = enemyIter->getContainer();

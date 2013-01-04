@@ -19,6 +19,8 @@
 
   class Enemy {
     Rectangle _container;
+    Rectangle _bounds;
+    Point _basePosition;
 
     ALLEGRO_BITMAP *_texture = NULL;
 
@@ -47,9 +49,11 @@
 
     unsigned int _stateTicks;
 
+    const int PADDING = 10;
+
   public:
     Enemy();
-    Enemy(int x, int y, ALLEGRO_BITMAP *texture, int enemyType, std::string sample);
+    Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType, std::string sample);
     ~Enemy();
 
     bool update(unsigned int ticks);

@@ -28,7 +28,7 @@ bool LevelManager::update(unsigned int ticks) {
 
 				int oldDifficulty = _level->getDifficulty();
 				int score = _level->getScore();
-				int shotHits = _level->getShotHits();
+				int shotHits = _level->getShotsHit();
 
 				delete _level;
 
@@ -60,20 +60,23 @@ void LevelManager::render() {
 			break;
 
 		case GALAGA_LEVEL_MANAGER_STATE_TRANSITION:
-			ALLEGRO_FONT *font = AssetManager::getFont("big");
+			if (_stateTicks < 90) {
+				ALLEGRO_FONT *font = AssetManager::getFont("big");
 
-			int lineHeight = al_get_font_line_height(font);
+				int lineHeight = al_get_font_line_height(font);
 
-	    al_draw_textf(font, al_map_rgb(255, 0, 0), _screenWidth / 2,
-	      _screenHeight / 2 - lineHeight / 2, ALLEGRO_ALIGN_CENTRE, "LEVEL %d",
-	      _currentLevel);
+		    al_draw_textf(font, al_map_rgb(255, 0, 0), _screenWidth / 2,
+		      _screenHeight / 2 - lineHeight / 2, ALLEGRO_ALIGN_CENTRE, "LEVEL %d",
+		      _currentLevel);
+		  }
+		  break;
 	}
 }
 
 int LevelManager::getScore() {
-	if (_level == NULL) {
-		return 0;
-	} else {
-		return _level->getScore();
-	}
+	return _level == NULL ? 0 : _level->getScore();
+}
+
+int LevelManager::getShotsHit() {
+	return _level == NULL ? 0 : _level->getShotsHit();
 }

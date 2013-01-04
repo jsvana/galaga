@@ -12,7 +12,7 @@ Galaga::Galaga(int screenWidth, int screenHeight, ALLEGRO_EVENT_QUEUE *eventQueu
   Rectangle shipSize = _ship.getContainer();
 
   _ship.setScreenBounds(_screenWidth, _screenHeight);
-  _ship.moveTo(_screenWidth / 2 - shipSize.getW() / 2, _screenHeight - shipSize.getH());
+  _ship.moveTo(_screenWidth / 2 - shipSize.getW() / 2, _screenHeight - 2 * shipSize.getH());
   _ship.setTexture(AssetManager::getTexture("ship"));
   _ship.setExplodingTexture(AssetManager::getTexture("explosion"));
 
@@ -79,8 +79,6 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
   Rectangle shipContainer;
   int i;
 
-  _needsDraw = false;
-
   if (_stateTicks == 1 && _prevGameState == GALAGA_GAME_START) {
     AssetManager::playSample("beginning", NULL);
     ++_stateTicks;
@@ -113,8 +111,6 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
       && !al_key_down(&_keyState, ALLEGRO_KEY_RIGHT)) {
       _ship.stopMovement();
     }
-
-    _needsDraw = true;
   }
 
   // Update game objects
@@ -125,7 +121,7 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
 
   _levelManager.update(ticks);
 
-  if (_ship.lifeCount() == 0) {
+  if (_ship.isDead()) {
     _prevGameState = _gameState;
     _gameState = GALAGA_GAME_ENDED;
     _stateTicks = 0;
@@ -152,19 +148,17 @@ void Galaga::mainGameRender() {
     al_flip_display();
     al_clear_to_color(al_map_rgb(0, 0, 0));
   } else {
-    if (_needsDraw) {
-      _backgroundManager.render();
+    _backgroundManager.render();
 
-      _levelManager.render();
+    _levelManager.render();
 
-      _ship.render();
+    _ship.render();
 
-      renderLives();
-      renderScore();
+    renderLives();
+    renderScore();
 
-      al_flip_display();
-      al_clear_to_color(al_map_rgb(0, 0, 0));
-    }
+    al_flip_display();
+    al_clear_to_color(al_map_rgb(0, 0, 0));
   }
 }
 
@@ -240,8 +234,11 @@ void Galaga::endGameRender() {
 
   int percentAccuracy = 0;
 
-  if (_shotsFired != 0) {
-    percentAccuracy = (int)((float)_shotHits / _shotsFired * 100);
+  if (_ship.getShotsFired() != 0) {
+    percentAccuracy = (int)((float)_levelManager.getShotsHit()
+      / _ship.getShotsFired() * 100);
+  } else {
+    percentAccuracy = 0;
   }
 
   al_draw_text(_hugeFont, al_map_rgb(255, 0, 0), _screenWidth / 2,
@@ -250,7 +247,7 @@ void Galaga::endGameRender() {
     _screenHeight / 2 - bigAscent / 2, ALLEGRO_ALIGN_CENTRE, "RESULTS");
   al_draw_textf(_bigFont, al_map_rgb(255, 255, 255), _screenWidth / 2,
     _screenHeight / 2 + bigAscent - bigAscent / 2, ALLEGRO_ALIGN_CENTRE,
-    "FINAL SCORE: %d", _score);
+    "FINAL SCORE: %d", _levelManager.getScore());
   al_draw_textf(_bigFont, al_map_rgb(255, 255, 255), _screenWidth / 2,
     _screenHeight / 2 + 2 * bigAscent - bigAscent / 2, ALLEGRO_ALIGN_CENTRE,
     "ACCURACY: %d%%", percentAccuracy);
@@ -312,6 +309,6 @@ void Galaga::renderScore() {
 void Galaga::renderLives() {
   for (int i = 0; i <= _ship.lifeCount(); i++) {
     al_draw_bitmap(AssetManager::getTexture("ship"), _screenWidth - 42 * i,
-      _screenHeight - 42, NULL);
+      _screenHeight - 32, NULL);
   }
 }

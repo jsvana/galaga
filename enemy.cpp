@@ -9,10 +9,13 @@ Enemy::Enemy() {
   _initialPosition.setY(0);
   _alive = true;
 
+  _basePosition.setX(0);
+  _basePosition.setY(0);
+
   _fireRate = rand() % 150;
 }
 
-Enemy::Enemy(int x, int y, ALLEGRO_BITMAP *texture, int enemyType, std::string sample) {
+Enemy::Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType, std::string sample) {
   _container.setX(x);
   _container.setY(y);
   _container.setW(30);
@@ -20,6 +23,11 @@ Enemy::Enemy(int x, int y, ALLEGRO_BITMAP *texture, int enemyType, std::string s
   _initialPosition.setX(x);
   _initialPosition.setY(y);
   _alive = true;
+
+  _bounds = bounds;
+
+  _basePosition.setX(x);
+  _basePosition.setY(y);
 
   _texture = texture;
   _sample = sample;
@@ -76,55 +84,21 @@ bool Enemy::hitTest(std::list<Bullet> *bullets) {
 }
 
 bool Enemy::update(unsigned int ticks) {
-  ++_stateTicks;
+  _container.setX(_container.getX() + _xSpeed);
+  _basePosition.setX(_container.getX());
+  _container.setY(_basePosition.getY() + 10 * sin(ticks / 8));
 
-  switch (_currentState) {
-    case GALAGA_ENEMY_STATE_MOVE:
-      if (_stateTicks >= 200 || _container.getX() < _initialPosition.getX()) {
-        _previousState = _currentState;
-        _currentState = GALAGA_ENEMY_STATE_GROW;
-
-        _growRateX = (float)_container.getX() / 100.0;
-        _growRateY = (float)_container.getY() / 117.0;
-
-        if (_xSpeed < 0) {
-          _xSpeed = -_xSpeed;
-        }
-
-        _stateTicks = 0;
-      } else {
-        _container.setX(_container.getX() + _xSpeed);
-
-        if (_stateTicks % 100 == 0) {
-          _xSpeed = -_xSpeed;
-        }
-      }
-      break;
-    case GALAGA_ENEMY_STATE_GROW:
-
-      if (_stateTicks >= 100) {
-        _previousState = _currentState;
-        _currentState = GALAGA_ENEMY_STATE_MOVE;
-
-        _container.setX(_initialPosition.getX());
-        _container.setY(_initialPosition.getY());
-
-        _stateTicks = 0;
-      } else {
-        _container.setX(_container.getX() + _growRateX);
-        _container.setY(_container.getY() + _growRateY);
-
-        if (_stateTicks % 50 == 0) {
-          _growRateX = -_growRateX;
-          _growRateY = -_growRateY;
-        }
-      }
-      break;
+  if ((_basePosition.getX() < _bounds.getX() + PADDING && _xSpeed < 0)
+    || (_basePosition.getX() + _container.getW() > _bounds.getW() - PADDING
+    && _xSpeed > 0)) {
+    _xSpeed = -_xSpeed;
   }
 
   if (ticks % 30 == 0) {
     _frame = (_frame + 1) % 2;
   }
+
+  ++_stateTicks;
 
   return true;
 }

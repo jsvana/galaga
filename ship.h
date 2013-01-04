@@ -73,14 +73,16 @@
     void vivify() { _alive = true; }
     bool isAlive() { return _alive; }
     bool isExploding() { return _currentState == GALAGA_SHIP_STATE_EXPLODING; }
+    bool isDead() { return _lives == 0 && !isExploding(); }
 
     int lifeCount() { return _lives; }
+    int getShotsFired() { return _shotsFired; }
 
     bool hitTest(std::list<Powerup> *powerups);
     bool hitTest(std::list<Bullet> *bullets);
 
     std::list<ActivePowerup> getActivePowerups();
-    void clearActivePowerups() { _activePowerups.clear(); }
+    void clearActivePowerups();
 
     void update(unsigned int ticks);
 
