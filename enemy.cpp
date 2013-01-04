@@ -5,8 +5,6 @@ Enemy::Enemy() {
   _container.setY(0);
   _container.setW(30);
   _container.setH(24);
-  _initialPosition.setX(0);
-  _initialPosition.setY(0);
   _alive = true;
 
   _basePosition.setX(0);
@@ -15,13 +13,11 @@ Enemy::Enemy() {
   _fireRate = rand() % 150;
 }
 
-Enemy::Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType, std::string sample) {
+Enemy::Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType, std::string sample, int difficulty) {
   _container.setX(x);
   _container.setY(y);
   _container.setW(30);
   _container.setH(24);
-  _initialPosition.setX(x);
-  _initialPosition.setY(y);
   _alive = true;
 
   _bounds = bounds;
@@ -33,10 +29,15 @@ Enemy::Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyT
   _sample = sample;
   _enemyType = enemyType;
 
+  int scale = round((difficulty / 6.0) * (difficulty / 6.0) + 1.0);
+
+  _xSpeed += scale;
+
   _fireRate = (rand() % 50) + 100;
 }
 
 Enemy::~Enemy() {
+
 }
 
 void Enemy::decideShot(Ship ship) {
@@ -107,7 +108,7 @@ void Enemy::render() {
   if (_alive) {
     al_draw_bitmap_region(_texture, _container.getW() * _frame, _container.getH() * _enemyType,
       _container.getW(), _container.getH(),
-      _container.getX() + (int)_growX, _container.getY() + (int)_growY, NULL);
+      _container.getX(), _container.getY(), NULL);
   }
 }
 

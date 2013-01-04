@@ -35,5 +35,7 @@
 		int getShotsHit();
 
 		int getCurrentLevel() { return _currentLevel; }
+
+		bool isTransitioning();
 	};
 #endif

@@ -70,9 +70,6 @@ void Galaga::startGameRender() {
 
   al_draw_text(_bigFont, al_map_rgb(255, 255, 255), _screenWidth / 2,
     _screenHeight / 2 - ascent / 2, ALLEGRO_ALIGN_CENTRE, "PRESS ENTER TO START");
-
-  al_flip_display();
-  al_clear_to_color(al_map_rgb(0, 0, 0));
 }
 
 bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
@@ -89,7 +86,8 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
   }
 
   if (events.type == ALLEGRO_EVENT_KEY_DOWN) {
-    if (events.keyboard.keycode == ALLEGRO_KEY_SPACE) {
+    if (events.keyboard.keycode == ALLEGRO_KEY_SPACE
+      && !_levelManager.isTransitioning()) {
       _ship.fire();
     } else if (events.keyboard.keycode == ALLEGRO_KEY_P) {
       _prevGameState = _gameState;
@@ -99,7 +97,7 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
     }
   }
 
-  if (events.type == ALLEGRO_EVENT_TIMER) {
+  if (events.type == ALLEGRO_EVENT_TIMER && !_levelManager.isTransitioning()) {
     al_get_keyboard_state(&_keyState);
     shipContainer = _ship.getContainer();
 
@@ -145,9 +143,6 @@ void Galaga::mainGameRender() {
 
     al_draw_text(_bigFont, al_map_rgb(255, 0, 0), _screenWidth / 2,
       _screenHeight / 2 - bigLineHeight / 2, ALLEGRO_ALIGN_CENTRE, "READY!");
-
-    al_flip_display();
-    al_clear_to_color(al_map_rgb(0, 0, 0));
   } else {
     _backgroundManager.render();
 
@@ -157,9 +152,6 @@ void Galaga::mainGameRender() {
 
     renderLives();
     renderScore();
-
-    al_flip_display();
-    al_clear_to_color(al_map_rgb(0, 0, 0));
   }
 }
 
@@ -199,9 +191,6 @@ void Galaga::pausedGameRender() {
   al_draw_text(_font, al_map_rgb(255, 255, 255), _screenWidth / 2,
     _screenHeight / 2 + totalHeight / 2, ALLEGRO_ALIGN_CENTRE,
     "PRESS 'P' TO RESUME");
-
-  al_flip_display();
-  al_clear_to_color(al_map_rgb(0, 0, 0));
 }
 
 bool Galaga::endGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
@@ -254,9 +243,6 @@ void Galaga::endGameRender() {
     "ACCURACY: %d%%", percentAccuracy);
   al_draw_text(_font, al_map_rgb(255, 255, 255), _screenWidth / 2,
     _screenHeight - bigAscent, ALLEGRO_ALIGN_CENTRE, "PRESS ENTER TO PLAY AGAIN");
-
-  al_flip_display();
-  al_clear_to_color(al_map_rgb(0, 0, 0));
 }
 
 bool Galaga::update(unsigned int ticks) {
@@ -297,6 +283,9 @@ void Galaga::render() {
       endGameRender();
       break;
   }
+
+  al_flip_display();
+  al_clear_to_color(al_map_rgb(0, 0, 0));
 }
 
 void Galaga::renderScore() {

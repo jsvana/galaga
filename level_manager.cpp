@@ -80,3 +80,8 @@ int LevelManager::getScore() {
 int LevelManager::getShotsHit() {
 	return _level == NULL ? 0 : _level->getShotsHit();
 }
+
+bool LevelManager::isTransitioning() {
+	return _currentState == GALAGA_LEVEL_MANAGER_STATE_TRANSITION
+		&& _stateTicks < 90;
+}

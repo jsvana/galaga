@@ -26,15 +26,7 @@
 
     std::string _sample;
 
-    float _growX = 0.0;
-    float _growY = 0.0;
-
-    float _growRateX = 0.0;
-    float _growRateY = 0.0;
-
-    Point _initialPosition;
-
-    int _xSpeed = 3;
+    int _xSpeed = 2;
 
     int _fireRate;
 
@@ -53,7 +45,7 @@
 
   public:
     Enemy();
-    Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType, std::string sample);
+    Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType, std::string sample, int difficulty);
     ~Enemy();
 
     bool update(unsigned int ticks);

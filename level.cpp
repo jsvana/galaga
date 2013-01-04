@@ -26,7 +26,7 @@ Level::Level(int screenWidth, int screenHeight, int difficulty, Ship *ship, int 
       Rectangle bounds(42 * x, 0, _screenWidth - 42 * (5 - x), _screenHeight);
       int enemyX = _screenWidth / 2 - totalWidth + 42 * x;
       Enemy enemy(enemyX, _screenHeight / 4 + 42 * y, bounds,
-        AssetManager::getTexture("enemies"), type, deathSound);
+        AssetManager::getTexture("enemies"), type, deathSound, _difficulty);
       _enemies.push_back(enemy);
     }
   }
