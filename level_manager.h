@@ -7,6 +7,8 @@
 	#include <allegro5/allegro.h>
 	#include <allegro5/allegro_font.h>
   #include <allegro5/allegro_ttf.h>
+
+	#include "boss.h"
 	#include "level.h"
 	#include "ship.h"
 
@@ -16,6 +18,8 @@
 		Ship *_ship;
 
 		Level *_level = NULL;
+
+		Boss *_boss = NULL;
 
 		int _currentLevel = 1;
 

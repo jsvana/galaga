@@ -69,8 +69,6 @@ void Enemy::decideShot(Ship ship) {
 }
 
 bool Enemy::hitTest(std::list<Bullet> *bullets) {
-  int i;
-
   for (Bullet& bullet : *bullets) {
     Rectangle bulletContainer = bullet.getContainer();
 
@@ -81,6 +79,7 @@ bool Enemy::hitTest(std::list<Bullet> *bullets) {
       return true;
     }
   }
+
   return false;
 }
 

@@ -49,7 +49,7 @@
     Rectangle();
     Rectangle(float x, float y, float w, float h);
 
-    void operator =(Rectangle r);
+    void operator=(Rectangle r);
 
     float getX() { return _x; }
     void setX(float x) { _x = x; }
