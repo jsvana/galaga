@@ -75,6 +75,16 @@ bool Boss::hitTest(std::list<Bullet> *bullets) {
   return false;
 }
 
+bool Boss::hitTest(Ship *ship) {
+  if (_container.collidesWith(ship->getContainer())) {
+    ship->kill();
+
+    return true;
+  }
+
+  return false;
+}
+
 bool Boss::update(unsigned int ticks) {
   float remainingXDistance = _destination.getX() - _container.getX();
   float remainingYDistance = _destination.getY() - _container.getY();
@@ -93,8 +103,10 @@ bool Boss::update(unsigned int ticks) {
 }
 
 void Boss::recalculateSpeeds() {
-  _destination.setX((rand() % (int)_bounds.getW() - _bounds.getX()) + _bounds.getX());
-  _destination.setY((rand() % (int)_bounds.getH() - _bounds.getY()) + _bounds.getY());
+  _destination.setX((rand() % (int)_bounds.getW() - _bounds.getX()
+    - _container.getW()) + _bounds.getX());
+  _destination.setY((rand() % (int)_bounds.getH() - _bounds.getY()
+    - _container.getH()) + _bounds.getY());
 
   float xDistance = sqrt((_destination.getX() - _container.getX())
     * (_destination.getX() - _container.getX()));
@@ -121,11 +133,6 @@ void Boss::render() {
       0, _container.getW(), _container.getH(),
       _container.getX(), _container.getY(), NULL);
   }
-}
-
-void Boss::moveTo(int x, int y) {
-  _container.setX(x);
-  _container.setY(y);
 }
 
 int Boss::getPointsWorth() {

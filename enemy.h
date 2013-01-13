@@ -18,6 +18,7 @@
   #define GALAGA_ENEMY_STATE_STRIKE 2
 
   class Enemy {
+  protected:
     Rectangle _container;
     Rectangle _bounds;
     Point _basePosition;
@@ -48,12 +49,12 @@
     Enemy(int x, int y, Rectangle bounds, ALLEGRO_BITMAP *texture, int enemyType, std::string sample, int difficulty);
     ~Enemy();
 
-    bool update(unsigned int ticks);
-    void render();
+    virtual bool update(unsigned int ticks);
+    virtual void render();
 
     Rectangle getContainer() { return _container; }
 
-    void decideShot(Ship ship);
+    virtual void decideShot(Ship ship);
     void trigger() { _needsFire = true; }
     bool needsFire() { return _needsFire; }
     void fire() { _needsFire = false; }
@@ -61,12 +62,13 @@
     bool isAlive() { return _alive; }
     std::string getSample() { return _sample; }
 
-    int getPointsWorth();
+    virtual int getPointsWorth();
 
     void kill() { _alive = false; }
     void vivify() { _alive = true; }
 
-    bool hitTest(std::list<Bullet> *bullets);
+    virtual bool hitTest(std::list<Bullet> *bullets);
+    virtual bool hitTest(Ship *ship) { return false; }
 
     void moveTo(int x, int y);
   };

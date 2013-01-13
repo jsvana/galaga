@@ -6,6 +6,7 @@
 	#include <list>
 
 	#include "asset_manager.h"
+	#include "boss.h"
 	#include "bullet.h"
 	#include "enemy.h"
 	#include "particle_manager.h"
@@ -21,7 +22,7 @@
 		int _score;
 		int _shotsHit;
 
-		std::list<Enemy> _enemies;
+		std::list<Enemy *> _enemies;
 		std::list<Bullet> _enemyBullets;
 		std::list<ParticleManager> _particleManagers;
 		std::list<Powerup> _powerups;

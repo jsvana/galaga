@@ -10,6 +10,7 @@
 		bool initialize();
 
 		bool audioEnabled();
+		bool fastStartEnabled();
 
 		void destroy();
 	};

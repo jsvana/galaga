@@ -8,31 +8,44 @@ Level::Level(int screenWidth, int screenHeight, int difficulty, Ship *ship, int 
 	_score = score;
 	_shotsHit = shotsHit;
 
-	int totalWidth = 6 * 32 + 5 * 10;
+	if (difficulty % 3 == 0) {
+		Rectangle bounds(0, 0, _screenWidth, _screenHeight - 32);
 
-  for (int y = 0; y < 2; y++) {
-    for (int x = 0; x < 6; x++) {
-      int type;
-      std::string deathSound;
+		Boss *boss = new Boss(_screenWidth / 2, _screenHeight / 4, bounds,
+			AssetManager::getTexture("enemies"), _difficulty);
 
-      if (x < 2 || x > 3) {
-        type = 0;
-        deathSound = "enemy_death_1";
-      } else {
-        type = 1;
-        deathSound = "enemy_death_2";
-      }
+		_enemies.push_back(boss);
+	} else {
+		int totalWidth = 6 * 32 + 5 * 10;
 
-      Rectangle bounds(42 * x, 0, _screenWidth - 42 * (5 - x), _screenHeight);
-      int enemyX = _screenWidth / 2 - totalWidth + 42 * x;
-      Enemy enemy(enemyX, _screenHeight / 4 + 42 * y, bounds,
-        AssetManager::getTexture("enemies"), type, deathSound, _difficulty);
-      _enemies.push_back(enemy);
-    }
-  }
+	  for (int y = 0; y < 2; y++) {
+	    for (int x = 0; x < 6; x++) {
+	      int type;
+	      std::string deathSound;
+
+	      if (x < 2 || x > 3) {
+	        type = 0;
+	        deathSound = "enemy_death_1";
+	      } else {
+	        type = 1;
+	        deathSound = "enemy_death_2";
+	      }
+
+	      Rectangle bounds(42 * x, 0, _screenWidth - 42 * (5 - x), _screenHeight);
+	      int enemyX = _screenWidth / 2 - totalWidth + 42 * x;
+	      Enemy *enemy = new Enemy(enemyX, _screenHeight / 4 + 42 * y, bounds,
+	        AssetManager::getTexture("enemies"), type, deathSound, _difficulty);
+	      _enemies.push_back(enemy);
+	    }
+	  }
+	}
 }
 
 Level::~Level() {
+	for (Enemy *enemy : _enemies) {
+		delete enemy;
+	}
+
 	_enemies.clear();
 	_enemyBullets.clear();
 	_particleManagers.clear();
@@ -40,7 +53,7 @@ Level::~Level() {
 }
 
 bool Level::update(unsigned int ticks) {
-	std::list<Enemy>::iterator enemyIter = _enemies.begin();
+	std::list<Enemy *>::iterator enemyIter = _enemies.begin();
 
 	_ship->hitTest(&_enemyBullets);
 
@@ -62,23 +75,18 @@ bool Level::update(unsigned int ticks) {
     }
   }
 
-	bool enemyDead = false;
-
 	while (enemyIter != _enemies.end()) {
-		enemyIter->update(ticks);
-		enemyIter->decideShot(*_ship);
+		(*enemyIter)->update(ticks);
+		(*enemyIter)->decideShot(*_ship);
+		(*enemyIter)->hitTest(_ship);
 
-		if (enemyIter->hitTest(_ship->getBullets())) {
-			if (!enemyDead) {
-				enemyDead = true;
-
-				AssetManager::playSample(enemyIter->getSample(), NULL);
-			}
+		if ((*enemyIter)->hitTest(_ship->getBullets())) {
+			AssetManager::playSample((*enemyIter)->getSample(), NULL);
 
 			++_shotsHit;
-			_score += enemyIter->getPointsWorth();
+			_score += (*enemyIter)->getPointsWorth();
 
-			Rectangle enemyContainer = enemyIter->getContainer();
+			Rectangle enemyContainer = (*enemyIter)->getContainer();
 			ParticleManager particleManager(enemyContainer.getX(), enemyContainer.getY());
 			_particleManagers.push_back(particleManager);
 
@@ -91,18 +99,19 @@ bool Level::update(unsigned int ticks) {
 			}
 		}
 
-		if (!enemyIter->isAlive()) {
+		if (!(*enemyIter)->isAlive()) {
+			delete (*enemyIter);
 			_enemies.erase(enemyIter++);
 		} else {
-			if (enemyIter->needsFire()) {
-				int x = enemyIter->getContainer().getX() +
-					enemyIter->getContainer().getW() / 4;
+			if ((*enemyIter)->needsFire()) {
+				int x = (*enemyIter)->getContainer().getX() +
+					(*enemyIter)->getContainer().getW() / 4;
 				Rectangle bounds(0, 0, _screenWidth, _screenHeight);
-				Bullet newBullet(x, enemyIter->getContainer().getY(),
+				Bullet newBullet(x, (*enemyIter)->getContainer().getY(),
 					AssetManager::getTexture("bullet"), false, bounds);
 
 				_enemyBullets.push_back(newBullet);
-				enemyIter->fire();
+				(*enemyIter)->fire();
 			}
 
 			++enemyIter;
@@ -149,8 +158,8 @@ void Level::render() {
 		powerup.render();
 	}
 
-	for (Enemy enemy : _enemies) {
-		enemy.render();
+	for (Enemy *enemy : _enemies) {
+		enemy->render();
 	}
 
   renderPowerups();

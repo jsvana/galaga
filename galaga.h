@@ -12,6 +12,7 @@
   #include "asset_manager.h"
   #include "background_manager.h"
   #include "bullet.h"
+  #include "config_manager.h"
   #include "enemy.h"
   #include "gamemodule.h"
   #include "level.h"

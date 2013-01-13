@@ -76,11 +76,13 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
   Rectangle shipContainer;
   int i;
 
-  if (_stateTicks == 1 && _prevGameState == GALAGA_GAME_START) {
+  if (_stateTicks == 1 && _prevGameState == GALAGA_GAME_START
+    && !ConfigManager::fastStartEnabled()) {
     AssetManager::playSample("beginning", NULL);
     ++_stateTicks;
     return true;
-  } else if (_stateTicks < 380 && _prevGameState == GALAGA_GAME_START) {
+  } else if (_stateTicks < 380 && _prevGameState == GALAGA_GAME_START
+    && !ConfigManager::fastStartEnabled()) {
     ++_stateTicks;
     return true;
   }
@@ -131,7 +133,8 @@ bool Galaga::mainGameUpdate(unsigned int ticks, ALLEGRO_EVENT events) {
 }
 
 void Galaga::mainGameRender() {
-  if (_stateTicks < 380 && _prevGameState == GALAGA_GAME_START) {
+  if (_stateTicks < 380 && _prevGameState == GALAGA_GAME_START
+    && !ConfigManager::fastStartEnabled()) {
     _backgroundManager.render();
 
     _ship.render();

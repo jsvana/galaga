@@ -29,6 +29,25 @@ namespace ConfigManager {
 		if (enabled == NULL) {
 			al_add_config_section(_config, "audio");
 			al_set_config_value(_config, "audio", "enabled", "true");
+
+			return true;
+		}
+
+		return strncmp(enabled, "true", 4) == 0;
+	}
+
+	bool fastStartEnabled() {
+		if (_config == NULL) {
+			return true;
+		}
+
+		const char *enabled = al_get_config_value(_config, "debug", "fast_start");
+
+		if (enabled == NULL) {
+			al_add_config_section(_config, "debug");
+			al_set_config_value(_config, "debug", "fast_start", "false");
+
+			return false;
 		}
 
 		return strncmp(enabled, "true", 4) == 0;

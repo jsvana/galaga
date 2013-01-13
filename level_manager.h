@@ -19,8 +19,6 @@
 
 		Level *_level = NULL;
 
-		Boss *_boss = NULL;
-
 		int _currentLevel = 1;
 
 		int _currentState = GALAGA_LEVEL_MANAGER_STATE_MAIN;
